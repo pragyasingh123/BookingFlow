@@ -1,0 +1,321 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.journey {
+  background-color: $bf-colour-journey-primary;
+  border: $bf-value-journey-border;
+  border-radius: $bf-value-journey-border-radius;
+  min-width: 290px;
+  max-width: $bf-component-max-width;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.2rem;
+  position: relative;
+  min-height: 3.8em;
+  margin: 6px auto;
+
+  &:hover {
+    .journey-not-available {
+      visibility: visible;
+      color: #000153;
+      font-weight: 700;
+    }
+  }
+
+  &-times {
+    font-size: $f-large;
+    text-align: left;
+    display: flex;
+    line-height: 1;
+
+    iron-icon.disruption-arrow {
+      margin-left: -20px;
+    }
+
+    iron-icon {
+      fill: $bf-colour-journey-secondary;
+      transform: scale(.7);
+      margin-left: .2rem;
+    }
+
+    &-cell {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 3px;
+    }
+
+    &--expected {
+      text-decoration: line-through;
+      padding-bottom: 3px;
+    }
+
+    &--cancelled {
+      color: $bf-alert-color;
+    }
+  }
+
+  &--expected {
+    font-size: $f-normal;
+    color: $bf-alert-color;
+  }
+
+  &--cancelled {
+    font-size: $f-small;
+    font-weight: bold;
+    color: $bf-alert-color;
+  }
+}
+
+// wrong approach, this should be replaced by directive
+.journey.journey-not-active,  {
+    color: #8e9090;
+    background-color: #f5f5f5;
+}
+
+.link-route-details, .link-next-screen {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.link-route-details {
+  left: 0;
+  right: 80%;
+}
+
+.link-next-screen {
+  right: 0;
+  left: 20%;
+}
+
+//top-level flexbox items
+.arrow-right-box {
+  flex-grow: 0;
+  flex-basis: 5%;
+}
+
+.journey-details-box {
+  flex-grow: 0;
+  flex-basis: 95%;
+}
+
+.status-icon {
+  display: flex;
+}
+
+.status-icon, .rail-icon {
+  margin-right: .5rem;
+}
+
+iron-icon.ico-warning_black_yellow {
+   margin-top: 5px;
+}
+
+.rail-icon {
+  transform: scale(.7);
+}
+
+.arrow {
+  transform: scale(2);
+  fill: $bf-colour-journey-secondary;
+  margin-left: .5rem;
+}
+
+.limited-tickets {
+  color: $bf-colour-journey-secondary;
+  font-size: $f-small;
+}
+
+.station-from::after {
+  content: " to "
+}
+
+.stations {
+  font-size: $f-small;
+}
+
+.journey-left-col {
+  line-height: .8;
+  flex-grow: 2;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-date {
+  line-height: $bf-line-height;
+}
+
+.past-journey,
+.delivery-journey,
+.sleeper-child {
+  font-size: $f-small;
+}
+
+.sleeper {
+  &-child {
+    font-size: $f-small;
+    max-width: 120px;
+    display: inline-block;
+  }
+
+  &-phone {
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    right: 0;
+    fill: $bf-colour-journey-sleeper-phone;
+  }
+}
+
+.chngs-dur {
+  text-align: left;
+}
+
+.changes {
+  font-size: $f-small;
+  &:after {
+    content: "|";
+    color: $bf-colour-bundle-1-item-b;
+    padding-left: .3rem;
+  }
+}
+
+.duration {
+  font-size: $f-small;
+}
+
+.journey-right-col {
+  margin-left: auto;
+  text-align: right;
+  display: inline-flex;
+  padding-left: 15px;
+}
+
+.journey-mod-applied {
+  font-size: $f-small;
+  text-align: left;
+}
+
+.journey-label {
+  color: $bf-colour-journey-primary;
+  font-size: 0.65rem;
+  border-radius: .2rem;
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  margin-left: 3px;
+  background-color: #717171;
+  &.fastest {
+    background-color: $bf-colour-journey-label-fastest;
+  }
+  &.cheapest {
+    background-color: $bf-colour-journey-label-cheapest;
+  }
+  &.sleeper {
+    background-color: $bf-colour-journey-label-sleeper;
+  }
+  &.slow-train {
+    background-color: $bf-colour-journey-label-slow-train;
+  }
+  &.groupsave {
+    background-color: $bf-colour-journey-label-groupsave;
+  }
+}
+
+.journey-not-available {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.7);
+    z-index: 99999;
+    border-radius: $bf-value-journey-border-radius;
+
+    div {
+      display: table;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      padding: 0 30px;
+      border-left: 5px solid #d7eed6;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.8em;
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+.mod-nectar {
+  color: $bf-colour-journey-mod-nectar;
+  iron-icon {
+    fill: $bf-colour-journey-mod-nectar;
+  }
+}
+
+.mod-railcard {
+  color: $bf-colour-journey-mod-railcard;
+  iron-icon {
+    fill: $bf-colour-journey-mod-railcard;
+  }
+}
+
+.mod-promo {
+  color: $bf-colour-journey-mod-promo;
+  iron-icon {
+    fill: $bf-colour-journey-mod-promo;
+    transform: scale(.7);
+  }
+}
+
+.price small {
+  margin-right: -0.2rem;
+}
+
+app-loading-indicator[inline] {
+  top: 0.2em;
+  right: 0.8em;
+}
+
+.no-extra-cost {
+  white-space: nowrap;
+}
+
+.price-sign {
+  font-size: 0.85rem;
+}
+
+.touch-smartcard-box {
+  text-align: left;
+  font-size: 12px;
+}
+
+.rail-icon.touch-smartcard-icon {
+  margin-right: 0;
+}
+
+.extra-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-left: 30px;
+
+  .left-col {
+    order: 1;
+  }
+  .right-col {
+    align-items: center;
+    order: 2;
+    display: flex;
+  }
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}

@@ -1,0 +1,17 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+:host {
+  background-color: $bf-colour-background;
+}
+
+.is-basket-empty {
+  .content {
+    margin-bottom: $bf-gutter/4;
+    text-align: center;
+  }
+}
+
+.alert {
+  margin: 0 auto $bf-gutter;
+  max-width: $bf-component-max-width;
+}

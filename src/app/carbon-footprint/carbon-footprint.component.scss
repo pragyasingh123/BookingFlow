@@ -1,0 +1,79 @@
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/variables";
+@import "../../assets/styles/typography";
+@import "../../assets/styles/components/ng_components_shared";
+
+.carbon-footprint-wrap {
+    padding: 5px 0;
+    margin-top: 5px;
+    border: 2px;
+
+    .carbon-footprint-header{
+        font-weight: bolder;
+        font-size: 1.0rem;
+        text-align: left;
+        padding-left: 2rem;
+    }
+
+    .carbon-footprint-details{
+        text-align: left;
+        margin-top: -1rem;
+        font-size: 0.8rem;
+        padding-left: 2rem;
+    }
+
+    .carbon-footprint-more{
+        margin-top: -1rem;
+        text-align: left;
+        padding-left: 2rem;
+    }
+
+    iron-icon{
+        float: left;
+        text-align: left;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+    ul{
+        list-style: none;
+        overflow: auto;
+        margin: 5px 0;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+    }
+
+    li{
+        min-height: 35px;
+        float: left;
+
+        &.train, &.car{
+            width: 40%;
+            text-align: center;
+            @media screen and (min-width: $breakpoint-phone) {
+                width: 30%;
+            }
+            @media screen and (max-width: 350px){
+                width: 50%;
+            }
+        }
+
+        &.train{
+            span{
+                display: block;                
+                font-size: 0.8rem;
+                text-align: left;
+                font-weight: bolder;
+            }
+        }
+
+        &.car{
+            span{
+                display: block; 
+                font-size: 0.8rem;
+                text-align: left;
+                font-weight: bolder;
+            }
+        }
+    }
+}

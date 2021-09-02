@@ -1,0 +1,31 @@
+<div aria class="btn-wrap" *ngIf="!isLoading">
+
+  <button #buttonElement class="btn" data-elid="button-click"
+          [class.btn-basic]="type == 'basic'"
+          [class.btn-continue]="type == 'continue'"
+          [class.btn-register]="type == 'register'"
+          [class.btn-register-tpe]="type == 'register-tpe'"
+          [class.btn-amend]="type == 'amend'"
+          [class.btn-journey]="type == 'journey'"
+          [class.btn-modal]="type == 'modal'"
+          [class.btn-secondary]="type == 'secondary'"
+          [class.btn-modal-inverse]="type == 'modal-inverse'"
+          [class.btn-nectar-login]="type == 'nectar-login'"
+          [class.btn-nectar-add]="type == 'nectar-add'"
+          [class.btn-link]="type == 'link'"
+          [class.btn-white]="type == 'btn-white'"
+          [class.btn-upgrade]="type == 'upgrade'"
+          [class.btn-amend-cancel]="type == 'amend-cancel'"
+          [class.btn-sleeper-modal]="type == 'btn-sleeper-modal'"
+          [class.btn-search-again]="type == 'btn-search-again'"
+          [class.btn-continue-wide] ="type == 'btn-continue-wide'"
+          [class.btn-amend-journey] ="type == 'btn-amend-journey'"
+          (click)="onClick($event)"
+          [disabled]="disabled"
+  >
+    <ng-content></ng-content>
+  </button>
+
+</div>
+
+<app-loading-indicator *ngIf="isLoading"></app-loading-indicator>

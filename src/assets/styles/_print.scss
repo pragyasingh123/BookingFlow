@@ -1,0 +1,74 @@
+@media print {
+
+  //Global print considerations, more granular styles to be applied to component / element blocks
+  body, html, .container, .content-spacing {
+    padding: 0!important;
+    margin: 0;
+    width: 100%;
+    vertical-align: text-top;
+  }
+
+
+  @page {
+    orphans: 4;
+    widows: 2;
+    margin: 1cm;
+  }
+
+  //Try to keep headings on the same page as their following content
+  %dont-break-after {
+    page-break-after : avoid
+  }
+
+  @each $size in (1,2,3,4,5,6) {
+    .ar-#{$size}, h#{$size} {
+      @extend %dont-break-after;
+    }
+  }
+
+  section {
+    page-break-inside: avoid;
+  }
+
+  //Hide inline url for internal links
+  [href^='/'],
+  [href^='.'],
+  [href='#'],
+  [href^='mailto'],
+  [href*='artemis.co'],
+  [href^='tel'] {
+    text-decoration: none;
+
+    &:after {
+      content: ''!important;
+    }
+  }
+
+  //Display urls attributes for external links
+  [href^='http'] {
+    &:after {
+      content: '<' attr(href) '>';
+    }
+  }
+
+  .ar-related-insights,
+  .ar-nfp {
+    display: none !important;
+  }
+
+  //Arbitrary styles
+  //Fund managers page
+  #arFundManagerList {
+    [class^=col-] {
+      width: (100% / 3);
+      float: left;
+    }
+  }
+
+  //Not proud of this but...
+  .fund-class-article .col-sm-4 {
+    width: (100% / 3);
+    float: left;
+  }
+
+}

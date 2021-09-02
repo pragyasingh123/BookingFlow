@@ -1,0 +1,222 @@
+@import "./variables";
+
+iron-icon[icon='toc:info'] {
+  fill: $bf-colour-iron-icon;
+}
+iron-icon[icon='toc:overtaking'] {
+  fill: $bf-colour-iron-icon;
+}
+
+iron-icon[icon='toc:warning_major'] {
+  fill: $bf-colour-alert;
+}
+iron-icon[icon='toc:rail'] {
+  fill: $bf-colour-alert;
+}
+iron-icon[icon='toc:seat'] {
+  position: relative;
+  left: 2px;
+}
+
+@mixin icon-styles {
+  font-family: $bf-font-icons;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  // speak: none; // only necessary if not using the private unicode range (firstGlyph option)
+  text-decoration: none;
+  text-transform: none;
+}
+
+%icon {
+  @include icon-styles;
+}
+
+@function icon-char($filename) {
+  $char: "";
+
+  @if $filename == alert {
+    $char: "\E001";
+  }
+  @if $filename == arrow-down {
+    $char: "\E002";
+  }
+  @if $filename == arrow-left {
+    $char: "\E003";
+  }
+  @if $filename == arrow-right {
+    $char: "\E004";
+  }
+  @if $filename == arrow-up {
+    $char: "\E005";
+  }
+  @if $filename == bike {
+    $char: "\E006";
+  }
+  @if $filename == bus {
+    $char: "\E007";
+  }
+  @if $filename == caret-down {
+    $char: "\E008";
+  }
+  @if $filename == caret-up {
+    $char: "\E009";
+  }
+  @if $filename == cart {
+    $char: "\E00A";
+  }
+  @if $filename == cross {
+    $char: "\E00B";
+  }
+  @if $filename == info {
+    $char: "\E00C";
+  }
+  @if $filename == journey-outward {
+    $char: "\E00D";
+  }
+  @if $filename == journey-return {
+    $char: "\E00E";
+  }
+  @if $filename == menu {
+    $char: "\E00F";
+  }
+  @if $filename == nectar {
+    $char: "\E010";
+  }
+  @if $filename == profile {
+    $char: "\E011";
+  }
+  @if $filename == railcard {
+    $char: "\E012";
+  }
+  @if $filename == seat {
+    $char: "\E013";
+  }
+  @if $filename == tick {
+    $char: "\E014";
+  }
+  @if $filename == tube {
+    $char: "\E015";
+  }
+  @if $filename == car {
+    $char: "\E016";
+  }
+  @if $filename == train {
+    $char: "\E017";
+  }
+  @if $filename == cloud {
+    $char: "\E018";
+  }
+  @if $filename == accessibility {
+    $char: "\E900";
+  }
+  @if $filename == cabins {
+    $char: "\E901";
+  }
+  @if $filename == children {
+    $char: "\E902";
+  }
+  @if $filename == new-seat {
+    $char: "\E903";
+  }
+
+  @return $char;
+}
+
+@mixin icon($filename, $insert: before, $extend: false) {
+&:#{$insert} {
+  @if $extend {
+    @extend %icon;
+  } @else {
+    @include icon-styles;
+  }
+  content: icon-char($filename);
+  @content;
+}
+}
+
+.icon-alert {
+  @include icon(alert);
+}
+.icon-arrow-down {
+  @include icon(arrow-down);
+}
+.icon-arrow-left {
+  @include icon(arrow-left);
+}
+.icon-arrow-right {
+  @include icon(arrow-right);
+}
+.icon-arrow-up {
+  @include icon(arrow-up);
+}
+.icon-bike {
+  @include icon(bike);
+}
+.icon-bus {
+  @include icon(bus);
+}
+.icon-car{
+  @include icon(car);
+}
+.icon-caret-down {
+  @include icon(caret-down);
+}
+.icon-caret-up {
+  @include icon(caret-up);
+}
+.icon-cart {
+  @include icon(cart);
+}
+.icon-cross {
+  @include icon(cross);
+}
+.icon-info {
+  @include icon(info);
+}
+.icon-journey-outward {
+  @include icon(journey-outward);
+}
+.icon-journey-return {
+  @include icon(journey-return);
+}
+.icon-menu {
+  @include icon(menu);
+}
+.icon-nectar {
+  @include icon(nectar);
+}
+.icon-profile {
+  @include icon(profile);
+}
+.icon-railcard {
+  @include icon(railcard);
+}
+.icon-seat {
+  @include icon(seat);
+}
+.icon-tick {
+  @include icon(tick);
+}
+.icon-train{
+  @include icon(train);
+}
+.icon-tube {
+  @include icon(tube);
+}
+.icon-overtaking {
+  @include icon(overtaking);
+}
+.icon-accessibility {
+  @include icon(accessibility);
+}
+.icon-cabins {
+  @include icon(cabins);
+}
+.icon-children {
+  @include icon(children);
+}
+.icon-new-seat {
+  @include icon(new-seat);
+}

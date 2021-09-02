@@ -1,0 +1,45 @@
+/*
+|--------------------------------------------------------------------------
+| Booking Flow Frontend
+|--------------------------------------------------------------------------
+|
+| No styling rules in this file. This file is solely for including sub style assets
+|
+*/
+
+
+/** Third party **/
+@import "../bower_components/bootstrap/dist/css/bootstrap.min.css";
+
+/** Booking Flow **/
+@import "variables";
+
+/** Booking Flow ctd. **/
+@import "helpers";
+@import "typography";
+@import "icons";
+@import "base";
+@import "form";
+
+/** Components **/
+@import "components/alerts";
+@import "components/box";
+@import "components/check_list";
+@import "components/form_dropdown";
+@import "components/index_icon_list";
+@import "components/index_page_list";
+@import "components/index_typography";
+@import "components/intro";
+@import "components/progress_bar";
+@import "components/select_accordion";
+@import "components/select_list";
+@import "components/train_list";
+@import "components/train_list_item";
+@import "components/ng_components_shared";
+@import "components/preferences";
+
+/** Elements **/
+
+/** Custom media **/
+@import "print";
+@import "a11y";

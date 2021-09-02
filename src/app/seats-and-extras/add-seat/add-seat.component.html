@@ -1,0 +1,49 @@
+﻿<app-loading-indicator inline *ngIf="!seatPrefAvailable" class="seat-loader"></app-loading-indicator>
+<div class="container-fluid" *ngIf="seatPrefAvailable">
+  <header class="modal-header-container">
+    <iron-icon icon="toc:seat"></iron-icon>
+    <h1 class="dialog-heading">Seating preferences</h1>
+  </header>
+  <hr>
+  <div class="hidden">
+    <p>Which journey would you like to reserve your seat for?</p>
+    <app-checkbox label="Outward" [checked]=true (onChecked)="hasOutward = !hasOutward" *ngIf="isOutwardSelectionAvailable"></app-checkbox>
+    <app-checkbox label="Return" [checked]=true (onChecked)="hasReturn = !hasReturn" *ngIf="trip?.returnJourneys?.length > 0 && isReturnSelectionAvailable"></app-checkbox>
+
+    <hr>
+  </div>
+  <div *ngIf="seatAttributes?.facing && seatAttributes?.backwards">
+    <p>Which direction would you like to be facing?</p>
+    <app-tab-option data-elid="direction-selection" [value]="selectedSeatDirection" [options]="seatDirectionOptions" (onSelected)="selectedSeatDirection = $event"></app-tab-option>
+  </div>
+
+  <div *ngIf="seatAttributes?.aisle && seatAttributes?.windows">
+    <p>Window or aisle seats?</p>
+    <app-tab-option data-elid="window-aisle-selection" [value]="selectedAisleOption" [options]="seatAisleOptions" (onSelected)="selectedAisleOption = $event"></app-tab-option>
+  </div>
+
+  <div *ngIf="seatAttributes?.airline && seatAttributes?.table">
+    <p>Table or airline seats?</p>
+    <app-tab-option data-elid="table-airline-selection" [value]="selectedTableOption" [options]="seatTableOptions" (onSelected)="selectedTableOption = $event"></app-tab-option>
+  </div>
+
+  <div *ngIf="seatAttributes?.quiet">
+    <p>Would you like to sit in a quiet coach?</p>
+    <app-checkbox data-elid="quiet-coach-checkbox" label="Quiet coach" [checked]="false" (onChecked)="selectedQuietCoachOption = !selectedQuietCoachOption"></app-checkbox>
+  </div>
+
+  <hr>
+
+  <div class="alert alert-warning">
+    <div class="content-wrap">
+      <p>
+        Seat reservation is not available with all train companies. We\'ll meet your requirements where possible.
+      </p>
+    </div>
+  </div>
+
+  <app-checkbox label="Remember my preferences" [checked]="isRememberMyPreferences" (onChecked)="isRememberMyPreferences = !isRememberMyPreferences" *ngIf="isLoggedIn"></app-checkbox>
+
+  <app-button data-elid="btn-confirm-reservation" class="btn-block" btn-type="continue" (click)="reserveSeat()" [showLoader]="true" [isLoading]="isSendingRequest" data-elid="make-res-button">Make a reservation</app-button>
+  <app-button data-elid="btn-cancel-reservation" class="btn-block" btn-type="link" (click)="backToSeatsAndExtras()" data-elid="cancel-button">Cancel</app-button>
+</div>

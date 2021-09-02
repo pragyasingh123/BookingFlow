@@ -1,0 +1,393 @@
+@import "../../assets/styles/variables";
+
+$order-summary-width: 230px;
+$order-summary-margin-left: 40px;
+
+.loader {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999999;
+    background-color: $bf-colour-background-darker;
+}
+
+.banner {
+    display: block;
+    width: 100%;
+    background-size: cover;
+}
+.banner-content {
+    max-width: 540px;
+    padding: 40px 20px;
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 0 auto;
+}
+.banner-title,
+.banner-text {
+    text-align: center;
+    color: $bf-colour-journey-header;
+    font-weight: 300;
+}
+.banner-title {
+    font-size: 2.4em;
+    margin: 10px auto 18px;
+}
+.banner-text {
+    font-size: 1.2em;
+    line-height: 1.42;
+}
+
+.banner-tpe {
+  .banner-content-tpe {
+    margin: 35px 0px;
+    text-align: center;
+    .banner-tpe-heading {
+      font-size: 50px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    .banner-tpe-mid-text {
+      font-size: 21px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .banner-tpe {
+    .banner-content-tpe {
+      margin: 35px 0px 0px 0px;
+      .banner-tpe-heading {
+        font-size: 33px;
+      }
+      .banner-tpe-mid-text {
+        font-size: 15px;
+        margin: 3px 30px;
+      }
+      .banner-tpe-mid-text:nth-child(3) {
+        margin: 3px 40px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 411px) and (max-width: 414px) {
+  .banner-tpe {
+    .banner-content-tpe {
+      .banner-tpe-mid-text {
+        margin: 3px 21px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 768px){
+  .banner-tpe {
+    .banner-content-tpe {
+      margin: 35px 0px 0px 0px;
+      .banner-tpe-heading {
+        font-size: 38px;
+      }
+      .banner-tpe-mid-text {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.content {
+    margin: 30px auto;
+    max-width: 940px;
+}
+
+.search-indicator {
+    margin: 1em auto;
+}
+
+#nre-initial {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#travel-summary {
+    padding: 24px;
+    background-color: white;
+    max-width: 39rem;
+    width: 100%;
+}
+.journey-summary {
+    background: $bf-panel-bg-color;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.journey-summary-text {
+    margin-bottom: 5px;
+}
+
+.railcards-info-in-header {
+    font-weight: 700;
+}
+
+.journey-summary-separator {
+    margin: 20px auto;
+    border-top: 1px solid $bf-nre-changes-and-duration-separator-color;
+}
+.journey-details-box {
+    position: relative;
+    padding: 0px;
+}
+.journey-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px;
+    margin: 15px 0;
+    &:first-child {
+        margin-top: 0px;
+    }
+    .btn.journey-date {
+        border: 1px solid $bf-nre-travel-details-line-color;
+        font-weight: normal;
+        margin: 0;
+        font-size: 12px;
+        padding: 1px 4px;
+        width: auto;
+        line-height: 1.4;
+        cursor: default;
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 16px;
+        margin: 0;
+        text-align: left;
+        padding-left: 10px;
+    }
+}
+
+.travel-details-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+        .time {
+            color: $bf-colour-journey-header-background;
+            font-weight: bold;
+            font-size: 15px;
+        }
+        .name {
+            color: $bf-nre-travel-details-name-color;
+            margin-left: 30px;
+            font-size: 16px;
+        }
+        &:after {
+            content: '';
+            position: absolute;
+            top: 17px;
+            left: 52px;
+            bottom: 17px;
+            border-left: 2px solid $bf-nre-travel-details-line-color;
+        }
+    }
+    &:before {
+        top: 6px;
+        left: 47px;
+    }
+    &:after {
+        bottom: 6px;
+        left: 47px;
+    }
+    &:after, &:before {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border: 2px solid $bf-nre-travel-details-line-color;
+        border-radius: 50%;
+        z-index: 1;
+    }
+    &.singleReturn {
+        & li:first-child { margin-bottom: 20px; }
+        & li:after { left: 14px; }
+        &:before { left: 9px; }
+        &:after { left: 9px; }
+    }
+}
+.changes-and-duration {
+    font-size: 0.75rem;
+    margin: 20px 0 20px 70px;
+    color: $bf-nre-changes-and-duration-color;
+    .separator {
+        color: $bf-nre-changes-and-duration-separator-color;
+    }
+}
+
+.ticket-type {
+    font-weight: 700;
+    margin-top: 10px;
+}
+.ticket-type,
+.ticket-restriction,
+.railcard-applied {
+    font-size: .75rem;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.journey-summary-outward > p:last-child,
+.journey-summary-return > p:last-child {
+    margin-bottom: 0px;
+}
+
+#order-summary {
+    width: $order-summary-width;
+    @media screen and (min-width: 768px) {
+        margin-left: $order-summary-margin-left;
+    }
+}
+.order-summary-container {
+    padding: 16px;
+    background-color: $bf-colour-nre-basket;
+    color: white;
+}
+
+.order-summary-header {
+    font-size: 1.1rem;
+    text-align: left;
+    margin: 0 auto 24px;
+    color: white;
+    font-weight: bold;
+}
+.nectar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.nectar-logo {
+    display: block;
+    width: 67px;
+    margin-left: -10px;
+}
+.nectar-description {
+    font-size: .7rem;
+    text-align: left;
+    margin: 0px auto;
+}
+.total-price-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.total-price-text {
+    text-align: left;
+}
+.total-price {
+    text-align: right;
+}
+
+.all-passenger-text {
+    text-align: left;
+    font-size: .7rem;
+}
+
+#journey-not-found {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 24px;
+    background-color: white;
+    border-radius: 6px;
+    margin: 0px auto;
+    max-width: 39rem;
+}
+.right-col {
+    margin-left: 24px;
+}
+.summary-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 0px;
+    color: $bf-nre-summary-color;
+    line-height: 1.4;
+}
+.journey-warring {
+    color: $bf-nre-journey-warring-color;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+@media screen and (max-width: 767px) {
+    .banenr-title {
+        font-size: 2em;
+    }
+    .banner-text {
+        font-size: 1em;
+        line-height: 1.4;
+    }
+    #journey-not-found,
+    #nre-initial {
+        flex-direction: column;
+    }
+    #journey-not-found,
+    #travel-summary {
+        padding: 18px;
+    }
+    #travel-summary {
+        margin-bottom: 20px;
+    }
+    .right-col {
+        margin-left: 0px;
+    }
+    .journey-summary-text,
+    .journey-warring {
+        margin-bottom: 12px;
+    }
+    #order-summary,
+    #travel-summary {
+        width: 100%;
+        max-width: 39rem;
+    }
+    #nre-initial {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .nectar-description {
+        width: 100%;
+    }
+    .total-price-container {
+        justify-content: flex-start;
+    }
+    .total-price {
+        text-align: left;
+        padding-left: 24px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    $order-summary-size: $order-summary-width + $order-summary-margin-left;
+
+    #travel-summary {
+        width: calc(100% - #{$order-summary-size});
+    }
+
+    .journey-warring {
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+}

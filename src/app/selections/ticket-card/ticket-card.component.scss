@@ -1,0 +1,9 @@
+.other-ticket-option-heading {
+  display: inline;
+}
+
+.status-icon {
+  &:hover {
+    text-decoration: none;
+  }
+}

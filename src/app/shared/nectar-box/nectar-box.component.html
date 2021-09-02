@@ -1,0 +1,45 @@
+﻿<div class="bf-box plum nectar-card-wrap">
+  <section class="content nectar-card-dialog">
+    <h3 class="box-heading heading-normal">
+      <img class="nectar-logo" src="assets/img/logos/nectar-purple-logo-white-text.svg" alt="nectar card purple logo">
+      Nectar Card
+    </h3>
+
+    <div *ngIf="!isLoggedIn">
+      <p>Collect <span class="num-points">{{nectarPts}}</span> points with these tickets.</p>
+      <app-button btn-type="nectar-login" class="btn-block btn-login" (click)="logIn()">Sign in / Register to collect Nectar points</app-button>
+    </div>
+
+    <div *ngIf="isLoggedIn" class="nectar-content">
+      <div *ngIf="!journeyComplete">
+        <p *ngIf="nectarCardRegistered">You could collect <span class="num-points">{{nectarPts}}</span> points with these tickets.</p>
+
+        <div class="nectar-card-input" *ngIf="!nectarCardRegistered">
+          <p>Collect <span class="num-points">{{nectarPts}}</span> points with these tickets. Add your last 11 digit card number.</p>
+
+          <div class="nectar-input-wrap">
+            <input id="ncn" #ncn="ngModel" type="text" pattern="\d{11}" minlength="11" maxlength="11" required class="nectar-input" [placeholder]="nectarLeadingNums" name="ncn" [(ngModel)]="nectarCardNum" (focus)="onComponentFocus()">
+          </div>
+          <app-loading-indicator inline *ngIf="addingInProgress" class="nectar-loader"></app-loading-indicator>
+          <app-button *ngIf="!addingInProgress" btn-type="nectar-add" class="add-nectar-card" (click)="addNectarCard()" [disabled]="!showAddButtonAddNectrCard">Add</app-button>
+        </div>
+
+        <p *ngIf="nectarCardRegisteredSuccess" class="validation-success">
+          {{ nectarCardRegisteredSuccessMessage }}
+        </p>
+
+        <p *ngIf="nectarError" class="validation-msg">
+          {{ errorMsg }}
+        </p>
+      </div>
+
+      <p *ngIf="journeyComplete && !nectarCardRegistered">
+        You could have collected <span class="num-points">{{nectarPts}}</span> points with these tickets. Register your card to collect Nectar points.
+      </p>
+      
+      <p *ngIf="journeyComplete && nectarCardRegistered">
+        Collected <span class="num-points">{{nectarPts}}</span> points.
+      </p>
+    </div>
+  </section>
+</div>

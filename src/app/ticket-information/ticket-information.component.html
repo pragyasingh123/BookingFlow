@@ -1,0 +1,200 @@
+<div class="ticket-info clearfix">
+  <div class="journey-date">
+    <span class="btn journey-date">{{ getDirection(direction) }}</span>
+    <h2>{{ timeDepart | date:'EEE dd MMM' }}</h2>
+    <div *ngIf="isCheapest" class="journey-label">Cheapest</div>
+  </div>
+
+  <div class="journey-details-box">
+    <ul class="travel-details-list">
+      <li><span class="time">{{ timeDepartDesc }}</span><span class="name" data-elid="from-station">{{ originName }}</span></li>
+      <li class="changes-and-duration" *ngIf="showRouteDetails == 'true' && numChanges != 0 && routeDetailsParamsOutward!== undefined"><a [routerLink]="['./route-details-simplified', routeDetailsParamsOutward]">{{ getChangesMsg(numChanges) }} <span class="separator">|</span> {{ getDuration(timeDepart, timeArrive) }}</a></li>
+      <li class="changes-and-duration" *ngIf="showRouteDetails == 'false' || numChanges == 0 || routeDetailsParamsOutward == undefined">{{ getChangesMsg(numChanges) }} <span class="separator">|</span> {{ getDuration(timeDepart, timeArrive) }}</li>
+      <li><span class="time">{{ timeArriveDesc }}</span><span class="name" data-elid="to-station">{{ destinationName }}</span></li>
+    </ul>
+  </div>
+
+  <span class="scheduled-train-times">These are the scheduled train times</span>
+
+  <div class="ttjourney-row" *ngFor="let ttjourney of ttjourneys">
+    <div *ngFor="let leg of ttjourney.legs">
+      <div class="journey-row seat-row" *ngIf="leg.seatReservation.length">
+        <div *ngFor="let reservation of leg.seatReservation">
+          <div *ngIf="reservation.direction.toUpperCase() == 'O' && reservation.coaches.length > 0">
+            <div class="left-column">
+              <iron-icon
+                class="ti-icon icon-seats icon-direction"
+                icon="toc:seat"
+                *ngIf="reservation.type.toUpperCase() == 'S'"
+              ></iron-icon>
+              <iron-icon class="ti-icon" icon="toc:sleeper-cabin" *ngIf="reservation.type.toUpperCase() == 'B'"></iron-icon>
+            </div>
+
+            <div class="right-col" *ngFor="let coach of reservation.coaches">
+              <div class="coach-container">
+                <p class="coach-details">{{coach.description}}</p>
+
+                <ng-container *ngFor="let seat of coach.seats; let i = index">
+                  <p class="seat-details">
+                  {{ seat.description }} {{ seat.attributes }}
+                  <span *ngIf="i < (coach.seats.length - 1)">, </span>
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="reservation.placesoverbooked > 0 && reservation.direction.toUpperCase() == 'O'">
+            <div class="left-column">
+              <iron-icon class="ti-icon icon-seats icon-direction" icon="toc:seat"></iron-icon>
+            </div>
+
+            <div class="right-col">
+              <p class="unreservec-seat-message">You’re booked on this train - You can sit in any vacant seat for your class of travel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-row bike-row">
+        <app-bike-reservation-desc [bikeReservation]="leg.bikeReservation" [direction]="'outward'"></app-bike-reservation-desc>
+      </div>
+    </div>
+  </div>
+
+  <hr *ngIf="isSingleReturn && getDuration(timeDepartReturn, timeArriveReturn) == '0m'">
+
+  <div class="journey-date" *ngIf="isSingleReturn && !isReturn">
+    <span class="btn journey-date">Open Rtn</span>
+  </div>
+
+  <div *ngIf="isReturn" class="journey-date">
+    <span class="btn journey-date">Rtn</span>
+    <h2>{{ timeDepartReturn | date:'EEE dd MMM' }}</h2>
+  </div>
+
+  <div class="journey-details-box" *ngIf="isReturn">
+    <ul class="travel-details-list" [ngClass]="isSingleReturn && getDuration(timeDepartReturn, timeArriveReturn) == '0m' ? 'singleReturn': ''">
+      <li><span class="time">{{ timeDepartReturnDesc }}</span><span class="name">{{ destinationName }}</span></li>
+      <li class="changes-and-duration" *ngIf="(showRouteDetails == 'true' && numChanges != 0 && isReturn && routeDetailsParamsReturn !== undefined)"><a [routerLink]="['./route-details-simplified', routeDetailsParamsReturn]">{{ getChangesMsg(numChangesReturn) }} <span class="separator">|</span> {{ getDuration(timeDepartReturn, timeArriveReturn) }}</a></li>
+      <li class="changes-and-duration" *ngIf="(showRouteDetails == 'false' || numChanges == 0) && isReturn || routeDetailsParamsOutward == undefined">{{ getChangesMsg(numChangesReturn) }} <span class="separator">|</span> {{ getDuration(timeDepartReturn, timeArriveReturn) }}</li>
+      <li><span class="time">{{ timeArriveReturnDesc }}</span><span class="name">{{ originName }}</span></li>
+    </ul>
+  </div>
+
+  <div class="journey-details-box" *ngIf="isSingleReturn && !isReturn">
+    <ul class="travel-details-list" [ngClass]="isSingleReturn && getDuration(timeDepartReturn, timeArriveReturn) == '0m' ? 'singleReturn': ''">
+      <li><span class="time">{{ timeDepartReturnDesc }}</span><span class="name">{{ destinationName }}</span></li>
+      <li><span class="time">{{ timeArriveReturnDesc }}</span><span class="name">{{ originName }}</span></li>
+    </ul>
+  </div>
+
+  <span class="scheduled-train-times" *ngIf="isReturn">These are the scheduled train times</span>
+
+  <div class="ttjourney-row" *ngFor="let ttjourney of ttjourneys">
+    <div *ngFor="let leg of ttjourney.legs">
+      <div class="journey-row seat-row" *ngIf="leg.seatReservation.length">
+        <div *ngFor="let reservation of leg.seatReservation">
+          <div *ngIf="reservation.direction.toUpperCase() != 'O' && reservation.coaches.length > 0">
+            <div class="left-column">
+              <iron-icon
+                class="ti-icon icon-seats icon-direction"
+                icon="toc:seat"
+                *ngIf="reservation.type.toUpperCase() == 'S'"
+              ></iron-icon>
+              <iron-icon class="ti-icon" icon="toc:sleeper-cabin" *ngIf="reservation.type.toUpperCase() == 'B'"></iron-icon>
+            </div>
+
+            <div class="right-col" *ngFor="let coach of reservation.coaches">
+              <div class="coach-container">
+                <p class="coach-details">{{coach.description}}</p>
+
+                <ng-container *ngFor="let seat of coach.seats; let i = index">
+                  <p class="seat-details">
+                  {{ seat.description }} {{ seat.attributes }}
+                  <span *ngIf="i < (coach.seats.length - 1)">, </span>
+                  </p>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="reservation.placesoverbooked > 0 && reservation.direction.toUpperCase() != 'O'">
+            <div class="left-column">
+              <iron-icon class="ti-icon icon-seats icon-direction" icon="toc:seat"></iron-icon>
+            </div>
+
+            <div class="right-col">
+              <p class="unreservec-seat-message">You’re booked on this train - You can sit in any vacant seat for your class of travel</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="journey-row bike-row">
+        <app-bike-reservation-desc [bikeReservation]="leg.bikeReservation" [direction]="'return'"></app-bike-reservation-desc>
+      </div>
+    </div>
+  </div>
+
+  <div class="journey-row journey-row--passengers clearfix" (click)="showPassengerInformation = !showPassengerInformation">
+    <hr>
+
+    <div class="ticket-price-total">
+      <iron-icon class="bf-journey-arrow" *ngIf="!showPassengerInformation" icon="toc:arrow_down"></iron-icon>
+      <iron-icon class="bf-journey-arrow" *ngIf="showPassengerInformation" icon="toc:arrow_up"></iron-icon>
+      <p class="ticket-price-total__desc">Ticket price (all passengers)</p>
+      <p class="ticket-price-total__price">£{{ cost.toFixed(2) }}<span *ngIf="isCheapest" class="money-saver">*</span></p>
+    </div>
+    <div class="passengers clearfix" [class.passengers--open]="showPassengerInformation">
+      <div *ngFor="let passenger of aggregatePassengers(journeyId, fares, discounts)" class="passenger">
+        <div class="passenger-info" [class.full-width]="passenger.discount.length > 0">{{passenger.count}} x {{passenger.type}}</div>
+        <p class="passenger-info__discount">{{passenger.discount}}</p>
+        <p class="passenger--price">£{{(passenger.pricemultiplier * passenger.price).toFixed(2)}}</p>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div *ngIf="coach && seats" class="flex-row ti-seating">
+    <iron-icon class="ti-icon seat-icon" icon='toc:seat'></iron-icon>
+    <span class="coach">Coach {{coach}}</span> <span class="seats">Seats {{seats}}</span>
+  </div>
+
+  <div class="journey-ticket-info">
+    <strong>{{ ticketType }}</strong>
+    <p>{{ ticketRouteDescription }}</p>
+
+    <div *ngIf="isFirstClass">
+      <hr class="assisted-travel-hr">
+
+      <div class="assisted-travel-wrap">
+        <div class="assisted-travel-wrap--left-col">
+          <iron-icon icon="toc:accessibility" class="assisted-travel-icon"></iron-icon>
+        </div>
+
+        <div class="assisted-travel-wrap--right-col">
+          <p class="assisted-travel">It is not possible to access First Class in a wheelchair on TransPennine Express or some other operators’ trains. Please check with our <a href="{{ assistedTravelLink }}" target="_blank" rel="noopener noreferrer">Assisted Travel</a> team before booking.</p>
+        </div>
+      </div>
+    </div>
+
+    <div (click)="showRouteDetailsModal($event, ticketCode)">
+      <iron-icon class="ti-icon help-icon" icon='toc:help'></iron-icon>
+      <a href="{{ ticketCode }}">View ticket restrictions</a>
+    </div>
+  </div>
+
+  <div class="sleepers" *ngIf="sleepersPreferences && showSleeperSection">
+    <div class="journey-row sleepers" *ngIf="sleepers">
+      <div *ngFor="let sleeper of sleepers">
+        <hr>
+        <div class="card-row-left-col">
+          {{ sleeper.description }}
+        </div>
+        <div class="card-row-right-col">
+          £{{ sleeper.cost / 100 | number:'1.2-2' }}
+        </div>
+      </div>
+    </div>
+  </div>

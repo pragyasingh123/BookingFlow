@@ -1,0 +1,52 @@
+@import "../../../assets/styles/components/ng_components_shared";
+@import "../../../assets/styles/variables";
+
+h1 {
+  color: $bf-colour-text;
+}
+
+.os-title, .os-delivery, .os-total {
+  font-weight: bold;
+}
+
+.os-delivery .price {
+  font-weight: normal;
+}
+
+.os-delivery {
+  margin: $bf-component-padding 0;
+  display: block;
+}
+
+.os-price {
+  align-self: flex-end;
+  .price {
+    font-weight: normal;
+  }
+}
+
+hr.os {
+  margin-bottom: $bf-component-padding;
+}
+
+.os-evoucher {
+  color: $bf-colour-button-secondary;
+  font-style: italic;
+}
+
+.os-payment {
+  color: $bf-colour-font-heading;
+  .price {
+    font-weight: normal;
+  }
+}
+
+.os-delivery-type {
+  font-weight: normal;
+  display: inline-block;
+  padding-right: 20px;
+}
+
+.os-delivery .card-row-right-col {
+  float: right;
+}

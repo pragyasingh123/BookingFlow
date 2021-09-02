@@ -1,0 +1,122 @@
+@import "../../../assets/styles/variables";
+
+form {
+		margin-top: 10px;
+		
+		input {
+			font-family: $bf-font-init;
+		}
+}
+
+.required-fields {
+	text-align: left;
+
+	span {
+		color: $br-registration-form-required-field;
+	}
+}
+
+.nectarcard-label-box {
+
+	margin: 10px 10px 10px -10px;
+
+  img {
+    max-width: none;
+    width: 72px;
+    height: 70px;
+    margin-top: -8px;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //IE11 case
+	.nectarcard-label-box {
+		img {
+			width: auto;
+			height: auto;
+		}
+	}
+}
+
+@media screen and (max-width: 380px)  {
+  .nectarcard-label-box {
+    img {
+      width: 52px;
+      height: 52px;
+    }
+  }
+}
+
+.nectarcard-question-color {
+	color: $bf-nectarcard-question-text-color;
+}
+
+.nectarcard-question-color,
+.nectarcard-question {
+	margin: 0 auto 3px;
+}
+
+.nectarcard-number-box {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: stretch;
+}
+
+.nectarcard-digits {
+	line-height: 56px;
+	vertical-align: middle;
+	text-align: left;
+	padding-right: 5px;
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.nectarcard-input {
+	flex: 1;
+	flex-basis: auto;
+}
+
+.alert-danger {
+	background-color: transparent;
+	border: none;
+	text-align: right;
+	font-size: 0.85rem;
+	padding: 0px 10px;
+	font-style: italic;
+}
+
+.small-margin-bottom {
+	margin-bottom: 2px;
+}
+
+.can-we-contact-you-wrapper {
+	margin-top: 30px;
+}
+
+.form-wrapper {
+	padding: 20px;
+	background-color: #eef0ec;
+}
+
+.full-width {
+	width: 100%;
+	margin-bottom: 0px;
+}
+
+.no-margin-padding {
+	margin-bottom: 0px;
+	padding-bottom: 1em;
+}
+
+.small-margin-bottom-checkbox {
+	margin-bottom: 0.5em;
+}
+
+.password-criteria {
+  color: #a94442;
+
+  strong {
+    display: block;
+    margin-bottom: 5px;
+  }
+}

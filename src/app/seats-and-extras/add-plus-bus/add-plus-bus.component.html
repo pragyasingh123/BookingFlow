@@ -1,0 +1,49 @@
+<app-loading-indicator inline *ngIf="!busPrefAvailable" class="loader"></app-loading-indicator>
+
+<div  *ngIf="busPrefAvailable">
+  <div class="color-strip"></div>
+  <div class="container-fluid">
+    <header class="modal-header-container">
+      <iron-icon icon="toc:bus"></iron-icon>
+      <h1 class="dialog-heading">Add PlusBus</h1>
+    </header>
+    <hr>
+    <p>PlusBus is a discount price travelcard for unlimited bus and tram travel around town.</p>
+
+
+    <div class="alert alert-warning">
+      <div class="icon-wrap">
+        <iron-icon icon="toc:my_account"></iron-icon>
+      </div>
+      <div class="content-wrap">
+        <p>
+          Price is for all passengers
+        </p>
+      </div>
+    </div>
+
+    <section class="plusbus-option" *ngFor="let option of extrasOptions.additionalOptionItems">
+      <div class="plusbus-info-row">
+        <h2>PlusBus to/from {{option.name}}</h2>
+        <iron-icon icon="toc:info" (click)="showInfoPlusBus(option.link)" class="plusbus-link"></iron-icon>
+      </div>
+
+      <app-checkbox label="{{option.date}}" [checked]="option.selected" (onChecked)="calculatePrice(option.selected = $event, option.cost)" extra="{{option.cost | currency:'GBP':true:'1.2-2'}}"></app-checkbox>
+    </section>
+
+    <hr>
+
+    <div class="row total-row">
+      <div class="col-xs-6">
+        Total
+      </div>
+      <div class="col-xs-6 text-right">
+        {{extrasOptions.totalCost | currency:'GBP':true:'1.2-2'}}
+      </div>
+    </div>
+
+    <app-button class="btn-block" btn-type="continue" (click)="addExtra()" [showLoader]="true" data-elid="add-button" [disabled]="(isButtonDisabled)">Add PlusBus</app-button>
+    <app-button class="btn-block" btn-type="link" (click)="backToSeatsAndExtras()">Cancel</app-button>
+  </div>
+
+</div>

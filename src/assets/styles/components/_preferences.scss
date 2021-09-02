@@ -1,0 +1,20 @@
+.widget-container{ margin: 80px auto 0; width: 50%; }
+.widget-container .mld-pc-option-container .mld-pc-option {
+
+    background: #EEE9F3;
+    padding: 10px 20px;
+    border-bottom: 1px solid #fff;
+    &:hover{ background: #9EFBD3; cursor: pointer;}
+    
+        .mld-pc-toggle input[type=checkbox], label{ display: inline-block; padding-left: 10px; }   
+    
+    
+}
+
+.widget-container .mld-text.markup p { 
+    margin-bottom: 0;     
+    position: relative;
+    top: 14px;
+    font-weight: 500;
+    font-size: 20px;
+}

@@ -1,0 +1,23 @@
+<!-- availability state -->
+<ng-template *ngIf="isSelected && !isSoldOut">
+  <section [ngSwitch]="isAvailable"
+           class="availability">
+    <div *ngSwitchCase="null"
+         class="checking">
+      <app-loading-indicator label="Searching for availability"></app-loading-indicator>
+    </div>
+    <div *ngSwitchCase="true"
+         class="available">
+      Your ticket search is available
+    </div>
+    <div *ngSwitchCase="false"
+         class="unavailable">
+      Sorry, your ticket search is unavailable
+    </div>
+  </section>
+</ng-template>
+<div *ngIf="isSoldOut"
+     class="sold-out">
+  Sold out
+</div>
+<!-- /availability state -->

@@ -1,0 +1,21 @@
+<div class="leg-bike-reservation-info" *ngIf="reservation.coaches.length > 0 && reservation.placesoverbooked == 0 || reservation.coaches.length == 0 && reservation.placesoverbooked > 0">
+  <div class="leg-bike-reservation-info__icon">
+    <iron-icon class="" icon="toc:bike"></iron-icon>
+  </div>
+
+  <div class="leg-bike-reservation-info__desc">
+    <ng-container *ngIf="reservation.placesoverbooked == 0">
+      <ng-container *ngFor="let coach of reservation.coaches">
+        {{ coach.description }}
+
+        <ng-container *ngFor="let place of coach.seats; let i = index">
+          {{ place.description }}<ng-container *ngIf="i < (coach.seats.length - 1)">, </ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="reservation.placesoverbooked > 0">
+      {{ reservation.placesoverbooked }} x bike space(s) reserved
+    </ng-container>
+  </div>
+</div>

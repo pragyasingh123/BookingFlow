@@ -1,0 +1,118 @@
+@import "../../../assets/styles/variables";
+
+:host {
+  display: block;
+  position: relative;
+  margin: 0 0 1em 0;
+  top:1px;
+}
+.input-area {
+  position: relative;
+
+  &.open {
+    border-bottom: 0;
+  }
+
+  .form-control {
+    padding-top: 16px;
+  }
+}
+.close-icon {
+  position: absolute;
+  top: 0.55em;
+  right: 0.2em;
+  padding: 5px;
+  background-color: transparent;
+  color: $bf-colour-date-picker-close-icon;
+  border: none;
+}
+.date-picker-panel {
+  background-color: #fff;
+  padding: 10px;
+  width: 100%;
+  position: absolute;
+  top: 3em;
+  z-index: 100;
+  border: 1px solid #525761;
+  border-top: none;
+
+}
+.days-display-wrapper {
+  font-size: 0.9em;
+}
+
+.week-heading {
+  font-weight: bold;
+
+  .day-heading {
+    float: left;
+    width: 14.27%;
+    text-align: center;
+  }
+}
+.month-label {
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 0.4em;
+}
+.week {
+  display: block;
+}
+.day {
+  float: left;
+  width: 14.27%;
+  cursor: pointer;
+  text-align: center;
+
+  &.outsideCurrentMonth {
+    color: #e8e8e8;
+  }
+  &.beforeMinDate,
+  &.afterMinDate {
+    color: #e8e8e8;
+    pointer-events: none;
+  }
+
+  .label-wrap {
+    padding: 5px;
+    text-align: center;
+    display: block;
+    border-radius: 50%;
+    max-width: 2.15em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.selected .label-wrap{
+    background-color: $bf-colour-datepicker-selected;
+    color: #fff;
+  }
+}
+
+.extended-booking-horizon__paragraph{
+    text-align: center;
+    padding-top: 25px;
+}
+.extended-booking-horizon__link{
+        color: $bf-colour-link !important;
+}
+
+.month-btn {
+  position: absolute;
+  top:0.1em;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+
+  iron-icon {
+    height: 33px;
+    width: 33px;
+  }
+
+  &.prev-month {
+    left: 5px;
+  }
+  &.next-month {
+    right: 5px;
+  }
+}

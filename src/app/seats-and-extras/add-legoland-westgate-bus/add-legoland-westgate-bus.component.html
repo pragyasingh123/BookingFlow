@@ -1,0 +1,49 @@
+<app-loading-indicator inline *ngIf="!busPrefAvailable" class="loader"></app-loading-indicator>
+
+<div  *ngIf="busPrefAvailable">
+  <div class="color-strip"></div>
+  <div class="container-fluid">
+    <header class="modal-header-container">
+      <iron-icon icon="toc:bus"></iron-icon>
+      <h1 class="dialog-heading">Add {{searchName}}</h1>
+    </header>
+    <hr>
+    <p *ngIf="legolandOption">Travel between Windsor &amp; Eton Central and Legoland</p>
+
+    <div class="alert alert-warning">
+      <div class="icon-wrap">
+        <iron-icon icon="toc:my_account"></iron-icon>
+      </div>
+      <div class="content-wrap">
+        <p>Price is for all passengers</p>
+      </div>
+    </div>
+
+    <section class="plusbus-option" *ngFor="let option of extrasOptions.additionalOptionItems">
+    <div class="row-flex">
+      <h2>{{searchName}}</h2>
+    </div>
+
+      <app-checkbox label="{{option.label}}" [checked]="option.selected" (onChecked)="calculatePrice(option.selected = $event, option.cost)" extra="{{option.cost | currency:'GBP':true:'1.2-2'}}"></app-checkbox>
+    </section>
+
+    <hr>
+
+    <div class="row total-row">
+      <div class="col-xs-6">
+        Total
+      </div>
+      <div class="col-xs-6 text-right">
+        {{extrasOptions.totalCost | currency:'GBP':true:'1.2-2'}}
+      </div>
+    </div>
+
+    <app-button class="btn-block"
+                btn-type="continue"
+                (click)="addExtra()"
+                [showLoader]="true">Add {{searchName}}
+    </app-button>
+    <app-button class="btn-block" btn-type="link" (click)="backToSeatsAndExtras()">Cancel</app-button>
+  </div>
+
+</div>

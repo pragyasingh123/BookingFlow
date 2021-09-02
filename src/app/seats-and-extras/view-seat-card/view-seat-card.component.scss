@@ -1,0 +1,100 @@
+@import "../../../assets/styles/variables";
+
+:host {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.sc-head {
+  display: flex;
+  justify-content: space-between;
+  height: 3rem;
+
+  /deep/ .spinner {
+    margin: 0;
+    width: 26px;
+    height: 2em;
+
+    > div {
+      width: 4px;
+      margin-right: 0px;
+    }
+  }
+}
+
+.sc-heading {
+  font-size: 1.125rem;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.seat-remove {
+  margin-top: 1rem;
+}
+
+.journey-row {
+  .journey-detail-row {
+    position: relative;
+    padding: 0.1em 0 0.5em;
+    &.reservation-disallowed {
+      color: $bf-colour-primary;
+      font-style: italic;
+      iron-icon { 
+        fill: $bf-colour-content-orange-bright;
+      }
+    }
+  }
+  .reservation-optional {
+    color: $bf-colour-primary;
+    font-style: italic;
+  }
+  .reservation-required {
+    .reservation-warning {
+      background-color: $bf-colour-delivery-details-secondary;
+      color: $bf-colour-font-heading;
+      padding: .5rem .6rem;
+      margin-bottom: 15px;
+    }
+  }
+
+  .left-col {
+    position: absolute;
+    left: 0;
+    top: 0.1em;
+    width: 30px;
+    text-align: center;
+
+    iron-icon {
+      height: 25px;
+      width: 25px;
+    }
+  }
+  .right-col {
+    padding-left: 40px;
+  }
+
+  .coach-container {
+    margin-bottom: 0px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+
+    .coach-details {
+      margin-bottom: 4px;
+    }
+    .seat-details {
+      margin: 0;
+    }
+
+    span {
+      margin-left: -4px;
+    }
+  }
+}
+
+.text-warning {
+  font-size: 1rem;
+  iron-icon {
+    transform: scale(1.4);
+  }
+}

@@ -1,0 +1,468 @@
+@import "../../assets/styles/variables";
+
+:host {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.choose-seat-prefs {
+  text-align: center;
+}
+
+.seat-cards {
+  display: flex;
+  justify-content: center;
+  max-width: $bf-component-max-width;
+  margin: 0 auto;
+  padding: 0 $bf-component-padding;
+
+  app-seat-card {
+    flex-grow: .6;
+  }
+  app-view-seat-card {
+    width: 100%;
+    padding: 0 17px !important;
+    margin: 0!important;
+  }
+
+  &.has-return-journey {
+    flex-direction: column;
+
+    //display seat cards as a row
+    @media (min-width: $breakpoint-phone) {
+      max-width: $bf-component-max-width * 1.5;
+      flex-direction: row;
+      app-seat-card {
+        flex-grow: .3;
+        &:last-of-type {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+  }
+
+}
+
+.sleepers {
+  max-width: $bf-component-max-width;
+  margin: 0 auto;
+}
+
+.sleeper-options {
+  margin-top: $bf-gutter;
+  p {
+    margin-bottom: $bf-gutter / 2;
+  }
+}
+
+.sleepers-wrap {
+  background-color: $bf-colour-background-footer;
+}
+
+.sleeper-info {
+  margin: $bf-gutter 0;
+  padding: $bf-gutter;
+}
+
+.sleeper-traveller-group {
+  background-color: $bf-colour-sleeper-traveller-group-background;
+  padding: $bf-gutter/4 $bf-gutter;
+}
+
+.sleeper-contact {
+  label {
+    font-weight: normal;
+  }
+}
+
+:host([btn-type="amend"]) {
+  display: block;
+}
+
+.seats-extras-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+:host .ticket-card {
+  margin: 0 auto;
+  max-width: 600px;
+  padding-left: 15px;
+  h4 {
+    font-weight: bold;
+  }
+}
+
+.seat-selector-response-wrap {
+  margin-top: 20px;
+}
+
+.nre-left-column {
+  width: 71%;
+  float: left;
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 63%;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.nre-right-column {
+  height: auto;
+  width: 28%;
+  float: right;
+  margin-right: 1%;
+  @media screen and (min-width: 768px) and (max-width: 991px) {
+    width: 34%;
+  }
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.nre-right-column-hide {
+  display: none;
+}
+
+.hide-continue-btn {
+  display: none;
+  @media screen and (max-width: 767px) {
+    display: block;
+  }
+}
+
+.hide-add-journey-btn {
+  display: none;
+}
+
+.nre-line-shape {
+  width: 100%;
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    width: 88%;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 71%;
+  }
+}
+
+.md-basket-background {
+  width: 270px;
+  background-color: $bf-colour-nre-basket;
+  font-family: $bf-font-headings;
+
+  .md-basket {
+    color: $bf-colour-more-info;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+  }
+
+  .ticket-header {
+    margin: 0;
+    padding-bottom: 10px;
+    color: $bf-colour-more-info;
+    line-height: 1.15;
+    font-weight: bolder;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    font-size: 22px;
+  }
+
+  .ticket-no {
+    background-color: $bf-colour-basket-label;
+    color: $bf-colour-button-tertiary;
+    line-height: 1.8;
+    padding: 0 10px;
+    margin-bottom: 0;
+    font-size: 16px;
+
+    .remove-journey {
+      color: $bf-colour-basket-label-button;
+      font-size: 12px;
+      float: right;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: normal;
+      line-height: 2.5;
+      border-radius: 3px;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .ticket-journey-times {
+    padding: 8px;
+    font-size: 14px;
+    font-family: $bf-font-base;
+
+    .ticket-price-wrap {
+      border-top: 1px solid $bf-colour-font-heading;
+      border-bottom: 1px solid $bf-colour-font-heading;
+      padding: 10px 0;
+      margin-top: 15px;
+
+      .bf-journey-arrow {
+        float: right;
+        transform: scale(1.9);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .ticket-wrap {
+    font-size: 1.4rem;
+    padding: 10px;
+    margin: 10px -7px;
+    color: $bf-colour-font-heading;
+    background-color: $bf-colour-more-info;
+  }
+
+  .ticket-wrap.tpe-case {
+    .ticket-no {
+      font-weight: bold;
+    }
+    .carbon-footprint-more {
+      display: none;
+    }
+  }
+
+  .tickets-main-info {
+    color: $bf-colour-font-heading;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    line-height: 1.6;
+    li {
+      padding-top: 2px;
+    }
+
+    .ticket-info-small-font {
+      margin-top: 8px;
+      margin-bottom: 10px;
+      font-weight: normal;
+      font-style: oblique;
+      font-stretch: normal;
+      line-height: 1;
+      letter-spacing: normal;
+      font-size: 12px;
+    }
+  }
+
+  .ticket-price-breakdown {
+    margin-top: 15px;
+
+    .out-return-time-date > div {
+      display: inline;
+    }
+
+    .passengers.spacing {
+      margin-bottom: 10px;
+      padding-inline-start: 0px;
+    }
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //IE11 case
+      .passengers.spacing {
+        border-top: 1px solid #e0ded8;
+      }
+
+      .people-information {
+        height: 30px;
+        line-height: 38px;
+        margin-left: -40px;
+      }
+    }
+
+    .total-fare-detail {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      font-size: 12px;
+      justify-content: space-between;
+      align-items: baseline;
+      width: 100%;
+    }
+
+    .people-information {
+      width: 140px;
+    }
+  }
+
+  .out-journey-breakdown {
+    overflow: auto;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $bf-colour-bundle-1-item-b;
+    line-height: 1.6;
+    list-style: none;
+    padding-inline-start: 0px;
+
+    li.time, li.change {
+      width: 33%;
+      text-align: center;
+      min-height: 35px;
+      float: left;
+    }
+
+    li.time>span {
+      font-weight: 800;
+    }
+
+    .time:nth-last-child(2) {
+      padding-bottom: 10px;
+    }
+
+    li.ticket {
+      width: 100%;
+      margin-top: 10px;
+      min-height: 0;
+    }
+
+    .disruption-arrow {
+      transform: scaleX(1.4);
+      vertical-align: middle;
+      color: inherit;
+      margin-right: 10px;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      display: inline-block;
+    }
+  }
+
+  .return-journey {
+    .passengers.spacing {
+      margin-bottom: 2px;
+    }
+  }
+  .carbon-footprint-more {
+    margin-top: 14px;
+    font-size: 12px;
+
+    .co2-header {
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .co2-body {
+      margin-bottom: 12px;
+    }
+
+    .co2-icons-section {
+      ul {
+        list-style: none;
+        overflow: auto;
+        margin: 5px 0;
+        padding-left: 0px;
+
+        .train {
+          width: 50%;
+          float: left;
+        }
+
+        .car {
+          float: left;
+          width: 49%;
+        }
+
+        .ti-icon {
+          width: 18px;
+          float: left;
+          text-align: left;
+          margin-right: 0;
+          margin-left: 0;
+        }
+
+        span {
+          display: block;
+          font-size: 13px;
+          text-align: left;
+          font-weight: bold;
+          margin-top: 4px;
+          padding-left: 21px;
+        }
+      }
+    }
+
+    a {
+      font-size: 14px;
+    }
+  }
+
+  .nectar-section {
+    .nectar-logo-size {
+      width: 53px;
+    }
+    margin-top: 20px;
+    line-height: 1.1em;
+    font-weight: bolder;
+
+    .nectar-logo {
+      margin-top: -4px;
+      float: left;
+      width: 53px;
+      height: 53px;
+    }
+
+    span {
+      font-family: $bf-font-base;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+  }
+
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //IE11 case
+    .out-journey-breakdown {
+      margin: 10px 0 8px -49px;
+      border-bottom: none;
+    }
+
+    .nectar-section {
+      .nectar-logo-size {
+        width: 66px;
+      }
+      .nectar-logo {
+        margin-top: -6px;
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
+  .basket-total {
+    font-family: $bf-font-base;
+    margin-top: 15px;
+    font-size: 25px;
+    font-weight: bolder;
+  }
+  .all-passengers {
+    font-size: 13px;
+  }
+
+}
+
+.section-sleeper-cabin-warning {
+  display: flex;
+  padding-bottom: 12px;
+  color: $bf-alert-color;
+
+  .icon-warning-sleeper-cabin {
+    padding-right: 6px;
+  }
+
+  .red-fill {
+    fill: $bf-alert-color;
+  }
+}
+
+.sleeper-cabin-message-option {
+  padding-bottom: 15px;
+}
+
+.twin-cabin-info {
+  font-size: 14px;
+}

@@ -1,0 +1,59 @@
+<div class="other-tickets-wrap">
+  <section class="other-tickets">
+    <h1 class="other-tickets-heading" *ngIf="headerTicketType">Other return tickets</h1>
+    <h1 class="other-tickets-heading" *ngIf="!headerTicketType">Other single tickets</h1>
+
+    <div *ngFor="let ticket of tickets">
+      <div *ngIf="checkIfSleeper(ticket.flags)" class="sleeper-top">
+        <div class="sleeper-body">
+          <div class="other-tickets-left-col">
+            <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+              <iron-icon icon="toc:info" ></iron-icon>
+            </a>
+
+            <h2 class="other-ticket-option-heading">{{ticket.faregroupname}}</h2>
+
+            <div class="flags">
+              <span class="sleeper-service">
+                Sleeper Service
+              </span>
+            </div>
+
+            <p>{{ticket.routedescription}}</p>
+          </div>
+
+          <div class="other-tickets-right-col">
+            <div class="price">
+              <div class="price-msg">{{ticket.priceMsg}}</div>
+              <div>
+                <span class="price-amount">£{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}</span>
+              </div>
+              <app-loading-indicator inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+              <app-button *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">Select</app-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!checkIfSleeper(ticket.flags)" class="flex-row">
+        <div class="other-tickets-left-col">
+          <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+            <iron-icon icon="toc:info" ></iron-icon>
+          </a>
+          <h2 class="other-ticket-option-heading">{{ticket.faregroupname}}</h2>
+          <p>{{ticket.routedescription}}</p><p *ngIf="ticket.flags?.indexOf('Sleeper') > -1">SLIPER found!</p>
+        </div>
+        <div class="other-tickets-right-col">
+          <div class="price">
+            <div class="price-msg">{{ticket.priceMsg}}</div>
+            <div>
+              <span class="price-amount">£{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}</span>
+            </div>
+            <app-loading-indicator inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+            <app-button *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">Select</app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,378 @@
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/variables";
+@import "../../assets/styles/typography";
+@import "../../assets/styles/components/ng_components_shared";
+//inherits styles from journey-card for the core journey details
+@import "../shared/journey-card/journey-card.component";
+
+//journey card overrides
+.journey-times {
+  font-size: $f-normal;
+  font-weight: bold;
+  float: left;
+}
+
+.stations {
+  font-size: $f-normal;
+}
+
+.price {
+  font-weight: normal;
+}
+
+.help-icon {
+  fill: $bf-colour-help-icon;
+  transform: scale(1.2);
+}
+
+.ti-seating {
+  font-size: $f-smaller;
+  margin-top: $bf-gutter;
+}
+
+.coach-container {
+  margin-bottom: 0px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+
+  .coach-details, 
+  .seat-details {
+    margin-bottom: 0px;
+  }
+  
+  span {
+    margin-left: -4px;
+  }
+}
+
+.coach::after {
+  color: $bf-colour-bundle-1-item-b;
+  padding-left: .3rem;
+  margin-right: .3rem;
+}
+
+.ti-restrictions, .ti-fare-info {
+  font-size: $f-smaller;
+}
+
+.ti-fare-info {
+  margin-top: $bf-gutter;
+  p {
+    margin: 0;
+  }
+}
+
+.journey-row.journey-row--passengers {
+  padding: 0;
+  cursor: pointer;
+
+  .passengers {
+    display: none;
+    padding: 0 0 7px 7px;
+    margin: 5px 0;
+
+    &.passengers--open {
+      display: block;
+    }
+
+    .passenger {
+      border-bottom: dashed 1px #e0ded8;
+      line-height: 28px;
+      font-size: 14px;
+      margin-bottom: 13px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: space-between;
+
+      &:last-child {
+        margin-bottom: 0px;
+      }
+
+      .full-width {
+        width: 100%;
+      }
+
+      .passenger-info {
+        font-weight: bold;
+        color: #ababab;
+
+        &__discount{
+          font-size: 1em;
+          margin: 0 50px 0 0;
+        }
+      }
+
+      .passenger--price {
+        font-weight: bold;
+        color: #777;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.ttjourney-row {
+  margin-top: 10px;
+}
+
+.scheduled-train-times {
+  margin-left: 10px;
+  display: block;
+}
+
+.icon-seats {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+.icon-bikes {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+}
+
+.ticket-info {
+  text-align: left;
+  position: relative;
+  background: $bf-panel-bg-color;
+  padding: 15px 10px;
+  margin-bottom: 10px;
+}
+
+span.btn.journey-date {
+  border: 1px solid #525761;
+  padding: 0px 4px;
+  margin-left: 16px;
+  width:84px;
+}
+
+.journey-ticket-info {
+  font-size: 11px;
+}
+
+.sleepers {
+  overflow: hidden;
+
+  .card-row-left-col,
+  .card-row-right-col  {
+    float: left;
+    width: 50%;
+  }
+
+  .card-row-left-col {
+    text-transform: capitalize;
+  }
+
+  .card-row-right-col {
+    text-align: right;
+    font-weight: bold;
+  }
+}
+
+.journey-date {
+  display: table;
+  padding: 0px 10px;
+  margin: 15px 0;
+  &:first-child {
+    margin-top: 0px;
+  }
+  .btn.journey-date {
+    display: table-cell;
+    font-weight: normal;
+    margin: 0;
+    font-size: 12px;
+    padding: 1px 4px;
+    width: auto;
+    line-height: 1.4;
+    vertical-align: middle;
+    cursor: default;
+  }
+  h2 {
+    font-weight: bold;
+    font-size: 16px;
+    display: table-cell;
+    margin: 0;
+    vertical-align: middle;
+    text-align: left;
+    padding-left: 10px;
+  }
+}
+
+.dot-separator {
+  display: block;
+  position: relative;
+  height: 200px;
+  border-left: 3px solid red;
+}
+
+.travel-details-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li {
+    .time {
+      color: $bf-colour-journey-header-background;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .name {
+      color: #646a72;
+      margin-left: 30px;
+      font-size: 16px;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 17px;
+      left: 62px;
+      bottom: 17px;
+      border-left: 2px solid #525761;
+    }
+  }
+  &:before {
+    top: 6px;
+    left: 57px;
+  }
+  &:after {
+    bottom: 6px;
+    left: 57px;
+  }
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #525761;
+    border-radius: 50%;
+    z-index: 1;
+  }
+}
+
+.changes-and-duration {
+  font-size: 0.75rem;
+  margin: 20px 0 20px 70px;
+  color: #0a493e;
+  .separator {
+    color: #e0e3e1;
+  }
+}
+
+.marbottom-zero {
+  margin-bottom: 0;
+}
+
+.travel-details-list.singleReturn {
+  & li:first-child { margin-bottom: 20px; }
+  & li:after { left: 24px; }
+  &:before { left: 19px; }
+  &:after { left: 19px; }
+}
+
+.journey-details-box {
+  position: relative;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.journey-label {
+  color: #FFFFFF;
+  font-size: 0.65rem;
+  border-radius: .2rem;
+  display: inline-block;
+  padding: 0.1rem 0.3rem;
+  margin-left: 3px;
+  background-color: $colour-electric-green;
+  position: absolute;
+  right: 10px;
+}
+
+.money-saver {
+  color: $colour-electric-green;
+  display: none;
+}
+
+.saving-money-info {
+  color: $colour-electric-green;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+
+.check-outline svg {
+  position: relative;
+  fill: $colour-electric-green;
+  transform: scale(.8);
+  top: 7px;
+  margin-right: 10px;
+}
+
+.assisted-travel-wrap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+
+  &--left-col {
+    order: 1;
+  }
+  &--right-col {
+    order: 2;
+  }
+}
+.assisted-travel-icon {
+  width: 30px;
+  height: 30px;
+}
+.assisted-travel-hr {
+  border-top: 1px solid;
+  margin-top: -8px;
+}
+.left-column {
+  position: absolute;
+  width: 30px;
+  text-align: center;
+}
+.journey-row {
+  position: relative;
+  padding: 0 3px;
+  margin-bottom: 10px;
+  &.seat-row,
+  &.bike-row {
+    padding-left: 0px;
+
+    .right-col {
+      display: block;
+      padding-left: 40px;
+      align-items: center;
+    }
+  }
+}
+
+.unreservec-seat-message,
+.unreservec-bike-message {
+  margin-bottom: 0px;
+}
+
+.ticket-price-total {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .bf-journey-arrow {
+    flex-basis: 24px;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  &__desc {
+    width: 100%;
+    margin: 0;
+  }
+  &__price {
+    font-weight: bold;
+    margin: 0 0 0 20px;
+  }
+}

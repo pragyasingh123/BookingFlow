@@ -1,0 +1,51 @@
+﻿<div class="bf-box layout-extras-view">
+  <section class="content">
+    <div class="title-and-logo-container">
+      <h3 class="extras-title">
+        <iron-icon icon="toc:info" (click)="showInfo()"></iron-icon>
+        <span>Bike space</span>
+      </h3>
+    </div>
+    
+    <div *ngIf="displayButtons">
+      <div class="bike-section">
+        <p class="extras-info">Reserve a place for your bike.</p>
+        <ng-container *ngIf="bike?.numberOfBikes > 0">
+          <div class="extra-controls extras-info">
+            <app-loading-indicator inline *ngIf="isPendingRemoval"></app-loading-indicator>
+            <div *ngIf="!isPendingRemoval">
+              <app-button btn-type="link" [routerLink]="['add/reserve-bike']">Change</app-button>
+              <span class="pipe">|</span>
+              <app-button btn-type="link" (click)="remove()">Remove</app-button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <ng-container *ngIf="bike?.numberOfBikes > 0">
+
+        <ng-container *ngIf="trip?.outwardJourneys?.length > 0 && trip?.returnJourneys?.length == 0" >
+          <app-bike-card *ngIf="isBikeReservationExist(trip.outwardJourneys[0].timetableJourneys[0].legs)" [journey]="trip?.outwardJourneys[0]"></app-bike-card>
+        </ng-container>
+
+        <ng-container *ngIf="trip?.outwardJourneys?.length > 0 && trip?.returnJourneys?.length > 0" >
+          <app-bike-card *ngIf="isBikeReservationExist(trip.outwardJourneys[0].timetableJourneys[0].legs)" heading="Outward bike reservations" [journey]="trip?.outwardJourneys[0]"></app-bike-card>
+          <app-bike-card *ngIf="isBikeReservationExist(trip.returnJourneys[0].timetableJourneys[0].legs)" heading="Return bike reservations" [journey]="trip?.returnJourneys[0]"></app-bike-card>
+        </ng-container>
+      </ng-container>
+
+      <ul class="extras-listing has-no-items-added" *ngIf="bike?.numberOfBikes === 0">
+        <li class="extra-item">
+          <div class="extra-head">
+            <div class="extra-head-text">Free to reserve</div>
+            <div class="extra-controls">
+              <app-button [routerLink]="['./add/reserve-bike']" btn-fxm="{'type': 'button', text: 'Reserve', 'icon': '', section: 'bike'}" data-elid="reserve-bike-button">Reserve</app-button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!displayButtons">
+      <p class="extras-info-no-reservations">Reservations are not possible for this part of your journey</p>
+    </div>
+  </section>
+</div>

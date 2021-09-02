@@ -1,0 +1,71 @@
+﻿<div class="page-wrap clearfix">
+
+  <section class="journey-header" *ngIf="!(isSearchInProgress$ | async)">
+    <h1 class="journey-header-title">Select your <span>outward</span> journey</h1>
+    <span class="journey-header-stations">
+      <div [hidden]="(searchCriteria$ | async)?.originName == undefined">
+      <span class="station-from">{{(searchCriteria$ | async)?.originName}}</span>
+      <span class="station-to">{{(searchCriteria$ | async)?.destinationName}}</span>
+      </div>
+    </span>
+    <div class="journey-chosen">
+      <span class="journey-date">{{(searchCriteria$ | async)?.datetimedepart.format("ddd D MMM YYYY") }}</span>
+      <span class="journey-passengers-num">{{ getPassengers((searchCriteria$ | async)?.adults + (searchCriteria$ | async)?.children) }}</span>
+      <app-button btn-type="amend" (click)="amendSelection()" *ngIf="!(searchResults$ | async)?.changeOfJourney">Change</app-button>
+      <div><app-button btn-type="amend" (click)="cancelAmend()" *ngIf="(searchResults$ | async)?.changeOfJourney">Cancel amending my booking</app-button></div>
+    </div>
+  </section>
+
+  <app-disruption-alert *ngIf="(searchResults$ | async)?.isservicedisrupted"></app-disruption-alert>
+
+  <app-loading-indicator class="search-indicator" *ngIf="(isSearchInProgress$ | async)" label="Searching..."></app-loading-indicator>
+
+  <div *ngIf="searchError" class="no-fares">
+    <div class="bf-box">
+        <div class="alert alert-danger text-center">
+          {{ searchErrorMessage }}
+        </div>
+        <app-button class="btn-block" btn-type="journey" (click)="amendSelection()">Search again</app-button>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div *ngIf="!(isSearchInProgress$ | async) && !searchError">
+      <div class="journeys-wrap">
+        <div class="row extended-search--earlier">
+          <extend-search data-elid="earlier-time-slection"
+                         [link]="(searchResults$ | async)?.earlierOutwardLink"
+                         [direction]="'earlier'"
+                         (onClicked)="onClickedExtendSearch($event)"></extend-search>
+        </div>
+
+        <section class="journeys">
+          <app-journey-card data-elid="outward-journeys" #card *ngFor="let service of (searchResults$ | async)?.outwardServices"
+                            [service]="service"
+                            [showLoadingState]="false"
+                            [hasGroupedStation]="(searchResults$ | async)?.hasGroupedStation"
+                            [isJourneyAmend]="(searchResults$ | async)?.changeOfJourney"
+                            [direction]="'outbound'"
+                            (onSelect)="onServiceSelect($event, card)">
+          </app-journey-card>
+        </section>
+
+        <div class="row extended-search--later">
+          <extend-search data-elid="later-time-slection"
+                         [link]="(searchResults$ | async)?.laterOutwardLink"
+                         [direction]="'later'"
+                         (onClicked)="onClickedExtendSearch($event)"></extend-search>
+        </div>
+      </div>
+    </div>
+
+    <app-tab-option *ngIf="!(isSearchInProgress$ | async) && (cffService.isCffRoute$ | async)" (onSelected)="toggleFares($event)" class="cff-toggle"
+                    [value]="all" [options]="cffToggleOptions"
+    ></app-tab-option>
+
+  </div>
+  <app-sleeper-modal *ngIf="sleeperModalVisible" [addToBasketByModal]="addToBasketByModalFunction"></app-sleeper-modal>
+  <!--Add modal window route outlet-->
+  <router-outlet></router-outlet>
+</div>

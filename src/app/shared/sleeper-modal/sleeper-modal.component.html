@@ -1,0 +1,61 @@
+<div class="modal-sleeper">
+    <div class="modal-sleeper-header">
+        <img src="assets/img/logos-sleeper.svg" title="Night Riviera Sleeper" alt="Night Riviera Sleeper logo" class="night-riviera-logo"/>
+        <a class="close-sleeper-modal" (click)="addToBasketByModal()">
+            <iron-icon class="modal-close-icon close-x" icon="toc:close_alternate"></iron-icon>
+        </a>
+    </div>
+
+    <div class="modal-sleeper-body">
+        <div class="modal-sleeper-body-container-col sleeper-content-modal">
+            <div class="modal-sleeper-body-container-row">
+                <div class="modal-sleeper-body-item-icon">
+                    <img class="icon-sleeper" src="assets/img/icons/cabins.svg">
+                </div>
+                <div class="modal-sleeper-body-item-col">
+                    <p><strong>Cabins</strong> – our most popular option, so you’ll need to be quick. For the best value, look out for our <strong>Sleeper Advance</strong> tickets. They’re great value, so sell out fast too.</p>
+                </div>
+            </div>
+
+            <div class="modal-sleeper-body-container-row">
+                <div class="modal-sleeper-body-item-icon">
+                    <img class="icon-sleeper" src="assets/img/icons/new-seat.svg">
+                </div>
+                <div class="modal-sleeper-body-item-col">
+                    <p><strong>Seats</strong> – just buy a ticket and settle back in one of our modern, airline-style seats.</p>
+                </div>
+            </div>
+
+            <div class="modal-sleeper-body-container-row">
+                <div class="modal-sleeper-body-item-icon">
+                    <img class="icon-sleeper" src="assets/img/icons/accessibility.svg">
+                </div>
+                <div class="modal-sleeper-body-item-col">
+                    <p><strong>Accessibility</strong> – each train has one accessible cabin and toilet next to each other. Plus, a wheelchair space and accessible toilet in the seated carriage.<br/>Call <strong>0800 197 1329</strong> to book.</p>
+                </div>
+            </div>
+
+            <div class="modal-sleeper-body-container-row">
+                <div class="modal-sleeper-body-item-icon">
+                    <img class="icon-sleeper" src="assets/img/icons/children.svg">
+                </div>
+                <div class="modal-sleeper-body-item-col">
+                    <p><strong>Children</strong> – under 5’s go free. Under 16’s pay 50% of the adult cost.<br/>Call <strong>0345 700 0125</strong> to book.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-sleeper-footer">
+        <div class="modal-sleeper-footer-container">
+            <div class="link">
+                <a href="{{nightRivieraSleeperUrl}}" target="_blank">More about our Night Riviera Sleeper</a>
+            </div>
+            <div class="button">
+                <app-button btn-type="btn-sleeper-modal" (click)="addToBasketByModal()">Ok</app-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-sleeper-overlay"></div>

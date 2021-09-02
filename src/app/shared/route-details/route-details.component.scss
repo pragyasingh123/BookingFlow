@@ -1,0 +1,202 @@
+@import '../../../assets/styles/components/ng_components_shared';
+
+.modal-foreground {
+  border-top: 0.5rem solid $bf-colour-route-details-tertiary;
+}
+
+.modal-heading-icon {
+  transform: scale(1.4);
+}
+
+app-loading-indicator {
+  margin-top: 2em;
+}
+
+.icon-disrupted,
+.icon-bus-leg {
+  fill: $bf-colour-disrupted-icon;
+}
+
+.rd-dur-changes {
+  font-size: $f-smaller;
+  margin-bottom: 20px;
+  padding: 0 $bf-component-padding;
+  span {
+    margin-right: $bf-gutter;
+  }
+}
+
+.route-details {
+  background-color: $bf-colour-background-darker;
+  padding-left: $bf-component-padding;
+  padding-right: $bf-component-padding;
+}
+
+.route-connection {
+  text-align: left;
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 5px 15px;
+  background-color: $bf-route-details-connection-bg-color;
+  line-height: 1.5;
+  color: $bf-route-details-connection-color;
+  font-size: 16px;
+}
+
+//sleeper overrides
+.layout-sleeper {
+  border-top: none;
+  * {
+    color: $bf-colour-route-details-primary;
+  }
+  .modal-heading-icon {
+    fill: $bf-colour-route-details-primary;
+  }
+  background-color: $bf-sleeper-colour-dark;
+  .route-details {
+    background-color: $bf-sleeper-colour-light;
+  }
+  .route-connection {
+    color: $bf-route-details-connection-color;
+  }
+}
+
+.alert-green {
+  background: #d4ebdc !important;
+  border: 0;
+}
+
+.isslowtrain .content-wrap {
+  padding-left: 10px;
+}
+
+.restrictions {
+  margin: 0 10px 15px;
+
+  p {
+    font-weight: bold;
+
+    &:first-child {
+      margin: 0 0 10px 0;
+    }
+
+    &:last-child {
+      margin: 10px 0 0 0;
+    }
+  }
+  .restriction {
+    font-style: italic;
+  }
+}
+
+.tube-info-box {
+  margin: 34px 0;
+}
+
+.tube-info-header {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.tube-info-text {
+  font-style: italic;
+
+  a {
+    font-style: normal;
+  }
+}
+
+.nre-disruptions-section {
+  padding: 0px 10px 0px 10px;
+  .nre-disruptions {
+    border-bottom: 1px solid #e0ded8;
+    margin-bottom: 20px;
+    .icon-warning-nre {
+      display: block;
+      width: 7%;
+      .ico-warning-yellow {
+        width: 24px;
+        height: 24px;
+        margin-top: 3px;
+      }
+    }
+    .nre-regular-section {
+      display: inline-flex;
+
+      .nre-info-all {
+        display: block;
+        padding-left: 8px;
+        height: 45px;
+        overflow: hidden;
+        font-size: 0.9em;
+
+        .nre-info-all-element {
+          margin-bottom: 4px;
+        }
+      }
+      .nre-full-view {
+        height: 100%;
+      }
+    }
+  }
+
+  .nre-header-section {
+    margin-bottom: 23px;
+    &:not(:first-child) {
+      padding-top: 14px;
+    }
+  }
+  .nre-show-hide-section {
+    display: flex;
+    justify-content: center;
+    padding: 2px 12px 0px 12px;
+    .nre-show-hide-btn {
+      font-size: 0.9em;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      margin-bottom: 7px;
+      &.nre-btn-open {
+        margin-top: 12px;
+        position: absolute;
+      }
+    }
+    .nre-icon-arrow {
+      margin-top: 4px;
+      height: 34px;
+      width: 34px;
+    }
+    &.show-less {
+      padding: 0px 12px 6px 12px;
+      margin-top: -22px;
+      margin-bottom: 47px;
+    }
+  }
+}
+
+.route-details-underground {
+  padding: 10px;
+
+  .london-underground-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .london-underground-info-message {
+    font-style: italic;
+    margin-bottom: 0px;
+  }
+
+  .link-to-tfl {
+    font-style: normal;
+    color: $bf-route-details-connection-tfl-link-color;
+    font-weight: 700;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: darken($bf-route-details-connection-tfl-link-color, 10%);
+    }
+  }
+}

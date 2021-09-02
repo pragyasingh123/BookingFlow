@@ -1,0 +1,68 @@
+﻿<section class="seat-card">
+
+  <header class="sc-head">
+    <h2 class="sc-heading">
+      {{directionHeading}}
+    </h2>
+    <app-button class="seat-remove" btn-type="link" [isLoading]="pendingRemoval" (click)="remove()" *ngIf="journey?.hasSeatReservation">Remove</app-button>
+  </header>
+
+  <div class="bf-box">
+    <div class="content">
+      <div class="journey-row" *ngFor="let ttjourney of journey.timetableJourneys">
+        <div class="journey-row" *ngFor="let leg of ttjourney.legs">
+
+          <div class="journey-detail-row">
+            <div class="left-col">
+              <iron-icon icon="toc:tube" *ngIf="leg.mode === 'U'"></iron-icon>
+              <iron-icon icon="toc:rail" *ngIf="leg.mode !== 'U'"></iron-icon>
+            </div>
+            <div class="right-col" data-elid="from-to-stations">
+              {{leg.departure.name}} to {{leg.arrival.name}}
+            </div>
+          </div>
+
+          <div class="journey-detail-row reservation-disallowed" *ngIf="leg.reservable === '_'">
+            <div class="right-col">Reservations are not possible for this part of your journey.</div>
+          </div>
+
+          <div class="journey-detail-row reservation-optional" *ngIf="!journey.seatReservationRequiredAtServiceLevel && leg.reservationIsOptional && leg.allowsReservation">
+            <div class="right-col">Seat reservation is optional for this journey</div>
+          </div>
+
+          <div class="journey-detail-row reservation-required" *ngIf="journey.seatReservationRequiredAtServiceLevel || (leg.reservationIsMandatory && leg.allowsReservation)" data-elid="reservation-warning">
+            <div class="right-col reservation-warning">
+              You must reserve a seat for this (part of the) journey.
+            </div>
+          </div>
+          <div class="journey-detail-row" *ngIf="leg.seatReservation.length">
+            <div *ngFor="let reservation of leg.seatReservation">
+              <div class="left-col">
+                <iron-icon class="" icon="toc:seat" *ngIf="reservation.type.toUpperCase() == 'S'"></iron-icon>
+                <iron-icon class="" icon="toc:sleeper-cabin" *ngIf="reservation.type.toUpperCase() == 'B'"></iron-icon>
+              </div>
+
+              <div class="right-col" *ngFor="let coach of reservation.coaches">
+                <div class="coach-container">
+                  <p class="coach-details">{{coach.description}}</p>
+
+                  <ng-container *ngFor="let seat of coach.seats; let i = index">
+                    <p class="seat-details">
+                      <ng-container *ngIf="reservation.type.toUpperCase() == 'B'">Berth {{seat.name}}<ng-container *ngIf="seat.attributes.length > 0">:</ng-container> {{formatAttributes(seat.attributes)}}</ng-container>
+                      <ng-container *ngIf="reservation.type.toUpperCase() != 'B'">{{seat.description}} {{formatAttributes(seat.attributes)}}</ng-container>
+                      <span *ngIf="i < (coach.seats.length - 1)">, </span>
+                    </p>
+                  </ng-container>
+                </div>
+              </div>
+
+              <div class="right-col" *ngIf="reservation.hasAsterisks">
+                You’re booked on this train - You can sit in any vacant seat for your class of travel
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

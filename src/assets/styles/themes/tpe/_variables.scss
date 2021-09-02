@@ -1,0 +1,245 @@
+/*
+|--------------------------------------------------------------------------
+| Variables
+|--------------------------------------------------------------------------
+|
+*/
+
+/** Colours **/
+$bf-colour-text: #1e234f;
+$bf-colour-primary: #20234e;
+$bf-colour-link: #00a6e6;
+
+$bf-colour-green: #0a493e; // rgb( 10,  73,  62);
+$bf-colour-green-pale: #d5d5de;
+$bf-colour-slate-grey: #525761; // rgb( 82,  87,  97);
+$bf-colour-electric-green: #37aa32; // rgb( 55, 170,  50);
+$colour-electric-green: $bf-colour-electric-green;
+$bf-colour-white: #ffffff;
+$bf-colour-black: #000000;
+
+$bf-colour-red: #f64f5f; // rgb(246,  79,  95);
+$bf-colour-teal: #009688; // rgb(  0, 150, 136);
+$bf-colour-yellow: #fadc64; // rgb(250, 220, 100);
+$bf-colour-orange: #e15200; // rgb(225,  82,   0);
+$bf-colour-salmon: #ff9999; // rgb(225, 153, 153);
+$bf-colour-cranberry: #b3274a; // rgb(179,  39,  74);
+$bf-colour-navyblue: #2b4685; // rgb( 43,  70, 133);
+$bf-colour-mint: #54e1c2; // rgb( 84, 225, 194);
+$bf-colour-sky: #76cce1; // rgb(118, 204, 225);
+$bf-colour-plum: #4a2c4d; // rgb( 74,  44,  77);
+$bf-colour-grass: #4dc386; // rgb( 77, 195, 134);
+
+$bf-colour-grey-a: #8e9090; // rgb(142, 144, 144);
+$bf-colour-grey-b: #e0ded8; // rgb(224, 222, 216);
+$bf-colour-grey-c: #f7f5ef; // rgb(247, 245, 239);
+
+$bf-colour-cedd-good: #317c2e; // rgb(49, 124, 46);
+$bf-colour-cedd-minor: #ffc807; // rgb(255, 200, 7);
+$bf-colour-cedd-major: #e53935; // rgb(213, 36, 32);
+
+$bf-colour-journey-header: #ffffff;
+$bf-colour-journey-header-background: #1e234f;
+$bf-colour-journey-secondary: #00a6e6;
+$bf-colour-headings: #20234e;
+$bf-colour-content-orange-bright: #20234e;
+$bf-colour-delivery-details-tertiary: #1e234f;
+$bf-colour-delivery-details-secondary: #ffcf20;
+
+$bf-colour-confirmation-tertiary: #1e234f;
+$bf-progress-foreground: #00a6e6;
+
+/** Application **/
+$bf-colour-background: transparent;
+$bf-colour-background-darker: #ffffff;
+$bf-colour-navbar-btn-cart: #ffffff;
+$bf-colour-navbar-background: linear-gradient(-90deg, #943f90 2%, #a8def7 32%, #fff 82%);
+$navbar-btn-cart-top: 24px;
+
+/** Navbar **/
+$bf-navbar-height: 73px;
+$bf-navbar-margin-bottom: 0px;
+$bf-navbar-btn-cart-padding: 0px 12px;
+$navbar-btn-cart-height: 25px;
+
+/** Logotype **/
+$bf-colour-navbar-logo-background: #ffffff;
+$bf-navbar-logo-background: url('../img/tpe_logo.png') no-repeat 0 0;
+$bf-navbar-logo-background-clip: padding-box;
+$bf-navbar-logo-background-size: 102px 75px;
+$bf-navbar-logo-display: inline-block;
+$bf-navbar-logo-width: 102px;
+$bf-navbar-logo-height: 75px;
+$bf-navbar-logo-margin: 0 0 0 5px;
+$bf-navbar-logo-position: absolute;
+
+/** Icons **/
+$bf-colour-iron-icon: #00a6e6;
+$bf-colour-help-icon: #00a6e6;
+
+/** Fonts **/
+
+$bf-font-init: Arial, sans-serif;
+$bf-font-base: 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+$bf-font-headings: 'Gotham SSm A', 'Gotham SSm B', sans-serif;
+$bf-font-icons: 'bf_icons';
+
+$bf-font-size-base: 16px;
+
+/** Spacing **/
+$bf-gutter: 20px;
+
+/** Shadows **/
+$bf-shadow-default: 0 2px 2px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+$bf-shadow-default-hover: 0 10px 20px rgba(0, 0, 0, 0.24), 0 6px 40px rgba(0, 0, 0, 0.12);
+$bf-shadow-default-focus: $bf-shadow-default-hover;
+$bf-shadow-default-pressed: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+
+/** Borders **/
+$bf-component-border-radius: 6px;
+$bf-button-border-radius: 30px;
+$bf-component-border-color: #e0e0e0;
+
+$bf-colour-progress-bar: #1e234f;
+$bf-colour-progress-bar-background: #d2effc;
+$bf-colour-progress-bar-background-current: #a5def9;
+$bf-colour-progress-bar-text-current: #1e234f;
+$bf-colour-progress-bar-passed: #1e234f;
+$bf-colour-progress-bar-passed-background: #a5def9;
+$bf-colour-progress-bar-number-background: #1e234f;
+
+/** Buttons **/
+$bf-colour-button-secondary: #00a6e6;
+$bf-colour-button-tertiary: $bf-colour-progress-bar;
+$bf-colour-button-quinary: #ff5b00;
+$bf-colour-button-quaternary: #00a6e6;
+$bf-colour-button-light: #d2effc;
+$bf-colour-button-upgrade: #ffffff;
+$bf-colour-button-upgrade-hover: $bf-colour-button-tertiary;
+$bf-colour-button-upgrade-background-hover: $bf-colour-button-upgrade;
+$bf-colour-button-nectar-login-border-hover: #00a6e6;
+$bf-colour-button-nectar-login: #ffffff;
+$bf-colour-button-nectar-login-border: #00a6e6;
+$bf-colour-button-nectar-login-background: #00a6e6;
+$bf-colour-btn-cream: #00a6e6;
+$bf-colour-selections-bg-add-btn: #00a7e7;
+$bf-colour-selections-add-btn: $bf-colour-white;
+
+/** MISC **/
+$bf-colour-upgrade-background: #ffffff;
+$bf-colour-selection-upgrade: #1e234f;
+$bf-colour-selection-other-tickets-background: #ffffff;
+$bf-colour-other-tickets-background: #d2d3dc;
+$bf-value-other-tickets-padding: 0 0 30px 0;
+$bf-colour-font-heading: #1e234f;
+$bf-colour-spinner-background: #00a6e6;
+$bf-colour-qtt-background: #1e234f;
+$bf-colour-btn-wrap-btn: #00a6e6;
+$bf-colour-promotion-box-border: #1e234f;
+$bf-colour-promotion-box: #1e234f;
+$bf-colour-wait-msg: #00a6e6;
+$bf-colour-notification-secondary: #00a6e6;
+$bf-colour-alert-background: #fadc64;
+$bf-colour-alert: #d0004d;
+
+$bf-colour-route-calling-points-toggle: #00a6e6;
+$bf-colour-route-calling-points-toggle-hover: #00a6e6;
+$bf-colour-sleeper-connection-details: #1e234f;
+$bf-sleeper-colour-dark: #1e234f;
+$bf-sleeper-colour-light: rgba(#ffffff, 0.2);
+
+$bf-colour-form-label-required: #00a6e6;
+$bf-colour-collection-option-fill: #00a6e6;
+$bf-colour-radio-item-inner-selected: #00a6e6;
+$bf-value-tab-option-focus-outline: none;
+$bf-colour-tab-option-primary: #ffffff;
+$bf-colour-tab-option-secondary: #00a6e6;
+$bf-colour-more-info-background: #1e234f;
+$bf-colour-modal-wrapper-border: #1e234f;
+$bf-value-navbar-spinner-top: 0.8em;
+$bf-value-navbar-spinner-position: 0.8em;
+$bf-value-journey-border: 1px solid #1e234f;
+$bf-value-journey-border-radius: 8px;
+$bf-colour-date-picker-close-icon: #00a6e6;
+$bf-colour-datepicker-selected: #00a6e6;
+$bf-colour-search-result-item-selected-text: #1e234f;
+$bf-colour-search-result-item-selected: #e9e6f2;
+$bf-colour-form-select-carrot: #1e234f;
+$bf-colour-confirmation-loader: #00a6e6;
+$bf-colour-content-grass: #1e234f;
+$bf-colour-journey-nav: #00a6e6;
+$bf-colour-checkbox-tick-checked-background: #9efbd3;
+$bf-colour-checkbox-tick: #1e234f;
+$bf-colour-failed-component-secondary: #1e234f;
+$bf-btn-view-in-account: none;
+$bf-booking-ref-thank-you-background: #1e234f;
+$bf-booking-ref-thank-you: #ffffff;
+$bf-booking-ref-background: './assets/img/booking-ref-background-tpe.jpg';
+$bf-booking-ref-box: $bf-booking-ref-thank-you-background url($bf-booking-ref-background) 15% center no-repeat;
+$bf-booking-ref-box-failed: $bf-colour-failed-component-secondary url($bf-booking-ref-background) 15% center no-repeat;
+$delivery-intro--message: none;
+$tc--carbon-footprint: none;
+$bf-colour-route-details-tertiary: #00a6e6;
+$bf-panel-bg-color: #f1f5fa;
+
+/** e-ticket **/
+$bf-eticket-bright-green: $bf-colour-link;
+$bf-eticket-border-top: #00a6e6;
+
+/** cheapest notification **/
+$bf-cheapest-notification-bg: $bf-colour-yellow;
+
+/** **/
+$br-registration-form-required-field: $bf-colour-teal;
+
+/* button registration color */
+$br-registration-button-bg-color: $bf-colour-teal;
+
+$bf-nectarcard-question-text-color: #753290;
+
+/* can we contacxt you */
+$bf-disabled-checkbox-bg: #f2eef6;
+$bf-disabled-checkbox-color: #dacfe5;
+$bf-checkbox-bg-color: #eee9f3;
+
+$bf-colour-btn-continue: $bf-colour-button-quinary;
+$cff-selected-day: #209588;
+$cff-selected-day-color: #fff;
+$cff-toast-primary: #0f493e;
+$cff-toast-secondary: #f9db6d;
+
+/* sleeper modal styles */
+$bf-sleeper-header-border: #72684a;
+$bf-sleeper-header-gradient-start: #385950;
+$bf-sleeper-header-gradient-end: #1e302b;
+$bf-sleeper-header-close-btn: #0a493e;
+$bf-sleeper-header-close-btn-bg: #d8d8d8;
+$bf-sleeper-footer-border: #e0ded8;
+$bf-sleeper-modal-bg: #fff;
+$bf-sleeper-icons-color: #009688;
+
+// selling for cancell trains
+$bf-warning-color: #fadc64;
+$bf-alert-color: #e23b3b;
+
+// NRE
+$bf-nre-travel-details-name-color: #646a72;
+$bf-nre-travel-details-line-color: #525761;
+$bf-nre-changes-and-duration-color: #0a493e;
+$bf-nre-changes-and-duration-separator-color: #e0e3e1;
+$bf-nre-summary-color: $bf-colour-text;
+$bf-nre-journey-warring-color: #e23b3b;
+$bf-colour-nre-basket: #1e234f;
+$bf-colour-basket-label: #ecd5e6;
+$bf-colour-basket-label-button: $bf-colour-nre-basket;
+
+// route details
+$bf-route-details-connection-bg-color: #ebe2f0;
+$bf-route-details-connection-color: #1e234f;
+$bf-route-details-connection-tfl-link-color: #00a6e6;
+$bf-route-details-callingpoints-bg-color: #00a6e6;
+
+// alert
+$bf-alert-component-background-color: #e53935;
+$bf-alert-component-text-color: #ffffff;
+

@@ -1,0 +1,10 @@
+﻿<app-radio-item *ngFor="let option of options"
+                [label]="option.label"
+                [selected]="option.selected || value === option.value"
+                [extra]="option.extra"
+                [price]="option.price"
+                [value]="option.value"
+                [ngClass]="option.layoutClasses"
+                (onSelected)="onSelected($event)">
+
+</app-radio-item>

@@ -1,0 +1,39 @@
+@import "../../../assets/styles/variables";
+
+.bike-reservations {
+  margin: 12px auto;
+  font-size: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &__header {
+    font-weight: 700;
+    font-size: 18px;
+    margin: 0 auto 8px;
+    text-align: left;
+  }
+
+  .leg-route-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: baseline;
+    margin-bottom: 8px;
+
+    &__icon {
+      flex-basis: 30px;
+      text-align: center;
+    }
+    &__desc {
+      text-align: left;
+      margin-left: 10px;
+
+      p:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+﻿<div class="basket-wrap" *ngIf="basketService.isBasketReady$ | async">
+
+    <h1 class="page-heading">Your Basket</h1>
+
+    <div *ngIf="basket?.isEmpty" class="bf-box is-basket-empty">
+      <div class="content">
+        Your basket is currently empty
+      </div>
+    </div>
+
+    <span *ngIf="!basket?.isEmpty">
+
+      <div *ngIf="basket?.trips.length > 1" class="alert alert-warning">
+          <div class="icon-wrap">
+            <iron-icon class="alert-icon" icon="toc:book_tickets"></iron-icon>
+          </div>
+        <div class="content-wrap">
+            <p>Please be aware that you have more than 1 journey in your basket.</p>
+        </div>
+      </div>
+
+      <app-trip-card *ngFor="let trip of basket?.trips" [editable]="true" [trip]="trip" (onEdit)="editTrip($event)" [isBasket]="true" [amendMode]="basket?.ischangeofjourney" [checkReservations]="false" [adminFee]="basket?.amendFee" [purpouse]="basket"></app-trip-card>
+      <app-order-summary [orders]="basket"></app-order-summary>
+
+  </span>
+</div>

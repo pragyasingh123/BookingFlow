@@ -1,0 +1,19 @@
+<div *ngFor="let reservation of bikeReservation" class="leg-bike-reservation">
+  <ng-container [ngSwitch]="direction">
+    <ng-container *ngSwitchCase="'outward'">
+      <ng-container *ngIf="reservation.direction.toUpperCase() == 'O'">
+        <app-bike-reservation-desc-card [reservation]="reservation"></app-bike-reservation-desc-card>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'return'">
+      <ng-container *ngIf="reservation.direction.toUpperCase() != 'O'">
+        <app-bike-reservation-desc-card [reservation]="reservation"></app-bike-reservation-desc-card>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <app-bike-reservation-desc-card [reservation]="reservation"></app-bike-reservation-desc-card>
+    </ng-container>
+  </ng-container>
+</div>

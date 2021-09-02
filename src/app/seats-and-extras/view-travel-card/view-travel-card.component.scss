@@ -1,0 +1,18 @@
+@import "../../../assets/styles/variables";
+
+.travelcard-from-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .tfp-pipe {
+    margin-left: .5rem;
+  }
+
+  @media screen and (min-width: $breakpoint-phone) {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+

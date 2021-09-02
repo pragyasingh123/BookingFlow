@@ -1,0 +1,246 @@
+/*
+|--------------------------------------------------------------------------
+| Media query generator
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin mq($break: '', $query:'', $mediaType: '') {
+  // Media queries
+  // Usage: @include mq(mobile) {...}
+
+  // 'mq' Params:
+  // $break [string] - breakpoint reference (desktop, tablet, mobile)
+  // $query [string] - additional queries (optional)
+
+
+  $mobileBp: '(max-width: 767px)';
+  $tabletBp: '(min-width: 600px) and (max-width: 1024px)';
+  $mobileAndTabletBp: '(max-width: 1024px)';
+  $desktopBp: '(min-width: 960px)';
+
+  @if $mediaType != '' {
+    $mediaType: #{$mediaType}#{" and "};
+  }
+
+  @if $break == "mobile" {
+    @media #{$mediaType}#{$mobileBp}#{$query} {
+
+      @content;
+    }
+  }
+
+  @else if $break == "tablet" {
+    @media #{$mediaType}#{$tabletBp}#{$query} {
+      @content;
+    }
+  }
+
+  @else if $break == "mobile-and-tablet" {
+    @media #{$mediaType}#{$mobileAndTabletBp}#{$query} {
+      @content;
+    }
+  }
+
+  @else if $break == "desktop" {
+    @media #{$mediaType}#{$desktopBp}#{$query} {
+      @content;
+    }
+  }
+
+  @else if $break == '' {
+    @if $query != '' {
+      @media #{$query} {
+        @content;
+      }
+    }
+
+    @else {
+      @error "You have not submitted a media query condition or key name";
+    }
+  }
+
+  @else {
+    @error "`#{$break}` doesn't exist - available options are 'desktop', 'tablet', 'mobile'. ";
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Rem unit calculator
+|--------------------------------------------------------------------------
+|
+*/
+
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+
+@function rem-calc($values...) {
+  // Rem unit calculator
+  // Usage: font-size: rem-calc(20px);
+
+  // 'rem-calc' Params:
+  // $values [string/number] - pixel unit(s) to be converted (can be single unit or list eg: 10px, 10px, 10px, 10px)
+
+  // returns [number] - converted rem unit(s)
+  //NB: if multiple values are parsed, a string is returned
+
+  $max: length($values);
+
+  $rems: 0;
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i)) / strip-unit($bf-font-size-base);
+
+    @if $max == 1 {//For single values, return a number
+      $rems: ($rems + $value) * 1rem;
+    }
+
+    @if $max > 1 {//For multiple values return a string
+      //Add a space after each value
+      $rems: ($rems + $value) + if($value == 0, '', 'rem'); //Leave out the unit if the value is 0
+      $rems: #{$rems + ' '};
+    }
+  }
+
+  @return $rems;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Point unit calculator - used for print typography
+|--------------------------------------------------------------------------
+|
+*/
+
+@function pt-calc($values...) {
+  // Point unit calculator
+  // Usage: font-size: pt-calc(20px);
+
+  // 'pt-calc' Params:
+  // $values [string/number] - pixel unit(s) to be converted (can be single unit or list eg: 10px, 10px, 10px, 10px)
+
+  // returns [number] - converted pt unit(s)
+  //NB: if multiple values are parsed, a string type is returned
+
+  $max: length($values);
+
+  $pts: 0;
+
+  @for $i from 1 through $max {
+    $value: strip-unit(nth($values, $i)) * .75;
+
+    @if $max == 1 {//For single values, return a number
+      $pts: ($pts + $value) * 1pt;
+    }
+
+    @if $max > 1 {//For multiple values return a string
+      //Add a space after each value
+      $pts: ($pts + $value) + if($value == 0, '', 'pt'); //Leave out the unit if the value is 0
+      $pts: #{$pts + ' '};
+    }
+  }
+
+  @return $pts;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Font size / line-height generator
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin font-size($size, $lineHeight:0) {
+  // Font size generator
+  // Usage: @include font-size(20px, 30px);
+
+  // 'font-size' Params:
+  // $size [string/number] - pixel unit(s) to render as font-size
+  // $lineHeight [string/number] - (optional) pixel unit(s) to render as line-height
+
+  // returns [css string] - font-size in rems, line-height as percentage
+
+  $lineHeight: strip-unit($lineHeight);
+
+  font-size: rem-calc($size);
+
+  @if($lineHeight > 0) {
+    line-height: $lineHeight / strip-unit($size) ;
+  }
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| Absolute position centering
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin absolute-center($width) {
+  // Absolute position centering
+  // Usage: @include absolute-center(20px);
+
+  // 'font-size' Params:
+  // $width [string/number] - width of element to be centered (any unit)
+
+  position: absolute;
+  left: 50%;
+  margin-left: -$width/2;
+  width: $width;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Clearfix
+|--------------------------------------------------------------------------
+|
+*/
+@mixin clearfix($extend: true) {
+  // Clearfix
+  // Usage: @include clearfix();
+
+  // 'clearfix' Params:
+  // $extend [boolean] - whether to include or extend the the clearfix css (optional, defaults to true)
+
+  @if $extend {
+
+    @extend %clearfix;
+
+  } @else {
+
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+  }
+}
+
+%clearfix {
+  @include clearfix(false);
+}
+
+@mixin flat-list($table: false) {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0 auto;
+    @if $table {
+        display: table-row;
+        li {
+            display: table-cell;
+        }
+    } @else {
+        display: block;
+        li {
+            display: inline-block;
+        }
+    }
+}

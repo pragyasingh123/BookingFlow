@@ -1,0 +1,85 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.modal-foreground {
+  border-top: .5rem solid $bf-colour-route-details-tertiary;
+}
+
+.modal-heading-icon {
+  transform: scale(1.4);
+}
+
+app-loading-indicator {
+  margin-top: 2em;
+}
+
+.icon-disrupted, 
+.icon-bus-leg {
+  fill: $bf-colour-disrupted-icon;
+}
+
+.rd-dur-changes {
+  font-size: $f-smaller;
+  margin-bottom: $bf-gutter;
+  padding: 0 $bf-component-padding;
+
+  span {
+    margin-right: $bf-gutter;
+  }
+}
+
+.route-details {
+  background-color: $bf-colour-background-darker;
+  padding-left: $bf-component-padding;
+  padding-right: $bf-component-padding;
+}
+
+.route-connection {
+  color: $bf-colour-route-details-tertiary;
+  background-color: transparent;
+  text-align: center;
+  position: relative;
+  margin-bottom: .5rem;
+}
+
+.route-connection-details {
+  display: inline-block;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  background-color: $bf-colour-route-details-primary;
+  font-weight: bold;
+}
+
+.route-connection-line {
+  position: relative;
+  bottom: 1.8rem;
+  border-width: 1px;
+  border-color: inherit;
+  margin: 0;
+  z-index: -1;
+}
+
+.layout-sleeper {
+  border-top: none;
+  * {
+    color: $bf-colour-route-details-primary;
+  }
+  .modal-heading-icon {
+    fill: $bf-colour-route-details-primary;
+  }
+  background-color: $bf-sleeper-colour-dark;
+  .route-details {
+    background-color: $bf-sleeper-colour-light;
+  }
+  .route-connection {
+    color: $bf-colour-route-details-secondary;
+  }
+
+  .route-connection-details {
+    background: $bf-colour-sleeper-connection-details;
+  }
+}
+
+.alert-green {
+  background: #d4ebdc !important;
+  border: 0;
+}

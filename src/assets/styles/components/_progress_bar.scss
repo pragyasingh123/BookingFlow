@@ -1,0 +1,56 @@
+@import "../variables";
+
+$prefix: bf-progress-bar;
+
+.#{$prefix} {
+    text-align: center;
+    .m-progress-lg {
+        @include flat-list(false);
+        display: inline-block;
+        margin: $bf-gutter auto;
+
+        .step {
+            background: lighten(green, 10%);
+            color: white;
+            padding: $bf-component-padding/2;
+
+            &.passed, &.current {
+                background: green;
+            }
+            &:first-child {
+                border-top-left-radius: $bf-component-border-radius;
+                border-bottom-left-radius: $bf-component-border-radius;
+            }
+            &:last-child {
+                border-top-right-radius: $bf-component-border-radius;
+                border-bottom-right-radius: $bf-component-border-radius;
+            }
+
+        }
+    }
+
+    .m-progress-xs {
+        position: relative;
+        height: $bf-gutter * 1.5;
+        margin: 0 ;
+
+        .copy, progress {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        progress {
+            &, &::-webkit-progress-bar { background-color: $bf-progress-background; }
+            &::-webkit-progress-value { background-color: $bf-progress-foreground }
+        }
+        .copy {
+            line-height: $bf-gutter * 1.5;
+            color: $bf-progress-text;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 0.88em;
+        }
+    }
+
+}

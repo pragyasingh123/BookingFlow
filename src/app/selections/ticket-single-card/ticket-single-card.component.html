@@ -1,0 +1,93 @@
+<div class="other-tickets-wrap other-tickets-wrap--single">
+  <section class="other-tickets">
+    <h1 class="other-tickets-heading">Other single tickets</h1>
+
+    <div class="flex-row single-return-types" *ngFor="let ticket of ticketsCheapest; let i = index; let isLastRowOut = last" [ngClass]="{ 'extra-margin-return-box' : isLastRowOut }">
+      <div class="other-tickets-left-col">
+        <a [routerLink]="['./route-details', getRouteParams(ticket.outgoingFare, false)]" class="status-icon">
+          <iron-icon icon="toc:info" ></iron-icon>
+        </a>
+        <h2 class="other-ticket-option-heading"><iron-icon class="upgrade-icon" icon="toc:out"></iron-icon>{{ticket.outgoingFare.faregroupname}}</h2>
+        
+        <div class="flags">
+          <span *ngIf="checkIfSleeper(ticket.outgoingFare.flags)" class="sleeper-service">
+            Sleeper Service
+          </span>
+        </div>
+        
+        <p>{{ticket.outgoingFare.routedescription}}</p>
+        
+        <br/>
+
+        <a [routerLink]="['./route-details', getRouteParams(ticket.returnFare, true)]" class="status-icon">
+          <iron-icon icon="toc:info" ></iron-icon>
+        </a>
+        <h2 class="other-ticket-option-heading"><iron-icon class="upgrade-icon" icon="toc:return"></iron-icon>{{ticket.returnFare.faregroupname}}</h2>
+        
+        <div class="flags">
+          <span *ngIf="checkIfSleeper(ticket.returnFare.flags)" class="sleeper-service">
+            Sleeper Service
+          </span>
+        </div>
+        
+        <p>{{ticket.returnFare.routedescription}}</p>
+      </div>
+
+      <div class="other-tickets-right-col">
+        <div class="price">
+          <div class="price-msg">{{ticket.outgoingFare.priceMsg}}</div>
+          <div>
+            <span class="price-amount">£{{ (ticket.outgoingFare.cost.totalfare + ticket.returnFare.cost.totalfare) / 100 | number:'1.2-2' }}</span>
+          </div>
+          <app-loading-indicator inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+          <app-button data-elid="other-ticek-btn" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">Select</app-button>
+        </div>
+      </div>
+    </div>
+
+    <app-button *ngIf="singleTickets.length" btn-type="secondary" class="btn-block" (click)="toggleTickets = !toggleTickets">{{ toggleTickets ? 'View less' : 'View more' }}</app-button>
+
+    <div *ngIf="singleTickets.length" class="other-tickets-dropdown" [class.is-open]="toggleTickets">
+      <div class="flex-row" *ngFor="let ticket of singleTickets; let i = index; let isLastRowRtn = last" [ngClass]="{ 'extra-margin-outward-box' : isLastRowRtn }">
+        <div class="other-tickets-left-col">
+          <a [routerLink]="['./route-details', getRouteParams(ticket.outgoingFare, false)]" class="status-icon">
+            <iron-icon icon="toc:info" ></iron-icon>
+          </a>
+          <h2 class="other-ticket-option-heading"><iron-icon class="upgrade-icon" icon="toc:out"></iron-icon>{{ticket.outgoingFare.faregroupname}}</h2>
+          
+          <div class="flags">
+            <span *ngIf="checkIfSleeper(ticket.outgoingFare.flags)" class="sleeper-service">
+              Sleeper Service
+            </span>
+          </div>
+          
+          <p>{{ticket.outgoingFare.routedescription}}</p>
+
+          <a [routerLink]="['./route-details', getRouteParams(ticket.returnFare, true)]" class="status-icon">
+            <iron-icon icon="toc:info" ></iron-icon>
+          </a>
+          <h2 class="other-ticket-option-heading"><iron-icon class="upgrade-icon" icon="toc:return"></iron-icon>{{ticket.returnFare.faregroupname}}</h2>
+          
+          <div class="flags">
+            <span *ngIf="checkIfSleeper(ticket.returnFare.flags)" class="sleeper-service">
+              Sleeper Service
+            </span>
+          </div>
+          
+          <p>{{ticket.returnFare.routedescription}}</p>
+        </div>
+
+        <div class="other-tickets-right-col">
+          <div class="price">
+            <div class="price-msg">{{ticket.outgoingFare.priceMsg}}</div>
+            <div>
+              <span class="price-amount">£{{ (ticket.outgoingFare.cost.totalfare + ticket.returnFare.cost.totalfare) / 100 | number:'1.2-2' }}</span>
+            </div>
+            <app-loading-indicator inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+            <app-button data-elid="other-ticek-btn" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">Select</app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

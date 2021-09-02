@@ -1,0 +1,85 @@
+﻿<section *ngIf="selectedDayDate === null && !searchError">
+  <div *ngIf="true"
+       class="date-picker-panel">
+    <div class="month-info-wrapper">
+      <div class="strapline">Find me cheap tickets for:</div>
+
+      <button [tap]="isPrevMonthAvailable ? 'tapped' : 'tapped-disabled'"
+              [tapCallback]="tapPrevCallback()"
+              tabindex="-1"
+              class="month-btn prev-month">
+        <iron-icon *ngIf="isPrevMonthAvailable"
+                   icon="toc:arrow_left"></iron-icon>
+      </button>
+
+      <div class="month-label">
+        {{(selectedMonth$ | async).startOf('month').format("MMMM YYYY") }}
+      </div>
+
+      <button [tap]="isNextMonthAvailable ? 'tapped' : 'tapped-disabled'"
+              [tapCallback]="tapNextCallback()"
+              tabindex="-1"
+              class="month-btn next-month">
+        <iron-icon *ngIf="isNextMonthAvailable"
+                   icon="toc:arrow_right"></iron-icon>
+      </button>
+
+      <div class="week-heading clearfix">
+        <div *ngFor="let day of dayHeadings"
+             class="day-heading">{{day}}</div>
+      </div>
+    </div>
+
+    <div class="days-display-wrapper">
+      <div *ngFor="let week of calendar" class="week clearfix">
+        <div *ngFor="let day of week.days"
+             [class.outsideCurrentMonth]="day.isOtherMonth"
+             [class.today]="day.isToday"
+             [class.selected]="day.isSelected"
+             [class.is-disabled]="day.isDisabled"
+             [class.is-cheapest-standard]="day.isCheapestStandard"
+             [class.is-cheapest-first]="day.isCheapestFirst && !day.isCheapestStandard"
+             [class.is-promo]="day.isPromo"
+             (click)="canDisplayPrice(day) && !day.isSelected && selectDay(day)"
+
+          class="day">
+          <span class="label-wrap">
+            {{day.date.format('D')}}
+          </span>
+          <span *ngIf="canDisplayPrice(day)" class="price">&pound;{{ day.priceCheapest }}</span>
+        </div>
+      </div>
+
+    </div>
+    <p class="extended-booking-horizon__paragraph">Buy Advance Single tickets up to three months before you travel on
+      <a class="extended-booking-horizon__link"
+        href="/plan-journey/tickets-railcards-and-season-tickets/booking-tickets-in-advance">selected routes</a>.</p>
+
+  </div>
+</section>
+
+<section *ngIf="selectedDayDate !== null && !searchError">
+  <div class="selected-date-heading">
+    <p>Prices are updated on a daily basis so the prices listed might be not available anymore.</p>
+    <span>Cheapest fares for </span>
+    <strong>{{ selectedDate }}</strong>
+  </div>
+
+  <app-cff-ticket-picker [searchResults]="cffService.searchResults$ | async"
+                         [closestCount]="closestCount"></app-cff-ticket-picker>
+</section>
+
+
+
+
+<div *ngIf="searchError"
+     class="no-fares">
+  <div class="bf-box">
+    <div class="alert alert-danger text-center">
+      {{ searchError }}
+    </div>
+    <app-button class="btn-block"
+                btn-type="journey"
+                (click)="amendSelection()">Search again</app-button>
+  </div>
+</div>

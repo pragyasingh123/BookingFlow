@@ -1,0 +1,49 @@
+@import "../../assets/styles/variables";
+
+
+.bf-footer {
+  padding-top: 1em;
+  font-size: 0.8em;
+  padding-bottom: 1em;
+  text-align: center;
+  margin-bottom: 76px;
+
+  .footer-links {
+    list-style-type: none;
+    padding-left: 0;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+
+    @media (min-width: $breakpoint-phone) {
+      li {
+        float: left;
+        margin-right: 8px;
+        
+        &:after {
+          content: ' | ';
+          position: relative;
+          left: 2px;
+        }
+        &:last-child:after {
+          content: '';
+        }
+      }
+    }
+  }
+  a {
+    color: $bf-colour-text;
+    text-decoration: none;
+    font-weight: normal;
+    margin-bottom: 0.6em;
+  }
+
+  .footer-logos img{
+    height: 44px;
+    display: inline-block;
+  }
+
+  .footer-payment-block ul { margin: 12px 0; padding: 0;}
+  .footer-payment-block ul li{ display: inline-block; width: 65px; vertical-align: middle;} 
+  .footer-payment-block ul li img{ width: 100%;}
+}

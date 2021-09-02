@@ -1,0 +1,49 @@
+<div class="calling-points" [class.expanded]="expanded">
+  <iron-icon class="leg-mode-icon" [class.leg-mode-rail]="journeyLeg.mode.icon === 'toc:rail'" [icon]="journeyLeg.mode.icon"></iron-icon>
+  <ul>
+    <li *ngFor="let cp of journeyLeg.callingPoints; let i = index; let last = last;" [class.passed]="cp.isPassed"
+        [class.current]="cp.isCurrent">
+
+      <span class="time"
+        [class.time-highlighted]="isCancelled(cp)"
+        [class.time-strikethrough]="isDelayed(cp)">{{ displayJourneyTime(i, journeyLeg.callingPoints.length, cp) }}</span>
+
+      <span *ngIf="journeyLeg.mode.id != 'U'" [class.time-strikethrough]="isCancelled(cp)" class="name">{{ cp.label }}</span>
+      <span *ngIf="journeyLeg.mode.id == 'U'" [class.time-strikethrough]="isCancelled(cp)" class="name">{{ tubeName(cp.label) }}</span>
+
+      <span *ngIf="isDelayed(cp) || isCancelled(cp)"
+        [class.time-highlighted]="isCancelled(cp) || isDelayed(cp)"
+        [class.journey--cancelled]="isCancelled(cp)"
+        [ngClass]="(i === 0 || last) ? 'time-leg' : 'time-cp'">
+        {{ displayDisruptionTime(i, journeyLeg.callingPoints.length, cp) }}
+      </span>
+
+      <span *ngIf="i == 0 && !isSimplified && journeyLeg.toc && journeyLeg.finalDestination && journeyLeg.mode.id != 'U'" class="service-info"><br/>{{ journeyLeg.toc }} towards {{ journeyLeg.finalDestination }}</span>
+
+      <p *ngIf="i == 0 && journeyLeg.isDisrupted && journeyLeg.disruptionInfo" class="info-warning">
+        <span><b>{{ journeyLeg.disruptionInfo.delaydescription }}</b><br/></span>
+        <span>{{ journeyLeg.disruptionInfo.delayadditionalinformation }}<br/></span>
+        <span>Information correct at {{ journeyLeg.disruptionInfo.delaypublished }}</span>
+      </p>
+
+
+      <span *ngIf="journeyLeg.mode.id == 'U'"> </span>
+      <span *ngIf="i == 0 && !isSimplified && journeyLeg.toc && journeyLeg.mode.id == 'U'" class="toggle-points"><br/>
+        {{tubeJourneyTime(journeyLeg) }}
+        <span> Journey time</span>
+      </span>
+      <div *ngIf="i == 0 && isSimplified" class="service-info-simplified">{{duration}}</div>
+
+      <span *ngIf="!isSimplified">
+          <a [hidden]=showHideCallingPoints(i,journeyLeg.callingPoints.length)
+          class="toggle-points" (click)="toggleCallingPoints()">
+          <iron-icon icon="toc:carat_down"></iron-icon>View {{journeyLeg.callingPoints.length}} calling {{"point" | pluralise:journeyLeg.callingPoints.length}}
+        </a>
+        <a *ngIf="expanded && i == journeyLeg.callingPoints.length-2" class="toggle-points is-showing-points" (click)="toggleCallingPoints()">
+          <iron-icon icon="toc:carat_up"></iron-icon>Hide calling {{"point" | pluralise:journeyLeg.callingPoints.length}}
+        </a>
+      </span>
+    </li>
+  </ul>
+
+</div>

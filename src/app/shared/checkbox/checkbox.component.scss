@@ -1,0 +1,68 @@
+@import '../../../assets/styles/variables';
+
+:host {
+  margin-bottom: 1em;
+  display: block;
+}
+:host(.no-background) {
+  .checkbox-wrap {
+    background-color: transparent;
+    color: white;
+  }
+}
+.checkbox-wrap {
+  padding: 10px;
+  display: block;
+  background-color: $bf-checkbox-bg-color;
+  color: #525761;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+
+  &.disabled-checkbox {
+    background-color: $bf-disabled-checkbox-bg;
+    color: $bf-disabled-checkbox-color;
+  }
+
+  .checkbox-tick {
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    display: inline-block;
+    margin-right: 1em;
+    float: left;
+    color: #fff;
+    text-align: center;
+  }
+
+  label {
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+
+  &.checked {
+    background-color: $bf-colour-checkbox-tick-checked-background;
+
+    .checkbox-tick {
+      background-color: $bf-colour-checkbox-tick;
+    }
+  }
+
+  &:focus, &:active {
+    box-shadow:none;
+  }
+
+  .extra {
+    position: absolute;
+    right: 10px;
+    top: 0.6em;
+  }
+}
+
+.disabled {
+    pointer-events: none;
+
+    .checkbox-tick {
+      background: #b1b1b1;
+    }
+}

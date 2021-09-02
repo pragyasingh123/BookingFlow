@@ -1,0 +1,337 @@
+@import "../../../assets/styles/components/ng_components_shared";
+:host {
+  display: inline-block;
+}
+
+//override display style from level of component css class
+:host(.btn-block) {
+  @extend %btn-block;
+}
+:host(.white-link) {
+  .btn-link {
+    color: white;
+  }
+}
+
+.btn {
+  margin: $bf-gutter/2 0;
+  color: $bf-colour-button-primary;
+  text-decoration: none;
+  border-radius: $bf-button-border-radius;
+  font-weight: bold;
+  text-align: center;
+  border-width: 2px;
+  white-space: normal;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-wrap {
+  text-align: center;
+}
+
+.btn-fallback-text::first-letter {
+  text-transform: uppercase;
+}
+
+//button types
+.btn-basic {
+  @extend %btn-teal;
+}
+
+.btn-continue {
+  width: 75%;
+  @extend %btn-block;
+  @extend %btn-red;
+}
+
+:host([btn-type="register"]) {
+  display: block;
+  margin-top: 0px; // $bf-gutter;
+}
+.btn-register {
+  background-color: $br-registration-button-bg-color;
+  border-color: $br-registration-button-bg-color;
+  padding: 6px 30px;
+  font-size: 1rem;
+  line-height: 24px;
+  width: auto;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+:host([btn-type="register-tpe"]) {
+  display: block;
+  margin-top: 0px; // $bf-gutter;
+}
+.btn-register-tpe {
+  text-transform: uppercase;
+  border-radius: 999px;
+  background-color: $bf-colour-button-secondary;
+  border-color: $bf-colour-button-secondary;
+  padding: 6px 30px;
+  font-size: 1rem;
+  line-height: 24px;
+  width: auto;
+  font-weight: 700;
+}
+
+:host([btn-type="continue"]) {
+  display: block;
+  margin-top: $bf-gutter;
+}
+
+.btn-amend {
+  @extend %btn-green;
+}
+:host([btn-type="amend"]) {
+  display: inline-block;
+}
+
+:host([btn-type="amend-cancel"]) {
+  display: block;
+}
+
+.btn-amend-cancel {
+  @extend %btn-cream;
+  padding: 15px;
+}
+
+.btn-journey {
+  @extend %btn-cream;
+  max-width: 280px;
+}
+:host([btn-type="journey"]) {
+  display: block;
+}
+
+.btn-modal {
+  @extend %btn-white;
+}
+
+.btn-secondary {
+  @extend %btn-white;
+  margin: 0;
+}
+
+
+:host(.btn-block) .btn-modal {
+  @extend %btn-modal-size;
+}
+
+.btn-modal-inverse {
+  @extend %btn-white-inverse;
+}
+:host(.btn-block) .btn-modal-inverse {
+  @extend %btn-modal-size;
+}
+
+
+.btn-nectar-login {
+  background-color: $bf-colour-button-nectar-login-background;
+  border: 2px solid $bf-colour-button-nectar-login-border;
+  color: $bf-colour-button-nectar-login;
+  width: auto;
+  white-space: normal;
+  &:hover {
+    border: 2px solid $bf-colour-button-nectar-login-border;
+    background-color: $bf-colour-button-nectar-login-border-hover;
+    color: $bf-colour-button-nectar-login;
+  }
+}
+
+.btn-nectar-add {
+  @extend %btn-plum-heavy;
+  margin: 0;
+}
+
+.btn-link {
+  background-color: transparent;
+  border: none;
+  color: $bf-colour-button-secondary;
+  text-decoration: none;
+  margin: 0 .2rem;
+  padding: 0;
+
+  &:hover {
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    color: darken($bf-colour-link, 10%);
+  }
+
+  &:active {
+    color: darken($bf-colour-link, 10%);
+    outline: none;
+  }
+  &:focus {
+    color: darken($bf-colour-link, 10%);
+    outline: thin dotted;
+  }
+
+  .ticket-card-remove & {
+    text-align: right;
+  }
+}
+
+.btn-upgrade {
+  background-color: $bf-colour-button-upgrade;
+  color: $bf-colour-button-tertiary;
+  border: 2px solid $bf-colour-button-tertiary;
+  padding: .2rem .5rem;
+  margin: 0;
+  &:hover {
+    color: $bf-colour-button-upgrade-hover;
+    background-color: $bf-colour-button-upgrade-background-hover;
+  }
+}
+
+.btn.btn-white {
+  padding: 0;
+  margin: 5px 0 0 0;
+  background: transparent;
+}
+
+//placeholder selectors for button colours/hovers
+%btn-block {
+  display: block;
+  width: 75%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%btn-red {
+  background-color: $bf-colour-button-quinary;
+  border: 2px solid $bf-colour-button-quinary;
+  &:hover {
+    color: $bf-colour-button-primary;
+    border: 2px solid $bf-colour-button-quinary;
+    background-color: darken($bf-colour-button-quinary, 5%);
+  }
+}
+
+%btn-teal {
+  background-color: $bf-colour-button-secondary;
+  border: 2px solid $bf-colour-button-secondary;
+  &:hover {
+    background-color: lighten($bf-colour-button-secondary, 5%);
+    border: 2px solid $bf-colour-button-secondary;
+  }
+}
+
+%btn-white {
+  color: $bf-colour-text;
+  border-color: $bf-colour-text;
+  background-color: transparent;
+  &:hover {
+    color: lighten($bf-colour-text, 5%);
+    border-color: lighten($bf-colour-text, 5%);
+    background-color: transparent;
+  }
+}
+
+%btn-white-inverse {
+  color: $bf-colour-button-primary;
+  border-color: $bf-colour-button-primary;
+  background-color: transparent;
+  &:hover {
+    color: darken($bf-colour-button-primary, 10%);
+    border-color: darken($bf-colour-button-primary, 10%);
+    background-color: transparent;
+  }
+}
+
+%btn-cream {
+  background-color: $bf-colour-background;
+  border: 2px solid $bf-colour-btn-cream;
+  color: $bf-colour-btn-cream;
+  &:hover {
+    border: 2px solid $bf-colour-btn-cream;
+    background-color: darken($bf-colour-background, 5%);
+    color: $bf-colour-btn-cream;
+  }
+}
+
+%btn-plum-light {
+  background-color: $bf-colour-button-primary;
+  border: 2px solid $bf-colour-button-quaternary;
+  color: $bf-colour-button-quaternary;
+  &:hover {
+    border: 2px solid $bf-colour-button-quaternary;
+    background-color: lighten($bf-colour-button-quaternary, 95%);
+    color: $bf-colour-button-quaternary;
+  }
+}
+
+%btn-plum-heavy {
+  background-color: $bf-colour-button-quaternary;
+  &:hover {
+    background-color: $bf-colour-button-quaternary;
+    color: transparentize($bf-colour-button-primary, .5);
+  }
+}
+
+%btn-green {
+  background-color: $bf-colour-button-tertiary;
+  border: 2px solid $bf-colour-button-primary;
+  padding: .1rem .5rem;
+  vertical-align: middle;
+  &:hover {
+    background-color: lighten($bf-colour-button-tertiary, 5%);
+    border: 2px solid $bf-colour-button-primary;
+  }
+}
+
+
+%btn-green-light {
+  background-color: $bf-colour-button-light;
+  color: $bf-colour-button-tertiary;
+  border: 2px solid $bf-colour-button-tertiary;
+  &:hover {
+    color: #e0f4ea;
+    background-color: $bf-colour-button-tertiary;
+  }
+}
+
+%btn-modal-size {
+  width: 200px;
+  margin: 20px auto;
+}
+
+.btn-sleeper-modal {
+  @extend %btn-teal;
+  width: 260px;
+  margin: 10px auto;
+}
+
+.btn-search-again {
+  @extend %btn-teal;
+  margin: 0px auto;
+  padding: 6px 24px;
+  white-space: nowrap;
+}
+
+.btn-continue-wide {
+  width: 100%;
+  @extend %btn-red;
+  @extend %btn-block;
+  display: block;
+  margin-bottom: 0px;
+}
+:host([btn-type="btn-continue-wide"]) {
+  display: block;
+}
+
+.btn-amend-journey {
+  width: 100%;
+  margin: 0px auto 20px;
+  @extend %btn-teal;
+  @extend %btn-block;
+  display: block;
+}
+:host([btn-type="btn-amend-journey"]) {
+  display: block;
+}

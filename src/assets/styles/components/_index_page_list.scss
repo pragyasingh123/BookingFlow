@@ -1,0 +1,9 @@
+$prefix: bf-page-list;
+
+.#{$prefix} {
+    padding-left: 0;
+    li {
+        list-style-type: none;
+        margin-bottom: 10px;
+    }
+}

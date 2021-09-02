@@ -1,0 +1,59 @@
+<div class="login-blanket" (click)="closeModal($event)">
+  <form [formGroup]="loginForm" (ngSubmit)="captchaRef.execute()">
+  <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)" ></re-captcha>
+    <div class="login-modal">
+      <div class="login-modal-inner" >
+        <div class="login-modal-header">
+          <button class="close-btn">
+            <iron-icon class="modal-close-icon" icon="toc:close_alternate"></iron-icon>
+          </button>
+          <div class="modal-header-text">
+            Sign in to your TPE account
+          </div>
+        </div>
+        <div class="modal-center">
+          <div class="modal-input-section">
+            <div class="input-label">Email address</div>
+            <div class="email-input">
+              <input type="email"
+                     name="email"
+                     [formControl]="loginForm.controls['email']"
+                     data-elid="email"
+                     placeholder="Email"
+                     pattern="[A-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})"
+                     required>
+              <small *ngIf="loginForm.controls.email?.invalid && loginForm.controls.email?.touched"
+                     class="alert alert-danger">Email is required and format should be john@doe.com</small>
+            </div>
+          </div>
+          <div class="modal-input-section">
+            <div class="input-label">Password</div>
+            <div class="password-input">
+              <input type="password"
+                     name="password"
+                     [formControl]="loginForm.controls['password']"
+                     data-elid="password"
+                     placeholder="Password"
+                     required>
+              <small *ngIf="loginForm.controls.password?.invalid && loginForm.controls.password?.touched"
+                     class="alert alert-danger">Password is required</small>
+            </div>
+          </div>
+          <div class="login-links">
+            <div class="login-forgotten-password" (click)="forgottenPassword()">Forgotten password?</div>
+            <div class="login-create-account" (click)="register()">Create a new account</div>
+          </div>
+        </div>
+        <div class="modal-button-section">
+          <div class="btn-wrap">
+            <app-button btn-type="register"
+                        [disabled]="!loginForm.valid"
+                        [isLoading]="loginInProgress"
+                        data-elid="sign-in-button">Sign in to your account
+            </app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

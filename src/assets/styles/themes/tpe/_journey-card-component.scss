@@ -1,0 +1,27 @@
+.journey--sleeper__disabled {
+    
+    &:before {
+      content: '';
+      background: rgba(255,255,255,0.9);
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      border-radius: 8px;
+      z-index: 999;
+    }
+      
+    &:after {
+      content: 'This journey does not have any fares available.';
+      display: block;
+      position: absolute;
+      text-align: left;
+      z-index: 99999;
+      font-size: 0.8em;
+      left: 30px;
+      top:  30px;
+    }
+      
+  }

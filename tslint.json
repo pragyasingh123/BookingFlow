@@ -1,0 +1,44 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "quotemark": [true, "single", "avoid-escape"],
+        "ordered-imports": false,
+        "import-spacing": true,
+        "semicolon": [true, "always"],
+        "max-line-length": [true, 250],
+        "member-access": true,
+        "variable-name": {
+            "options": [
+              "check-format",
+              "allow-leading-underscore",
+              "allow-snake-case"
+            ]
+        },
+        "align": [false],
+        "no-console": [true, "log", "error"],
+        "only-arrow-functions": false,
+        "trailing-comma": [false],
+        "arrow-parens": [true],
+        "object-literal-sort-keys": true,
+        "no-var-keyword": false,
+        "prefer-for-of": false,
+        "prefer-const": false,
+        "object-literal-key-quotes": [true, "as-needed"],
+        "no-empty": false,
+        "forin": false,
+        "triple-equals": false,
+        "radix": false,
+        "no-string-literal": false,
+        "no-shadowed-variable": false,
+        "interface-name": [true, "always-prefix"],
+        "no-unused-expression": false,
+        "max-classes-per-file": [true, 5],
+        "adjacent-overload-signatures": false,
+        "no-trailing-whitespace": true
+    },
+    "rulesDirectory": []
+}

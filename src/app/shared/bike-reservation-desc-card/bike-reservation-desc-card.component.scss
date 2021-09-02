@@ -1,0 +1,27 @@
+@import "../../../assets/styles/variables";
+
+.leg-bike-reservation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: 8px;
+
+    &__icon {
+      flex-basis: 30px;
+      text-align: center;
+    }
+    &__desc {
+      text-align: left;
+      margin-left: 9px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+}

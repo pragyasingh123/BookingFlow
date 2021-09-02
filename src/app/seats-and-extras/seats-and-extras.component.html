@@ -1,0 +1,432 @@
+﻿<div class="container">
+  <h1 class="page-heading" data-elid="seats-extras-header">Seats and Extras</h1>
+</div>
+
+<app-loading-indicator class="loading-indicator" *ngIf="!tripReservationLoaded" label="Please wait..." data-elid="loading-indicator"></app-loading-indicator>
+
+<div class="container" *ngIf="tripReservationLoaded">
+  <div [ngClass]="{'nre-left-column': nreIsSet()}">
+  <section class="ticket-card">
+    <h4>Journey {{tripno}}</h4>
+  </section>
+
+  <div *ngIf="trip?.hasSleepers" [class.container]="!nreIsSet()">
+    <div class="row">
+      <div class="sleepers">
+        <div class="col-xs-12">
+          <div class="alert alert-warning">
+            <div class="content-wrap">
+              <p>
+                <iron-icon icon="toc:sleeper"></iron-icon>
+                You have selected an overnight sleeper
+              </p>
+            </div>
+          </div>
+
+          <div class="alert alert-more-info">
+            <a (click)="showSleeperModal(sleeperInfoContent)" tabindex="-1" class="content-wrap">
+              <p>
+                <iron-icon icon="toc:help"></iron-icon>
+                More about sleeper facilities
+              </p>
+            </a>
+          </div>
+
+          <div *ngIf="showSleeperMessage">
+            <div class="section-sleeper-cabin-warning">
+              <div class="icon-warning-sleeper-cabin">
+                <iron-icon icon="toc:warning_major" class="red-fill" ></iron-icon>
+              </div>
+
+              <div>
+                <div data-elid="sleeper-cabin-child-warning">We're sorry, it's not possible to book your chosen combination of adult/child tickets with a Sleeper cabin online.
+                  Please call our customer services on <strong>{{ phoneNo }}</strong> to check availability.
+                </div>
+
+                <div>
+                    <app-button *ngIf="!nreIsSet()" btn-type="basic" (click)="addAnotherJourney()" data-elid="back-to-search-sleeper">Back to search</app-button>
+                    <app-button *ngIf="nreIsSet()" btn-type="basic" (click)="backToSearchNre()" data-elid="back-to-search-sleeper">Back to search</app-button>
+                </div>
+              </div>
+            </div>
+
+            <div class="sleeper-cabin-message-option" *ngIf="showContentForRegularSleeper"><strong>Continue without sleeper option</strong></div>
+          </div>
+
+          <div *ngIf="trip?.outwardSleeper && checkRadioButtonAvailableForOutward()" class="sleeper-options">
+            <h2 class="select-option-heading">Outward sleeper</h2>
+            <p>How would you like to travel to {{trip.outwardJourneys[0].destination.name}}?</p>
+            <app-radio [options]="outwardSleeperOptions" (onSelect)="onSelectedSleeper($event, 'O')" *ngIf="checkRadioButtonAvailableForOutward()"></app-radio>
+          </div>
+
+          <div *ngIf="checkRadioButtonAvailableForReturn()">
+            <div *ngIf="trip?.returnSleeper" class="sleeper-options">
+              <h2 class="select-option-heading">Return sleeper</h2>
+              <p>How would you like to travel to {{trip.returnJourneys[0].destination.name}}?</p>
+              <app-radio [options]="returnSleeperOptions" (onSelect)="onSelectedSleeper($event, 'R')"></app-radio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(requiresCustomerDetails || requiresPreferences) && showContentForRegularSleeper" class="sleepers-wrap">
+    <div class="sleepers">
+      <section class="sleeper-info">
+        <div class="sleeper-traveller"  *ngIf="requiresPreferences">
+          <h2 class="select-option-heading">Traveller information</h2>
+          <hr />
+
+          <div class="sleeper-traveller-group" *ngIf="sleeperService.sleeperReservation.sleeperPreferences.length === 1">
+            <div class="sleeper-traveller-group">
+              <h2 class="heading-normal">Passenger 1:</h2>
+              <app-tab-option [options]="genderOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[0].gender"
+              (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[0].gender = $event"></app-tab-option>
+              <p class="text-warning">
+                Please note, if you're travelling alone and choose a twin cabin, you may be sharing
+                the cabin with another passenger of the same gender.
+              </p>
+              <h2 class="heading-normal">Select a bunk position</h2>
+              <app-tab-option [options]="bunkOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[0].bedtype"
+              (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[0].bedtype = $event"></app-tab-option>
+              <div class="twin-cabin-info">We will try to meet your preference where possible.</div>
+            </div>
+          </div>
+
+          <div class="sleeper-traveller-group" *ngIf="sleeperService.sleeperReservation.sleeperPreferences.length > 1">
+            <div class="sleeper-traveller-group" *ngFor="let sleeper of sleeperService.sleeperReservation.sleeperPreferences;let i=index;let l=last;">
+              <div *ngIf="i % 2 === 0 && l === false">
+                <h2 class="heading-normal">Group {{i/2+1}}:</h2>
+                <h2 class="">Passenger 1:</h2>
+                <app-tab-option [options]="genderOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i].gender"
+                                (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i].gender = $event"></app-tab-option>
+                <h2 class="">Passenger 2:</h2>
+                <app-tab-option [options]="genderOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i+1].gender"
+                                (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i+1].gender = $event"></app-tab-option>
+                <h2 class="heading-normal">Should passengers 1 and 2 share a cabin?</h2>
+                <app-tab-option [options]="shareOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i].sharewithfellowtraveller"
+                                (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i].sharewithfellowtraveller = $event;
+                                              sleeperService.sleeperReservation.sleeperPreferences[i+1].sharewithfellowtraveller = $event"></app-tab-option>
+                <div *ngIf="sleeperService.sleeperReservation.sleeperPreferences[i].sharewithfellowtraveller === 'false'">
+                  <p class="text-warning">
+                    Please note, if you're travelling alone and choose a twin cabin, you may be sharing
+                    the cabin with another passenger of the same gender.
+                  </p>
+                  <h2 class="heading-normal">Select a bunk position for passenger 1</h2>
+                  <app-tab-option [options]="bunkOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i].bedtype"
+                                  (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i].bedtype = $event"></app-tab-option>
+                  <h2 class="heading-normal">Select a bunk position for passenger 2</h2>
+                  <app-tab-option [options]="bunkOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i+1].bedtype"
+                                  (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i+1].bedtype = $event"></app-tab-option>
+                  <div class="twin-cabin-info">We will try to meet your preference where possible.</div>
+                </div>
+              </div>
+
+              <div *ngIf="i % 2 === 0 && l === true">
+                <h2 class="heading-normal">Group {{i/2+1}}:</h2>
+                <h2 class="">Passenger 1:</h2>
+                <app-tab-option [options]="genderOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i].gender"
+                                (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i].gender = $event"></app-tab-option>
+                <p class="text-warning">
+                  Please note, if you're travelling alone and choose a twin cabin, you may be sharing
+                  the cabin with another passenger of the same gender.
+                </p>
+                <h2 class="heading-normal">Select a bunk position</h2>
+                <app-tab-option [options]="bunkOptions" [value]="sleeperService.sleeperReservation.sleeperPreferences[i].bedtype"
+                                (onSelected)="sleeperService.sleeperReservation.sleeperPreferences[i].bedtype = $event"></app-tab-option>
+                <div class="twin-cabin-info">We will try to meet your preference where possible.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sleeper-contact"  *ngIf="requiresCustomerDetails">
+          <h2 class="heading-normal">Contact information</h2>
+          <p>
+            Please provide your details so we can contact you in case there's a disruption. We won't use your contact
+            information for any other reason.
+          </p>
+          <form #sleeperForm="ngForm">
+            <label class="is-required">Title</label>
+            <app-select class="l-inline" [options]="personTitleOptions"
+                        (onSelected)="sleeperService.sleeperReservation.personTitle = $event.value" placeholder="Select..."></app-select>
+            <label for="firstname" class="is-required">First name</label>
+            <input type="text" id="firstname" name="firstname" required [(ngModel)]="sleeperService.sleeperReservation.firstname" />
+            <label for="surname" class="is-required">Surname</label>
+            <input type="text" id="surname" name="surname" required [(ngModel)]="sleeperService.sleeperReservation.surname" />
+            <label for="telephone" class="is-required">Telephone</label>
+            <input type="text" id="telephone" name="telephone" pattern="[\d|\s]+" required #telephone="ngModel"
+                  [(ngModel)]="sleeperService.sleeperReservation.telephone" />
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="seats-extras-wrapper" *ngIf="showContentForRegularSleeper">
+    <div class="row">
+      <div class="seat-cards" [class.has-return-journey]="trip?.returnJourneys?.length > 0">
+        <app-view-seat-card data-elid="outward-journey-details"
+                            *ngIf="trip?.outwardJourneys?.length > 0 && sleeperService.sleeperSelection.IsOutwardSeatSelectionAvailable()"
+                            heading="Outward seats"
+                            [journey]="trip?.outwardJourneys[0]"
+                            (onRemoveClicked)="removeSeat($event)"></app-view-seat-card>
+
+        <app-view-seat-card data-elid="return-journey-details"
+                            *ngIf="trip?.returnJourneys?.length > 0 && sleeperService.sleeperSelection.IsReturnSeatSelectionAvailable()"
+                            heading="Return seats"
+                            [journey]="trip?.returnJourneys[0]"
+                            (onRemoveClicked)="removeSeat($event, 'return')"></app-view-seat-card>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showContentForRegularSleeper">
+    <div class="row" style="margin: 0px;">
+      <section class="col-xs-12">
+        <div class="choose-seat-prefs" *ngIf="isSeatSelectionAvailable &&  !reservationDisabled">
+          <div *ngIf="trip.seatReservationStillNeededOnSomeJourneys">
+            <p>We'll always do our best to find the best seat for you.</p>
+
+            <app-button data-elid="reserve-a-seat"
+                        btn-type="secondary" [routerLink]="['./preferences']"
+                        [disabled]="reservationDisabled"
+                        btn-fxm="{'type': 'button', text: 'Reserve a seat', 'icon': '', section: 'reservations'}"
+                        data-elid="reserve-seat-button">Reserve a seat
+            </app-button>
+          </div>
+
+          <div *ngIf="!trip.seatReservationStillNeededOnSomeJourneys && !seatSelectorAvailable">
+            <p>We'll always do our best to find the best seat for you.</p>
+
+            <app-button data-elid="chnage-your-seat"
+                        btn-type="secondary"
+                       [routerLink]="['./preferences']"
+                       [disabled]="reservationDisabled"
+                       btn-fxm="{'type': 'button', text: 'Change your seat', 'icon': '', section: 'reservations'}"
+                       data-elid="amend-seat-button">Change your seat
+            </app-button>
+          </div>
+
+          <div *ngIf="!trip.seatReservationStillNeededOnSomeJourneys && seatSelectorAvailable">
+            <p>Having set seating preferences, use the seat map to view or change your seating reservation</p>
+
+            <app-button btn-type="secondary" (click)="seatSelector()"
+                        [disabled]="seatSelectorDisabled"
+                        btn-fxm="{'type': 'button', text: 'View seat map', 'icon': '', section: 'reservations'}"
+                        data-elid="view-seat-map-button">View seat map
+            </app-button>
+
+            <div *ngIf="seatSelectorReservationState" class="seat-selector-response-wrap">
+              <p *ngIf="seatSelectorReservationState == 'success'">Your seating reservation has been updated</p>
+              <p *ngIf="seatSelectorReservationState == 'fail'">
+                Your seating reservation has not been updated, please try again
+              </p>
+            </div>
+          </div>
+
+          <hr [ngClass]="{'nre-line-shape': nreIsSet()}">
+        </div>
+
+        <h2 *ngIf="trip?.hasSleepers" class="page-section-heading">Journey Extras</h2>
+        <app-view-plus-bus *ngIf="trip?.isPlusBusAllowed"
+                          [plusBuses]="plusBuses"
+                          (onRemoveClicked)="removeAdditionalOption($event, 'plusbus', 'plusbus')">
+        </app-view-plus-bus>
+
+        <app-view-legoland-westgate-bus *ngIf="trip?.isLegolandBusAllowed"
+                                        [legolandWestgateBus]="legolandBus"
+                                        [legolandOption]="true"
+                                        (onRemoveClicked)="removeAdditionalOption($event, 'legoland', 'legolandbus')">
+        </app-view-legoland-westgate-bus>
+
+        <app-view-travel-card *ngIf="trip?.isTravelcardAllowed"
+                          [travelcard]="travelcard"
+                          (onRemoveClicked)="removeTravelcard($event)">
+        </app-view-travel-card>
+
+        <app-view-legoland-westgate-bus *ngIf="trip?.isOxfordWestgateBusAllowed"
+                                        [legolandWestgateBus]="oxfordWestgateBus"
+                                        [legolandOption]="false"
+                                        (onRemoveClicked)="removeAdditionalOption($event, 'oxford westgate', 'oxford-westgate bus')">
+        </app-view-legoland-westgate-bus>
+
+        <app-view-bike *ngIf="possibilityOfBikeReservation"
+                          [bike]="bike"
+                          [trip]="trip"
+                          (onRemoveClicked)="removeBike()">
+        </app-view-bike>
+      </section>
+    </div>
+
+      <app-button btn-type="amend-cancel" (click)="cancelAmend()"
+                  *ngIf="changeOfJourney">Cancel amending my booking
+      </app-button>
+
+    <app-sticky-button-holder>
+      <app-button btn-type="continue" [ngClass]="{'hide-continue-btn': nreIsSet()}" (click)="continue()"
+                  btn-fxm="{'type': 'button', text: 'Continue', 'icon': '', section: 'Seats and Extras'}"
+                  data-elid="continue-button">Continue</app-button>
+    </app-sticky-button-holder>
+
+      <app-button class="btn-block" btn-type="journey"
+                  [ngClass]="{'hide-add-journey-btn': nreIsSet()}"
+                  (click)="addAnotherJourney()"
+                  *ngIf="!changeOfJourney"
+                  btn-fxm="{'type': 'button', text: 'Add another journey', 'icon': '', section: 'Seats and Extras}"
+                  data-elid="another-journey-button">Add another journey
+      </app-button>
+
+  </div>
+
+  <!--Add modal window route outlet-->
+  <router-outlet></router-outlet>
+  </div>
+  <div [ngClass]="{'nre-right-column': nreIsSet(), 'nre-right-column-hide': !nreIsSet()}" *ngIf="nreIsSet()">
+    <div class="md-basket-background">
+      <div class="md-basket">
+        <div class="ticket-header">Order Summary</div>
+
+        <div class="ticket-wrap tpe-case">
+          <div class="ticket-no">Journey 1 <span class="remove-journey" (click)="deleteMyTrip()">Remove</span></div>
+
+          <div class="ticket-journey-times">
+            <div>{{journeyDirection()}} journey</div>
+
+            <ul class="tickets-main-info" a>
+              <li>From: {{trip.outwardJourneys[0].origin.name}}</li>
+              <li>To: {{trip.outwardJourneys[0].destination.name}}</li>
+              <li>Out: {{(trip.outwardDepartureTime).format(dateTimeFormat)}}</li>
+              <li class="ticket-info-small-font">{{trip.outwardJourneys[0].routeDescription}}</li>
+              <li style="display: block" *ngIf="trip.returnDepartureTime">Return: {{(trip?.returnDepartureTime).format(dateTimeFormat)}}</li>
+              <li style="display: block" class="ticket-info-small-font" *ngIf="trip.returnDepartureTime">{{trip.returnJourneys[0].routeDescription}}
+              </li>
+            </ul>
+
+            <div class="ticket-price-wrap">
+              <div class="total-price">
+                <span>Total <strong>£{{trip.totalCostPence / 100 | number:'1.2-2' }}</strong></span>
+                <iron-icon class="bf-journey-arrow" *ngIf="!showAllInfoInBasket"
+                           icon="toc:arrow_down" (click)="showAllDetailsInBasket()"
+                           data-elid="arrow-down"></iron-icon>
+                <iron-icon class="bf-journey-arrow" *ngIf="showAllInfoInBasket"
+                           icon="toc:arrow_up" (click)="showAllDetailsInBasket()"
+                           data-elid="arrow-up"></iron-icon>
+              </div>
+
+              <div class="ticket-price-breakdown" *ngIf="showAllInfoInBasket">
+                <div class="outward-journey">
+                  <div class="out-return-time-date">
+                    <strong>Out: </strong>
+                    <div>{{(trip.outwardDepartureTime).format(dateFormat)}}</div>
+                  </div>
+
+                  <ul class="out-journey-breakdown">
+                    <li class="time">Depart <span>{{(trip.outwardDepartureTime).format(dateTime)}}</span></li>
+                    <li class="change">Chg <span>{{noOfChanges(true)}}</span>
+                      <iron-icon class="disruption-arrow" icon="toc:breadcrumb_arrow"></iron-icon>
+                    </li>
+                    <li class="time">Arrive <span>{{(trip.outwardArrivalTime).format(dateTime)}}</span></li>
+                  </ul>
+
+                  <ul class="passengers spacing">
+                    <li class="total-fare-detail">
+                      <span class="people-information">
+                          <span>{{nreNoOfAdults()}}</span> x
+                          <span>{{ "Adult" | pluralise:nreNoOfAdults() }}</span>
+                      </span>
+                    </li>
+                    <li class="total-fare-detail">
+                      <span class="people-information"
+                            *ngIf="nreNoOfChildren() > 0">
+                          <span>{{nreNoOfChildren()}}</span> x
+                          <span>{{ "Child" | pluralise:nreNoOfChildren()}}</span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="return-journey" *ngIf="trip.returnDepartureTime">
+                  <div class="out-return-time-date">
+                    <strong>Return: </strong>
+                    <div>{{(trip.returnDepartureTime).format(dateFormat)}}</div>
+                  </div>
+
+                  <ul class="out-journey-breakdown">
+                    <li class="time">Depart <span>{{(trip.returnDepartureTime).format(dateTime)}}</span></li>
+                    <li class="change">Chg <span>{{noOfChanges(false)}}</span>
+                      <iron-icon class="disruption-arrow" icon="toc:breadcrumb_arrow"></iron-icon>
+                    </li>
+                    <li class="time">Arrive <span>{{(trip.returnArrivalTime).format(dateTime)}}</span></li>
+                  </ul>
+
+                  <ul class="passengers spacing">
+                    <li class="total-fare-detail">
+                      <span class="people-information">
+                          <span>{{nreNoOfAdults()}}</span> x
+                          <span>{{"Adult" | pluralise:nreNoOfAdults()}}</span>
+                      </span>
+                    </li>
+                    <li class="total-fare-detail">
+                      <span class="people-information"
+                            *ngIf="nreNoOfChildren() > 0">
+                          <span>{{nreNoOfChildren()}}</span> x
+                          <span>{{"Child" | pluralise: nreNoOfChildren()}} </span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="carbon-footprint-more">
+              <div>
+                <div class="co2-header">{{carbonFootprintCalculation.percentOfEmmissionSaving}}% CO2 emission saving -
+                </div>
+                <div class="co2-body">
+                  Based on {{ totalNumberOfTickets }} person(s) travelling this journey by train and not by car
+                </div>
+                <div class="co2-icons-section">
+                  <ul>
+                    <li class="train">
+                      <iron-icon class="ti-icon train-icon" icon='toc:train'></iron-icon>
+                      <span>{{carbonFootprintCalculation.trainCo2Usage}}kg CO2e</span>
+                    </li>
+                    <li class="car">
+                      <iron-icon class="ti-icon car-icon" icon='toc:car'></iron-icon>
+                      <span>{{carbonFootprintCalculation.carCo2Usage}}kg CO2e</span>
+                    </li>
+                  </ul>
+                </div>
+                <a href="../../about-us/sustainability/carbon-calculator" target="_blank">Find out more about emissions
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nectar-section">
+          <div class="nectar-logo-size">
+            <img class="nectar-logo" alt="" src="assets/img/logos/nectar-purple-logo-white-text.svg" alt="">
+          </div>
+          <span> {{nectarPoints}}  points collected</span>
+          <br/>
+          <span>with these tickets</span>
+        </div>
+
+        <div class="basket-total">
+          <strong>Total: <span class="pull-right">&pound;{{trip.totalCostPence / 100 | number:'1.2-2' }}</span></strong>
+          <div class="all-passengers">(All passengers)</div>
+        </div>
+
+        <app-button data-elid="continue-button"
+                    btn-type="continue" (click)="continue()"
+                    btn-fxm="{'type': 'button', text: 'Continue', 'icon': '', section: 'Seats and Extras'}"
+                    data-elid="continue-button-nre">Continue
+        </app-button>
+      </div>
+    </div>
+  </div>
+</div>

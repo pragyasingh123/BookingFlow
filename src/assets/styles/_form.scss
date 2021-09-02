@@ -1,0 +1,86 @@
+@import "./variables";
+
+label {
+  display: block;
+  margin-bottom: 0;
+  &.is-required::after {
+    color: $bf-colour-form-label-required;
+    content: " *";
+  }
+}
+
+input {
+  border:2px solid $bf-colour-bundle-1-item-b;
+}
+
+.validation-msg {
+  color: $bf-warning-red;
+  font-size: $f-smaller;
+}
+
+$prefix: 'bf-form';
+
+.#{$prefix} {
+
+  background: $bf-colour-form-background;
+  margin-bottom: $bf-gutter;
+
+  .field {
+    margin: $bf-gutter/2;
+    padding: $bf-gutter/2 0;
+
+    &.bf-field-select {
+      font-size: 0;
+      label, select {
+        display: inline-block;
+        vertical-align: top;
+        font-size: $f-normal;
+      }
+      option {
+        color: $bf-colour-text;
+      }
+      label {
+        width: 75%;
+        padding-right: $bf-gutter/2;
+      }
+      label + select {
+        width: 25%;
+      }
+    }
+
+    &.bf-field-text {
+      label {
+        width: 100%;
+      }
+      label + input {
+        width: 100%;
+      }
+    }
+
+  }
+}
+
+.form-control {
+  height: 3.5em;
+  border-radius: 0;
+  padding: 13px 35px 12px 15px;
+  border: 1px solid #525761;
+  background-color: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  font-size: 16px;
+}
+
+select.form-control {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+div[tabindex]:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+}

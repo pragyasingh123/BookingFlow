@@ -1,0 +1,57 @@
+@import "../../../assets/styles/variables";
+
+form {
+    margin-top: 10px;
+
+    input {
+      font-family: $bf-font-init;
+    }
+}
+
+.submit-success {
+    padding: 20px 0;
+}
+
+.password-not-working{
+    margin-top: 20px;
+    display: inline-block;
+}
+
+app-button /deep/ button {
+  background-color: $bf-colour-btn-continue !important;
+  border-color: $bf-colour-btn-continue !important;
+}
+
+.email-sent {
+    max-width: 456px;
+    text-align: left;
+    margin: 20px auto;
+
+    div:nth-child(1) {
+      border-bottom: 1px solid;
+      padding: 15px 0;
+      margin-bottom: 15px;
+      padding-right: 56px;
+    }
+
+    div:nth-child(2),
+    div:nth-child(4) {
+      font-family: $bf-font-headings;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    div:nth-child(3) {
+      max-width: 400px;
+    }
+
+    div:nth-child(3),
+    div:nth-child(5) {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    a {
+      cursor: pointer;
+    }
+}

@@ -1,0 +1,41 @@
+﻿<app-progress-bar [current]="1"></app-progress-bar>
+
+<div class="page-wrap clearfix">
+
+  <section class="journey-header"
+           *ngIf="!(isSearchInProgress$ | async)">
+    <h1 class="journey-header-title">Select your
+      <span>{{ cffStep$ | async }}</span> journey</h1>
+    <span class="journey-header-stations"
+          *ngIf="(journeyLocations$ | async)">
+      <span class="station-from">{{ (journeyLocations$ | async)?.originName }}</span>
+      <span> to </span>
+      <span class="station-to">{{(journeyLocations$ | async)?.destinationName}}</span>
+    </span>
+    <div class="journey-chosen"
+         *ngIf="(searchCriteria$ | async)">
+      <span class="journey-passengers-num">{{ getPassengersCount((searchCriteria$ | async)) }}</span>
+      <app-button btn-type="amend"
+                  (click)="amendSelection()"
+                  *ngIf="!(searchResults$ | async)?.changeOfJourney">Change</app-button>
+    </div>
+  </section>
+
+
+  <div [class.is-hidden]="!(searchCriteria$ | async) || (isSearchInProgress$ | async)"
+       class="container">
+    <app-cff-date-picker (selectedDayDateEmitter)="selectDay($event)"></app-cff-date-picker>
+  </div>
+
+  <app-loading-indicator [class.is-hidden]="!(searchCriteria$ | async) || !(isSearchInProgress$ | async)" label="Searching..."></app-loading-indicator>
+
+  <app-tab-option *ngIf="(cffService.isCffRoute$ | async)"
+                  (onSelected)="toggleFares($event)"
+                  value="cheapest"
+                  [options]="cffToggleOptions"
+                  class="cff-toggle">
+  </app-tab-option>
+
+  <!--Add modal window route outlet-->
+  <router-outlet></router-outlet>
+</div>

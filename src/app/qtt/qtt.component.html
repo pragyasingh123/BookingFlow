@@ -1,0 +1,121 @@
+﻿<div class="container min-height" [ngClass]="{'journeyCheckInProgress': isJourneyCheckInProgress}" [class.amend-booking]="amendBooking">
+  <h1 class="page-heading white">Buy tickets</h1>
+  <app-loading-indicator *ngIf="isJourneyCheckInProgress" class="search-indicator" label="Checking your journey details"></app-loading-indicator>
+  <div [hidden]="isJourneyCheckInProgress" class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="white">From</span>
+          <app-station-picker data-elid="qtt-outward-from-section" [id]="'qtt_out_dep_st'" (onSelected)="onStationSelected(originSelection = $event)" [value]="originSelection" [amend]="amendBooking"></app-station-picker>
+        </div>
+        <div class="col-xs-12">
+          <span class="white">To</span>
+          <app-station-picker data-elid="qtt-outward-to-section" [id]="'qtt_out_arr_st'" (onSelected)="onStationSelected(destinationSelection = $event)" [value]="destinationSelection" [amend]="amendBooking">></app-station-picker>
+        </div>
+        <div class="col-xs-12" [class.hidden]="amendBooking">
+          <app-button btn-type="link" class="more-options white-link" (click)="toggleMoreOptions()">
+            <span data-elid="btn-add-more-less-options" class="">{{ !hasMoreOptions ? 'More' : 'Less' }} options</span>
+          </app-button>
+        </div>
+        <div class="col-xs-12" *ngIf="hasMoreOptions">
+          <div class="row">
+            <div class="col-xs-12">
+              <app-select data-elid="via-avoid-option" [id]="'qtt_via_avoid_type'" [options]="viaAvoidOptions" (onSelected)="viaAvoidOptionSelection = $event"></app-select>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="col-xs-12">
+              <app-station-picker data-elid="via-avoid-selection" [id]="'qtt_via_avoid_st'" (onSelected)="onViaAvoidStationSelected(viaDestinationSelection = $event)" [value]="viaDestinationSelection"></app-station-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <app-date-picker data-elid="qtt-outward-calendar" [id]="'qtt_out_date'" [date]="outwardDateSelection" (onChange)="outboundDateSelect(outwardDateSelection = $event)"></app-date-picker>
+        </div>
+
+        <div class="col-xs-6 no-right-pad">
+          <app-select data-elid="outward-depart-after-before" [id]="'qtt_out_after'" [options]="departOptions" (onSelected)="departOptionSelection = $event"></app-select>
+        </div>
+        <div class="col-xs-6">
+          <app-select data-elid="outward-depart-after-before-time" [id]="'qtt_out_time'" [options]="timeOptions" (onSelected)="timeOptionSelection = $event"></app-select>
+        </div>
+        <div class="col-xs-12">
+          <app-checkbox data-elid="are-you-returning" [id]="'qtt_checkbox_return'" class="no-background" [label]="'Are you returning?'" [checked]="isReturnTicket"
+                        (onChecked)="onCheckedReturnTicket($event)" [amend]="amendBooking"></app-checkbox>
+        </div>
+        <section *ngIf="isReturnTicket">
+          <div class="col-xs-12">
+            <app-checkbox [id]="'checkbox_open_return'" class="no-background" [label]="'Open return'" [checked]="isOpenReturn"
+                          (onChecked)="onCheckedOpenReturn($event)"></app-checkbox>
+          </div>
+          <section *ngIf="!isOpenReturn">
+            <div *ngIf="!isReturnTicket">
+              <div class="col-xs-12">
+                <span class="white">From</span>
+                <app-station-picker data-elid="qtt-return-from-section" [disabled]="true" [value]="destinationSelection" [amend]="amendBooking"></app-station-picker>
+              </div>
+              <div class="col-xs-12">
+                <span class="white">To</span>
+                <app-station-picker data-elid="qtt-return-to-section"  [disabled]="true" [value]="originSelection" [amend]="amendBooking"></app-station-picker>
+              </div>
+            </div>
+
+            <div class="col-xs-12">
+              <app-date-picker data-elid="qtt-return-calendar" [id]="'qtt_out_date'" [date]="returnDateSelection"
+                               (onChange)="returnDateSelection = $event" [minDate]="outwardDateSelection"></app-date-picker>
+            </div>
+            <div class="col-xs-6 no-right-pad">
+              <app-select data-elid="return-depart-after-before" [id]="'qtt_ret_after'" [options]="departOptions" (onSelected)="returnOptionSelection = $event"></app-select>
+            </div>
+            <div class="col-xs-6">
+              <app-select data-elid="return-depart-after-before-time" [id]="'qtt_ret_time'" [options]="returnTimeOptions" (onSelected)="returnTimeOptionSelection = $event"></app-select>
+            </div>
+          </section>
+        </section>
+        <div class="col-xs-6 no-right-pad">
+          <app-select data-elid="adult-selection" [id]="'qtt_adult_no'" [options]="adultOptions" (onSelected)="adultOptionSelection = $event" [amend]="amendBooking"></app-select>
+        </div>
+        <div class="col-xs-6">
+          <app-select data-elid="children-selection" [id]="'qtt_children_no'" [options]="childOptions" (onSelected)="childOptionSelection = $event" [amend]="amendBooking"></app-select>
+        </div>
+
+        <div class="col-xs-12">
+          <app-checkbox data-elid="add-railcard-section" [id]="'qtt_checkbox_add_railcard'" [amend]="amendBooking" class="no-background" [label]="'Add Railcard?'" [checked]="hasRailcard"
+                        (onChecked)="onCheckedRailcard()"></app-checkbox>
+        </div>
+        <section *ngIf="hasRailcard">
+          <div *ngFor="let railcard of railcardComponent.railcards;let i=index;">
+            <div class="col-xs-6 no-right-pad">
+              <app-select data-elid="railcard-selection" [id]="'qtt_railcard_selection_' + i" [options]="railcard.options" [placeholder]="'Please select.'" [value]="railcard.optionSelection" (onSelected)="railcard.onSelectedOption($event)"></app-select>
+            </div>
+            <div class="col-xs-6">
+              <app-select data-elid="railcard-selection-amount" [id]="'qtt_railcard_qty_' + i" [options]="railcard.amountOptions" [value]="railcard.amountSelection" (onSelected)="railcard.onSelectedAmount($event)"></app-select>
+            </div>
+            <div class="col-xs-6 no-right-pad" *ngIf="railcard.isAdultAvailable">
+              <app-select data-elid="railcard-selection-adults" [id]="'qtt_railcard_qty_' + i + '_adults'" [options]="railcard.adultOptions" [value]="railcard.adultSelection" (onSelected)="railcard.onSelectedAdult($event)"></app-select>
+            </div>
+            <div class="col-xs-6" *ngIf="railcard.isChildAvailable">
+              <app-select data-elid="railcard-selection-children" [id]="'qtt_railcard_qty_' + i + '_children'" [options]="railcard.childOptions" [value]="railcard.childSelection" (onSelected)="railcard.onSelectedChild($event)"></app-select>
+            </div>
+
+            <div class="col-xs-12">
+              <app-button btn-type="link" class="white-link" (click)="railcardComponent.add()">
+                <span data-elid="add-another-railcard-click" class="">Add another one</span>
+              </app-button>
+              <app-button btn-type="link" class="more-options white-link" (click)="railcardComponent.remove(i)">
+                <span data-elid="remove-railcard-click" class="">Remove</span>
+              </app-button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <app-button data-elid="continue-button" [hidden]="isJourneyCheckInProgress" btn-type="continue" (click)="search()">
+    <iron-icon icon="toc:search"></iron-icon>
+    Search
+  </app-button>
+
+</div>

@@ -1,0 +1,51 @@
+@import '../../../assets/styles/variables';
+
+:host {
+  margin: 0 0 1em 0;
+  display: block;
+  &.l-inline {
+    display: inline-block;
+  }
+
+  .amend {
+    pointer-events: none;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.4);
+    }
+  }
+}
+
+.select-wrap{
+  position: relative;
+  
+  select.form-control::-ms-expand {
+    display: none;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    border-top: 7px solid $bf-colour-form-select-carrot;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    margin-top: -4px;
+    pointer-events: none;
+  }
+}
+
+.select-placeholder {
+  display: none;
+}

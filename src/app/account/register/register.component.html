@@ -1,0 +1,129 @@
+﻿<div class="container">
+  <h1 class="page-heading">Register</h1>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <div class="btn-wrap">
+          Back to <app-button btn-type="link" (click)="redirectTo()">Login</app-button> page.
+      </div>
+
+      <form #registerForm="ngForm" (ngSubmit)="onRegisterUser()" novalidate>
+        <p class="required-fields">Fields marked with <span>&#42;</span> are required.</p>
+
+        <div class="form-group">
+          <label for="title" class="is-required">Title</label>
+          <app-select class="l-inline" id="title" name="title" [placeholder]="selectOptions" [options]="personTitleOptions" (onSelected)="title = $event.value" ></app-select>
+        </div>
+
+        <div class="form-group">
+          <label for="firstName" class="is-required">First name</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName" required />
+          <small *ngIf="registerForm.controls.firstName?.touched && registerForm.controls.firstName?.invalid" class="alert alert-danger">This field is required</small>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName" class="is-required">Last name</label>
+          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" required />
+          <small *ngIf="registerForm.controls.lastName?.touched && registerForm.controls.lastName?.invalid" class="alert alert-danger">This field is required</small>
+        </div>
+
+        <div class="form-group">
+          <label for="nectarcardnumber" class="is-optional">
+            Nectar card number
+            <div class="row nectarcard-label-box">
+              <div class="col-xs-2">
+                <img src="assets/img/logos/nectar-purple-logo-white-text.svg" alt="">
+              </div>
+
+              <div class="col-xs-10">
+                <p class="nectarcard-question-color">Do you have a Nectar card?</p>
+                <p class="nectarcard-question">Register it to start collecting points.</p>
+              </div>
+            </div>
+          </label>
+
+          <div class="nectarcard-number-box">
+            <span class="nectarcard-digits">98263000 - </span>
+            <div class="nectarcard-input">
+              <input type="tel" class="form-control" id="nectarcardnumber" name="nectarcardnumber" [(ngModel)]="nectarcardnumber" pattern="[0-9]{11}" placeholder="XXXXXXXXXXX" maxlength="11" />
+              <small *ngIf="registerForm.controls.nectarcardnumber?.touched && registerForm.controls.nectarcardnumber?.invalid" class="alert alert-danger">Please type in last 11 digits of your Nectar card</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="mobileNumber" class="">Mobile phone number</label>
+          <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" [(ngModel)]="mobileNumber" ngControl="mobileNumber" maxlenght="14" pattern="[0+]\d{10,13}" />
+          <small *ngIf="registerForm.controls.mobileNumber?.touched && registerForm.controls.mobileNumber?.invalid" class="alert alert-danger">Mobile number should start with 0 or + and should contain between 11 and 14 digits</small>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="is-required">Email address</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" ngControl="email" required maxlenght="40" pattern="((([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))" />
+          <small *ngIf="registerForm.controls.email?.invalid && registerForm.controls.email?.touched" class="alert alert-danger">Please enter a valid email address.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmEmail" class="is-required">Confirm email address</label>
+          <input type="email" class="form-control" id="confirmEmail" name="confirmEmail" [(ngModel)]="confirmEmail" ngControl="confirmEmail" required maxlenght="40" pattern="((([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-zA-Z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-zA-Z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-zA-Z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))" />
+          <small *ngIf="email != confirmEmail && registerForm.controls.confirmEmail?.touched" class="alert alert-danger">Please enter a valid email address.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="is-required">Password</label>
+          <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" (input)="onChangePasswordValidate($event.target.value)" required />
+
+          <div *ngIf="showPasswordValidationMessage">
+            <small class="alert alert-danger">{{ passwordValidationMessage }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password2" class="is-required">Confirm password</label>
+          <input type="password" class="form-control" id="password2" name="password2" [(ngModel)]="password2"  required />
+          <small *ngIf="password != password2 && registerForm.controls.password2?.touched" class="alert alert-danger">Passwords don't match</small>
+        </div>
+
+        <div class="form-group password-criteria">
+          <strong>Your password must:</strong>
+          <ul>
+            <li>Be a minimum of 8 characters long</li>
+            <li>Have a mix of upper and lowercase letters </li>
+            <li>Include at least 1 number</li>
+            <li>Contain at least 1 special character, please do not use #</li>
+            <li>Not include your name or email address</li>
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <p>At First TransPennine Express Limited, we want you to be the first to hear about travel inspiration, promotions, offers, products and news. We would also like to give you the opportunity to participate in market research about our products and services.</p>
+          <p>Yes please, I'd like to hear about these by:</p>
+        </div>
+
+        <div class="can-we-contact-you-wrapper">
+          <app-checkbox class="small-margin-bottom" [label]="'Email'" [checked]="contactEmail" (onChecked)="onCheckedContactEmail($event)" [canWeContactYou]='noContact'></app-checkbox>
+          <app-checkbox class="small-margin-bottom" [label]="'SMS'" [checked]="contactSMS" (onChecked)="onCheckedContactSMS($event)" [canWeContactYou]='noContact'></app-checkbox>
+          <app-checkbox class="small-margin-bottom" [label]="'App push notifications'" [checked]="contactApp" (onChecked)="onCheckedContactApp($event)" [canWeContactYou]='noContact'></app-checkbox>
+          <app-checkbox class="small-margin-bottom" [label]="'I confirm that I am at least 16 years old. (We will only send marketing communications to persons 16 and over)'" [checked]="im16yearsOld" (onChecked)="onCheckedContactConfirm16($event)" [canWeContactYou]='noContact'></app-checkbox>
+          <app-checkbox class="small-margin-bottom-checkbox" [label]="'No thanks, I don\'t want to be contacted'" [checked]="noContact" (onChecked)="onCheckedNoContact($event)" [canWeContactYou]='contactPost || contactApp || contactEmail || im16yearsOld || contactSMS'></app-checkbox>
+
+          <div *ngIf="!canWeContactValidation">
+            <small class="alert alert-danger no-margin-padding">{{ canWeContactValidationMsg }}</small>
+          </div>
+
+          <p>Communications will only come from First TransPennine Express Limited, although may include content from our trusted partners. Don't worry, if you change your mind you can opt out at any time. To find out more, read our <a href="{{privacyPolicy}}" target="_blank">Privacy Policy</a>.</p>
+
+          <p>Read the full Terms and Conditions <a href="{{termsAndConditions}}" target="_blank">here</a>.</p>
+
+          <app-checkbox class="small-margin-bottom-checkbox" [label]="'I have read and accept terms and conditions'" [checked]="acceptTermsandConditions" (onChecked)="onCheckedTermsAndConditions($event)"></app-checkbox>
+          <div *ngIf="!acceptTermsandConditions">
+            <small class="alert alert-danger no-margin-padding">{{ acceptTermsandConditionsValidationMsg }}</small>
+          </div>
+        </div>
+
+        <re-captcha #captchaRef="reCaptcha"></re-captcha>
+
+        <app-button btn-type="continue" type="submit" [disabled]="!registerForm.form.valid || password != password2 || email != confirmEmail || registerInProgress || canWeContactValidation == false || acceptTermsandConditions == false || !title || title.length < 2 || registerForm.controls.nectarcardnumber?.invalid || showPasswordValidationMessage == true || registerInProgress" [show-loading-on]="registerInProgress" data-elid="register-button">Register</app-button>
+      </form>
+    </div>
+  </div>
+</div>

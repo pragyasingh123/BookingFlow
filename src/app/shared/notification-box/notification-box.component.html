@@ -1,0 +1,15 @@
+<div class="notification-box"
+  [ngClass]="type? 'notification-box--' + type : 'notification-box--warning'">
+
+  <iron-icon [ngClass]="{'transparent': type === 'warning'}"
+    [class]="'icon-' + icon" icon="toc:{{ icon }}"></iron-icon>
+
+  <span>
+    {{ message }}
+
+    <span class="btn-link-copy" *ngIf="btnLinkCopy && btnLink">{{ btnLinkCopy }}</span>
+
+    <span class="btn-link" *ngIf="btnLinkType === 'amendSearch' && btnLink"
+      (click)="amendSearch()">{{ btnLink }}</span>
+  </span>
+</div>

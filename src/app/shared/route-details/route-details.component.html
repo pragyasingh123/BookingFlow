@@ -1,0 +1,145 @@
+<div class="modal-wrapper">
+  <div class="modal-foreground" [class.layout-sleeper]="isSleeper">
+    <div class="modal-heading-wrap">
+      <h1>
+        <iron-icon class="modal-heading-icon" icon="toc:info"></iron-icon>
+        <span *ngIf="isSleeper">Sleeper service</span>
+        <span *ngIf="!isSleeper">Route details</span>
+      </h1>
+
+      <button class="close-btn" (click)="backToJourneys()">
+        <iron-icon class="modal-close-icon" icon="toc:close_alternate"></iron-icon>
+      </button>
+    </div>
+
+    <app-loading-indicator
+      *ngIf="(isSearchInProgress$ | async) || isWaitingForParams"
+      label="Loading route details..."
+    ></app-loading-indicator>
+
+    <div class="route-details-wrap" *ngIf="!(isSearchInProgress$ | async) && !isWaitingForParams">
+      <div class="modal-content-wrap">
+        <div *ngIf="permittedLocations.length" class="restrictions">
+          <p>The following London stations are available for travel with the chosen ticket</p>
+          <div *ngFor="let permittedLocation of permittedLocations">
+            {{ permittedLocation }}
+          </div>
+          <p>Travel is not permitted from/to any other London station with this ticket</p>
+        </div>
+
+        <app-notification-box
+          *ngIf="isAnyLegCancelled"
+          [type]="'alert'"
+          [icon]="'warning_major'"
+          [message]="'This service has been cancelled. We apologise for the inconvenience.'"
+          [btnLinkType]="'amendSearch'"
+          [btnLinkCopy]="'Please select another service or '"
+          [btnLink]="'amend your search here'"
+        ></app-notification-box>
+
+        <div *ngIf="displayNre()" class="nre-disruptions-section">
+          <div class="nre-disruptions">
+            <div class="nre-disruptions-body">
+              <div class="nre-regular-section">
+                <div class="icon-warning-nre">
+                  <iron-icon icon="toc:warning_black_yellow" class="ico-warning-yellow"></iron-icon>
+                </div>
+                <div class="nre-info-all" [class.nre-full-view]="showHideNreDetails">
+                  <div *ngFor="let nreItem of nreObjectArray" class="nre-header-section">
+                    <p *ngIf="nreItem.nreHeader" class="nre-info-all-element">{{ nreItem.nreHeader }}</p>
+                    <p *ngIf="nreItem.nreNotice" class="nre-info-all-element">{{ nreItem.nreNotice }}</p>
+                    <div *ngIf="nreItem.nreUrl" class="nre-url-section nre-info-all-element">
+                      <a href="{{ nreItem.nreUrl }}" target="_blank" rel="noopener noreferrer">More details</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="nre-show-hide-section">
+              <a *ngIf="!showHideNreDetails" (click)="toggleNreView()" class="nre-show-hide-btn"
+              >Read more<iron-icon class="nre-icon-arrow" icon="toc:arrow_down"></iron-icon
+              ></a>
+              </div>
+            </div>
+          </div>
+          <div class="nre-show-hide-section show-less" *ngIf="showHideNreDetails">
+            <a (click)="toggleNreView()" class="nre-show-hide-btn nre-btn-open"
+            >Read less<iron-icon class="nre-icon-arrow" icon="toc:arrow_up"></iron-icon
+            ></a>
+          </div>
+        </div>
+        
+        <app-notification-box
+          *ngIf="isAnyLegDelayed"
+          [type]="'warning'"
+          [icon]="'warning_major'"
+          [message]="'This service is delayed. We apologise for the inconvenience.'"
+        ></app-notification-box>
+
+        <div *ngIf="isSleeper" class="alert alert-sleeper">
+          <div class="icon-wrap">
+            <iron-icon icon="toc:sleeper"></iron-icon>
+          </div>
+          <div class="content-wrap">
+            Travel overnight on our Night Riviera Sleeper. Wake up at your destination refreshed, ready for a full day's sightseeing or
+            business.
+          </div>
+        </div>
+
+        <div *ngIf="isSlowTrain" class="alert alert-warning isslowtrain">
+          <iron-icon icon="toc:overtaking"></iron-icon>
+          <div class="content-wrap">
+            Slow train: Other trains leave later than this one but arrive earlier because they make fewer stops.
+          </div>
+        </div>
+
+        <div *ngIf="routeDetails.hasBusLeg" class="alert alert-warning">
+          <div class="icon-wrap">
+            <icon-icon class="icon-bus-leg" icon="toc:warning"></icon-icon>
+          </div>
+          <div class="content-wrap">Bus service for part of the journey.</div>
+        </div>
+
+        <div class="rd-dur-changes">
+          <span>Duration: {{ routeDuration }}</span>
+          <span>Changes: {{ routeChanges }}</span>
+        </div>
+
+        <span *ngFor="let journeyLeg of routeDetails.journeyLegs; let i = index">
+          <div class="route-details" *ngIf="!journeyLeg.mode.isConnection">
+            <app-route-calling-points [class.layout-sleeper]="isSleeper" [journeyLeg]="journeyLeg"></app-route-calling-points>
+            <app-route-facilities [facilities]="journeyLeg.facilities" [ngClass]="isSleeper ? 'layout-sleeper' : ''"></app-route-facilities>
+          </div>
+
+          <div class="route-details" *ngIf="journeyLeg.mode.isConnection">
+            <div class="route-details-underground">
+              <p class="london-underground-title">
+                London Underground
+                <span *ngIf="routeDetails.journeyLegs[i - 1] && routeDetails.journeyLegs[i - 1].callingPoints.length > 0">
+                  from {{ routeDetails.journeyLegs[i - 1].callingPoints[routeDetails.journeyLegs[i - 1].callingPoints.length - 1].label }}
+                </span>
+                <span *ngIf="routeDetails.journeyLegs[i + 1] && routeDetails.journeyLegs[i + 1].callingPoints.length > 0">
+                  to {{ routeDetails.journeyLegs[i + 1].callingPoints[0].label }}
+                </span>
+              </p>
+
+              <p class="london-underground-info-message">
+                Please check operating hours for this service <a href="{{ tflLinkUrl }}" target="_blank" class="link-to-tfl">more info</a>
+              </p>
+            </div>
+          </div>
+
+          <div *ngIf="routeDetails.journeyLegs.length > 1 && legTimes[i]?.duration && !legTimes[i].nextConnectionIsUndergroundInNight">
+            <div class="route-connection">Connection time {{ legTimes[i]?.duration }}</div>
+          </div>
+        </span>
+
+        <app-button *ngIf="isSleeper" class="btn-block" btn-type="modal-inverse" (click)="backToJourneys()">Close </app-button>
+
+        <app-button *ngIf="!isSleeper" class="btn-block" btn-type="modal" (click)="backToJourneys()">Close </app-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" (click)="backToJourneys()"></div>
+</div>

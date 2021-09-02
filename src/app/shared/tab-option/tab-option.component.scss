@@ -1,0 +1,94 @@
+@import "../../../assets/styles/variables";
+
+:host {
+  display: block;
+  margin: 0 0 1em 0;
+}
+
+:host.cff-toggle {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  z-index: 101;
+  background-color: #faf9f5;
+  width: 100%;
+  margin: 0;
+
+  .btn-group {
+    margin: 0 auto;
+  }
+}
+
+.btn-tab {
+  border-width: 1px;
+  border-color: $bf-colour-tab-option-secondary;
+  color: $bf-colour-tab-option-secondary;
+  background-color: $bf-colour-tab-option-primary;
+  text-decoration: none;
+  border: 2px solid $bf-colour-link;
+  border-right-width: 1px;
+  border-radius: $bf-component-border-radius;
+  font-weight: bold;
+  text-align: center;
+
+  &:focus {
+    outline: $bf-value-tab-option-focus-outline;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+
+  &.active, &.active:active {
+    background-color: $bf-colour-tab-option-secondary;
+    color: $bf-colour-tab-option-primary;
+    box-shadow: none;
+  }
+
+}
+
+.btn-group + .btn-group .btn-tab{
+  border-right-width: 1px;
+  border-left-width: 1px;
+}
+
+// mobile styles
+@media screen and (max-width: 599px) {
+  .btn-group-justified > .btn-group {
+    width: 100%;
+    display: block;
+  }
+  .btn-group > .btn-group:first-child:not(:last-child) > .btn:last-child {
+    border-radius: 6px 6px 0px 0px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 1px;
+    border-top-width: 2px;
+    margin-left: -1px;
+  }
+  .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 1px;
+    border-top-width: 1px;
+  }
+  .btn-group > .btn-group:last-child:not(:first-child) > .btn:first-child {
+    border-radius: 0px 0px 6px 6px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-top-width: 1px;
+  }
+
+  .btn.active {
+    outline: none;
+
+    &:focus,
+    &:active,
+    &:hover,
+    &:visited {
+      outline: none;
+    }
+  }
+}

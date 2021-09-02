@@ -1,0 +1,61 @@
+  <div class="tickets-via-post">
+
+    <app-select *ngIf="addressResults.length" class="l-inline"
+                [options]="addressResults"
+                (onSelected)="selectAddress($event)"></app-select>
+
+    <hr>
+
+    <div class="address-lookup" *ngIf="!showAddressForm">
+      <label for="housenumber">House number</label>
+      <input type="text" name="housenumber" id="housenumber" class="sessioncamexclude" [formControl]="postageForm.controls['housenumber']" />
+
+      <label class="is-required" for="postcode">Postcode</label>
+      <input type="text" maxlength="8" name="postcode" id="postcode" class="sessioncamexclude" pattern="[0-9a-zA-Z\s-]+$" [formControl]="postageForm.controls['postcode']"/>
+      <small *ngIf="isPostcodeFieldInvalid()" class="alert alert-danger">This field is required and should be English letters, numbers, space, or "-"</small>
+
+      <app-button (click)="lookUpAddress()" class="btn-address-lookup">Look up address</app-button>
+
+      <small class="alert alert-danger" *ngIf="lookupFailed">There are no address results for your selected house name and postcode combination - please amend and try again or enter your address manually.</small>
+
+      <div>
+        <a href="#" (click)="enterAddressManually($event)">Enter address manually</a>
+      </div>
+    </div>
+
+    <form [formGroup]="postageForm" *ngIf="showAddressForm">
+
+      <div class="tickets-via-post-address-fields">
+
+        <label for="addressee" class="is-required">Contact Name</label>
+        <input type="text" name="addressee" id="addressee" [formControl]="postageForm.controls['addressee']" class="sessioncamexclude"/>
+        <div *ngIf="isFieldInvalid('addressee')" class="alert alert-danger">Contact Name required.</div>
+
+        <label for="address1" class="is-required">Address Line 1</label>
+        <input type="text" name="address1" id="address1"  [formControl]="postageForm.controls['address1']" class="sessioncamexclude"/>
+        <div *ngIf="isFieldInvalid('address1')" class="alert alert-danger">Street required.</div>
+
+        <label for="address2">Address Line 2</label>
+        <input type="text" name="address2" id="address2" [formControl]="postageForm.controls['address2']" class="sessioncamexclude"/>
+
+        <label for="address3">Address Line 3</label>
+        <input type="text" name="address3" id="address3" [formControl]="postageForm.controls['address3']" class="sessioncamexclude"/>
+
+        <label for="city" class="is-required">Town/City</label>
+        <input type="text" name="city" id="city" [formControl]="postageForm.controls['city']"  class="sessioncamexclude"/>
+        <div *ngIf="isFieldInvalid('city')" class="alert alert-danger">Town/City required.</div>
+
+        <label for="region">Region</label>
+        <input type="text" name="region" id="region" [formControl]="postageForm.controls['region']" class="sessioncamexclude"/>
+
+        <label class="is-required" for="postcode">Postcode</label>
+        <input type="text" maxlength="8" name="postcode" id="postcode" class="sessioncamexclude" pattern="[0-9a-zA-Z\s-]+$" [formControl]="postageForm.controls['postcode']"/>
+        <div *ngIf="isPostcodeFieldInvalid()" class="alert alert-danger">Postcode required</div>
+
+        <p>
+          <app-button (click)="showAddressForm = false">Return to address lookup</app-button>
+        </p>
+      </div>
+    </form>
+
+  </div>

@@ -1,0 +1,51 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.other-ticket-option-heading {
+  display: inline;
+}
+
+.other-tickets-wrap--single,
+.other-ticket-option-heading:last-of-type {
+  margin-top: 15px;
+}
+
+.other-tickets-wrap--single .other-tickets {
+  margin-bottom: 0;
+}
+
+.other-tickets {
+  .flex-row {
+		&.extra-margin-return-box {
+			margin-bottom: 20px;
+		}
+
+		&.extra-margin-outward-box {
+			margin-bottom: 20px;
+		}
+  }
+
+  .text-return-tickets {
+		display: block;
+		text-align: center;
+		font-size: 1rem;
+		margin-bottom: 20px; // remove when more information link will be visible
+  }
+
+  .more-information-return-tickets {
+		display: block;
+		text-decoration: none;
+		outline: none;
+		border: none;
+		text-align: center;
+		font-weight: 700;
+		color: $bf-colour-secondary;
+		font-size: 1rem;
+		margin-bottom: 20px;
+  }
+}
+
+.status-icon {
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,13 @@
+<div class="radio-item-wrap" [class.selected]="selected" (click)="onClick()">
+  <div class="radio-item-disc">
+    <div class="radio-item-inner"></div>
+  </div>
+
+  <div>
+    <label class="radio-item-label">{{label}}</label>
+    <div class="extra" *ngIf="extra">{{extra}}</div>
+  </div>
+
+  <div class="price" *ngIf="price!== 0">{{price | currency:'GBP':true:'1.2-2'}}</div>
+  <div class="price" *ngIf="price === 0">No extra cost</div>
+</div>

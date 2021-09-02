@@ -1,0 +1,47 @@
+@import "../../../assets/styles/variables";
+
+.form-login.ng-dirty.ng-invalid {
+    border-bottom: 0;
+}
+
+.form-login {
+    input {
+        font-size: 15px;
+        font-family: $bf-font-init;
+    }
+}
+
+.btn-wrap {
+    .btn {
+        background-color: transparent;
+        border: none;
+        color: $bf-colour-btn-wrap-btn;
+        text-decoration: none;
+        margin: 0 .2rem;
+        padding: 0;
+        border-radius: 6px;
+        font-weight: bold;
+        text-align: left;
+        border-width: 2px;
+        display: block;
+        white-space: normal;
+    }
+
+    .btn:first-of-type {
+        margin-bottom: 10px;
+    }
+}
+
+.password-not-working{
+    margin-top: 20px;
+    display: inline-block;
+}
+
+app-button {
+  margin-bottom: 50px;
+
+  /deep/ button {
+    background-color: $bf-colour-btn-continue !important;
+    border-color: $bf-colour-btn-continue !important;
+  }
+}

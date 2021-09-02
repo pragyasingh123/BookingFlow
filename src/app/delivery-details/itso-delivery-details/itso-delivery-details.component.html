@@ -1,0 +1,12 @@
+<div *ngIf="itsoData">
+  <div class="flex-row space-class">
+    <div>
+      <div><strong>Touch Smartcard</strong> | {{beautifyIsrnNo(itsoData)}}</div>
+      <div><strong>Loading station</strong>: {{locationNameByID(itsoData)}}</div>
+    </div>
+      <div class="card-row-right-col">
+        <div>&nbsp;</div>
+        <div>Free</div>
+    </div>
+  </div>
+</div>

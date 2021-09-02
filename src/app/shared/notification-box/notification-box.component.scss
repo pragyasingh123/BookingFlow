@@ -1,0 +1,43 @@
+@import "../../../assets/styles/variables";
+
+$color-alert: #e33935;
+$color-white: #fff;
+
+.notification-box {
+  display: flex;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+
+  &--warning {
+    background-color: $bf-warning-color;
+  }
+
+  &--alert {
+    background-color: $color-alert;
+    color: $color-white;
+  }
+
+  iron-icon {
+    height: 30px;
+    flex: 0 0 40px;
+  }
+
+  iron-icon.transparent {
+    opacity: .8;
+  }
+
+  &--message {
+    flex-basis: 100%;
+  }
+}
+
+.notification-box .btn {
+  &-link {
+    text-decoration: underline;
+    color: $color-white;
+
+    &-copy {
+      display: inline-block;
+    }
+  }
+}

@@ -1,0 +1,157 @@
+﻿<div class="bf-box">
+  <section class="ticket-card content">
+<h4 class="journey-number-heading">Journey {{trip?._apiResponse.tripno}}</h4>
+    <app-ticket-information *ngFor="let journey of trip.outwardJourneys"
+                            [timeDepart]="journey.departureTime"
+                            [timeArrive]="journey.arrivalTime"
+                            numChanges="{{ journey.timetableJourneys[0].legs.length - 1 }}"
+                            ticketCode="{{ journey.ticketTypeCode }}"
+                            hasMultipleStations="true"
+                            ticketType="{{ journey.ticketTypeDescription }}"
+                            ticketRouteDescription="{{ journey.routeDescription }}"
+                            label1="{{ journey.label }}"
+                            singleReturn="{{ isSingleReturn }}"
+                            modifier="0"
+                            direction="{{ journey.directionLabel }}"
+                            price="{{ journey.cost }}"
+                            originName="{{ journey.origin.name }}"
+                            destinationName="{{ journey.destination.name }}"
+                            showRouteDetails="{{!isBasket}}"
+                            originId="{{ journey.origin.id }"
+                            destinationId="{{ journey.destination.id }}"
+                            [fares]="journey.fares"
+                            [discounts]="journey.discounts"
+                            [trip]="trip"
+                            [journeyId]="journey.id"
+                            [routeDetailsParamsOutward] = "outwardRouteDetailsParams"
+                            [routeDetailsParamsReturn] = "returnRouteDetailsParams"
+                            [sleepers]="journey.sleeperReservation"
+                            [isCheapest]="isCheapest"
+                            [savedMoneyAmount]="savedMoneyAmount"
+                            adults="{{inflect(trip.numAdult, 'adult')}}"
+                            children="{{inflect(trip.numChild, 'child')}}"
+                            cost="{{ trip?.totalCost | number:'1.2-2' }}">
+    </app-ticket-information>
+
+    <div *ngIf="trip?.returnJourneys.length && isReturnJourneyType()">
+      <hr>
+      <app-ticket-information *ngFor="let journey of trip.returnJourneys"
+                              [timeDepart]="journey.departureTime"
+                              [timeArrive]="journey.arrivalTime"
+                              numChanges="{{ journey.timetableJourneys[0].legs.length - 1 }}"
+                              ticketCode="{{ journey.ticketTypeCode }}"
+                              hasMultipleStations="true"
+                              ticketType="{{ journey.ticketTypeDescription }}"
+                              ticketRouteDescription="{{ journey.routeDescription }}"
+                              label1="{{ journey.label }}"
+                              modifier="0"
+                              direction="{{ journey.directionLabel }}"
+                              price="{{ journey.cost }}"
+                              originName="{{ journey.origin.name }}"
+                              destinationName="{{ journey.destination.name }}"
+                              originId="{{ journey.origin.id }"
+                              destinationId="{{ journey.destination.id }}"
+                              showRouteDetails="{{!isBasket}}"
+                              [routeDetailsParamsOutward] = "returnRouteDetailsParams"
+                              [discounts]="journey.discounts"
+                              [trip]="trip"
+                              [journeyId]="journey.id"
+                              [fares]="journey.fares"
+                              [sleepers]="journey.sleeperReservation">
+      </app-ticket-information>
+    </div>
+
+    <div class="tc-controls" *ngIf="editable">
+      <div id="reservationError" class="reservation-warning" *ngIf="checkReservations && trip.seatReservationStillNeededOnSomeJourneys">
+        You must reserve a seat for this (part of the) journey.
+      </div>
+
+      <app-button btn-type="link" (click)="editExtras(trip)">Edit seats and extras</app-button>
+      <span *ngIf="!amendMode">|
+      <app-button btn-type="link" (click)="deleteTrip(trip)">Remove</app-button></span>
+    </div>
+
+    <div *ngIf="trip.travelcard">
+      <hr>
+      <app-addon-information [travelcard]="trip.travelcard"></app-addon-information>
+    </div>
+    <div *ngIf="trip.plusBuses.length">
+      <hr>
+      <app-addon-information [plusBuses]="trip.plusBuses"></app-addon-information>
+    </div>
+    <div *ngIf="trip.legolandBus != undefined">
+      <hr>
+      <app-addon-information [legolandBus]="trip.legolandBus"></app-addon-information>
+    </div>
+    <div *ngIf="trip.oxfordWestgate != undefined">
+      <hr>
+      <app-addon-information [oxfordWestgate]="trip.oxfordWestgate"></app-addon-information>
+    </div>
+
+    <div class="admin-fee" *ngIf="adminFee">
+      <hr>
+      <div class="card-row-left-col">
+         Admin Fee
+      </div>
+      <div class="card-row-right-col">
+        £{{ adminFee | number:'1.2-2' }}
+      </div>
+    </div>
+
+    <div *ngIf="showFavouriteName">
+      <div class="favourite-wrap">
+        <hr>
+        <div class="flex-row favourite-title">
+          <iron-icon class="icon-favourite" icon="toc:romantic_break"></iron-icon>
+          <div>Add to favourite</div>
+          <div *ngIf="tripIsFavouite" class="favourite-amend">
+              <app-loading-indicator inline *ngIf="showLoadingState"></app-loading-indicator>
+              <div *ngIf="canEditFavourite">
+                <div *ngIf="!showLoadingState">
+                  <app-button btn-type="link" (click)="editFavourite(tripIsFavouite = !tripIsFavouite)">Edit</app-button>|
+                  <app-button btn-type="link" (click)="removeFavourite(trip.id)">Remove</app-button>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="flex-row">
+
+          <div class="favourite-body" *ngIf="!tripIsFavouite">
+            <input type="text" placeholder="Home, work etc." name="favourite" (keyup)="onKey($event)" value="{{ favouriteJourneyName }}">
+            <app-loading-indicator inline *ngIf="showLoadingState"></app-loading-indicator>
+            <button *ngIf="!showLoadingState" class="btn btn-add btn-secondary add-favourite" (click)="addFavourite(trip.id)">Add</button>
+            <p class="favourite-explanation">Adding this journey to your favourites will make it quicker to book again next time.</p>
+          </div>
+          <div *ngIf="tripIsFavouite" class="favourite-msg">Your journey has been saved in your account as "{{ favouriteJourneyName }}"</div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="flex-row tc-journey-price">
+      <div class="card-row-left-col">
+        Total price
+      </div>
+      <div class="card-row-right-col">
+        £{{ trip?.totalCost | number:'1.2-2' }}
+        <span *ngIf="isCheapest && savedMoneyAmount > 0" class="tip-total-price">*</span>
+      </div>
+    </div>
+
+    <div *ngIf="isCheapest && savedMoneyAmount > 0" class="saving-money-info">
+      <span class="check-outline">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path fill="none" d="M0 0h24v24H0V0zm0 0h24v24H0V0z"/>
+          <path d="M16.59 7.58L10 14.17l-3.59-3.58L5 12l5 5 8-8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+        </svg>
+      </span>* You will save £{{savedMoneyAmount.toFixed(2)}} on this booking
+    </div>
+
+    <hr>
+
+    <app-carbon-footprint isSingleReturn='{{trip?.returnJourneys.length}}' [trip]="trip" class="tc--carbon-footprint">
+    </app-carbon-footprint>
+  </section>
+</div>

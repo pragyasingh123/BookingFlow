@@ -1,0 +1,27 @@
+$prefix: bf-icon-set;
+
+.#{$prefix} {
+
+    [class*=icon-] {
+        font-size: 50px;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        vertical-align: top;
+        min-height: 60px;
+        width: 25%;
+        text-align: center;
+    }
+
+	.missing { color: red; }
+
+    @include mq('mobile') {
+        [class*=icon-] {
+            font-size: 10vw;
+        }
+    }
+}

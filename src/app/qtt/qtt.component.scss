@@ -1,0 +1,25 @@
+﻿@import "../../assets/styles/variables";
+
+:host {
+  background-color: $bf-colour-qtt-background;
+  padding-bottom: 2em;
+  display: block;
+}
+.min-height {
+  min-height: 320px;
+}
+.no-right-pad {
+  padding-right: 0;
+}
+
+.white {
+  color: white;
+}
+
+.more-options {
+  float: right;
+  margin-bottom: 1em;
+}
+.journeyCheckInProgress{
+  min-height: 0px;
+}

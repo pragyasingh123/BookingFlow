@@ -1,0 +1,30 @@
+.permissions-block__reset {
+    display:none;
+}
+
+.footer__link, .footer__img {
+    display: none;
+}
+
+.primary {
+    background-color: #a8def7;
+    height: 41px;
+    width: 106px;
+    border: transparent;
+}
+
+.button-container {
+    display: inline-flex;
+    margin-left: 18%;
+    margin-right: 2%;
+    position: relative;
+    margin-top: 1%;
+}
+
+.form-group {
+    margin-bottom: 0px !important;
+}
+
+.form-group.text-center {
+    margin-top: 1%;
+}

@@ -1,0 +1,153 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.ticket-card {
+  text-align: center;
+}
+
+.reservation-warning {
+  background-color: $bf-colour-delivery-details-secondary;
+  color: $bf-colour-delivery-details-tertiary;
+  font-weight: bold;
+  padding: .5rem .6rem;
+  margin-bottom: 15px;
+}
+
+.tc-passengers {
+  margin-right: $bf-gutter;
+}
+
+.icon-passengers {
+  transform: scale(.9);
+  margin-right: .5rem;
+}
+
+.icon-rcard {
+  transform: scale(1.2);
+  margin-right: .5rem;
+}
+
+.flex-row iron-icon {
+  flex-basis: $left-col-width
+}
+
+.tc-controls {
+  overflow: hidden;
+  color: $bf-colour-bundle-1-item-b;
+
+  app-button {
+    height: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  span {
+    text-align: center;
+    display: inline-block;
+    margin: 0 1px;
+  }
+}
+
+.journey-number-heading{
+font-weight: bold;
+    text-align: left;
+    font-size: 1.2rem;
+  }
+
+.favourite-amend {
+  margin-left: auto;
+}
+
+.tube-icon {
+  fill: $bf-colour-tube-icon;
+}
+
+//travelcard
+.travelcard > div {
+  margin: $bf-gutter/2 0;
+}
+
+.travelcard-price {
+  margin-left: auto;
+  font-weight: normal;
+}
+
+//favourite
+.icon-favourite {
+  fill: $bf-colour-icon-favourite;
+}
+
+.favourite-title {
+  margin: $bf-gutter/2 0;
+}
+
+.favourite-body {
+  text-align: left;
+  flex-basis: $right-col-width;
+  @media screen and (min-width: $breakpoint-phone) {
+    margin-left: auto;
+  }
+  .btn.btn-add {
+    background: $bf-colour-selections-bg-add-btn;
+    color: $bf-colour-selections-add-btn;
+  }
+}
+
+.favourite-explanation {
+  font-size: $f-smaller;
+}
+
+.favourite-msg {
+  text-align: left;
+  flex-basis: $right-col-width;
+  margin-left: auto;
+  margin-top: -.5em;
+  font-size: $f-smaller;
+}
+
+//trip total
+.tc-journey-price {
+  margin: $bf-gutter/2 0 0;
+  font-size: $f-normal;
+  font-weight: bold;
+}
+
+.tc-journey-price small {
+  margin-right: -0.2rem;
+}
+
+.admin-fee {
+  overflow: hidden;
+  .card-row-left-col {
+    float:left;
+  }
+
+  .card-row-right-col {
+    float:right;
+  }
+}
+
+.tc--carbon-footprint {
+  display: $tc--carbon-footprint;
+}
+
+.saving-money-info {
+  color: $colour-electric-green;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  width: 100%;
+}
+
+.check-outline svg {
+  position: relative;
+  fill: $colour-electric-green;
+  top: 6px;
+  margin-right: 10px;
+}
+
+.tip-total-price {
+  color: $colour-electric-green;
+}

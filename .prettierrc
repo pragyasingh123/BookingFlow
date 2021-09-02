@@ -1,0 +1,31 @@
+{
+  "printWidth": 140,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": [
+        "babel*",
+        "deploy.js",
+        "eslint*",
+        "gulp*",
+        "lint-staged*",
+        "purge.js",
+        "rollup*",
+        "webpack*"
+      ],
+      "options": {
+        "tralingComma": "es5"
+      }
+    },
+    {
+      "files": ["*.json", ".babelrc", ".prettierrc"],
+      "options": {
+        "parser": "json",
+        "printWidth": 80
+      }
+    }
+  ]
+}

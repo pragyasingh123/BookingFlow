@@ -1,0 +1,120 @@
+/*
+|--------------------------------------------------------------------------
+| Typography
+|--------------------------------------------------------------------------
+|
+| Overrides base Bootstrap styles
+|
+*/
+
+@import "variables";
+
+
+$f-vvlarge:  rem-calc( $bf-font-size-base * 1.750 ); //28px
+$f-vlarge:   rem-calc( $bf-font-size-base * 1.500 ); //24px
+$f-large:  rem-calc( $bf-font-size-base * 1.250 ); //20px
+$f-larger:  rem-calc( $bf-font-size-base * 1.125 ); //18px
+$f-normal:  rem-calc( $bf-font-size-base * 1.000 ); //16px
+$f-smaller: rem-calc( $bf-font-size-base * 0.875 ); //14px
+$f-small:   rem-calc( $bf-font-size-base * 0.750 ); //12px
+$f-vsmall:  rem-calc( $bf-font-size-base * 0.675 ); //10px
+
+
+
+html, body {
+  font-family: $bf-font-base;
+  line-height: $bf-line-height;
+  -webkit-font-smoothing: antialiased;
+  font-size: $bf-font-size-base;
+  color: $bf-colour-text;
+}
+
+%heading-base {
+  font-weight: normal;
+  font-family: $bf-font-headings;
+  color: $bf-colour-font-heading;
+  margin-bottom: .67em;
+}
+
+
+//outline headings
+$heading-sizes : (
+    "h1" : $f-vvlarge,
+    "h2" : $f-vlarge,
+    "h3" : $f-large,
+    "h4" : $f-large,
+    "h5" : $f-normal,
+    "h6" : $f-normal
+);
+
+@each $heading, $size in $heading-sizes {
+  #{$heading}, .bf-#{$heading} {
+    font-size: $size;
+    @extend %heading-base;
+  }
+}
+
+p { margin-bottom: rem-calc($bf-gutter); }
+
+.reset-password-tips{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+//structural headings
+.page-heading {
+  font-size: $f-vvlarge;
+  text-align: center;
+  color: $bf-colour-headings;
+  margin: $bf-gutter 0;
+  &--email-sent {
+    font-size: 1.5em;
+  }
+}
+.email-sent {
+  text-align: center;
+}
+.reset-link {
+  margin: 20px 0px;
+  font-size: 0.9em;
+}
+.page-section-heading {
+  font-size: $f-large;
+  text-align: center;
+}
+
+.dialog-heading {
+  color: $bf-colour-headings;
+  padding-right: 25px;
+}
+
+.select-option-heading {
+  font-size: $f-larger;
+  color: $bf-colour-headings;
+  margin: 0 0 .2rem;
+  font-weight: bold;
+}
+
+.box-heading {
+  font-size: $f-large;
+  margin: ($bf-gutter / 2) 0 $bf-gutter;
+  font-weight: bold;
+}
+
+//visual headings
+.heading-normal {
+  font-size: $f-normal;
+  color: $bf-colour-headings;
+  font-family: $bf-font-base;
+  font-weight: bold;
+  margin-bottom: .5rem;
+}
+
+%reverse-underline {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}

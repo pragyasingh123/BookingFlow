@@ -1,0 +1,37 @@
+<app-loading-indicator inline *ngIf="!travelCardPrefAvailable" class="loader"></app-loading-indicator>
+<div *ngIf="travelCardPrefAvailable" >
+<div class="color-strip"></div>
+<div class="container-fluid">
+  <header class="modal-header-container">
+    <iron-icon icon="toc:tube"></iron-icon>
+    <h1 class="dialog-heading">Add Travelcard</h1>
+  </header>
+  <hr>
+  <p>With a Travelcard you can travel as often as you like on bus, Tube, tram, DLR, London Overground and National Rail services within the London travel zones.</p>
+
+  <h2 class="heading-normal">1. When are you travelling?</h2>
+  <p>Tickets are valid all day on the weekend</p>
+  <app-radio [options]="whenTravellingOptions" (onSelect)="whenTravellingSelection = $event"></app-radio>
+
+
+  <h2 class="heading-normal">2. Which zone will you be travelling in?</h2>
+  <app-radio [options]="zoneOptions" [value]="zoneSelection" (onSelect)="zoneSelection = $event"></app-radio>
+
+  <hr>
+
+  <div class="row total-row">
+    <div class="col-xs-6">
+      Total
+    </div>
+    <div class="col-xs-6 text-right">
+      {{getTotalCost() | currency:'GBP':true:'1.2-2'}}
+    </div>
+  </div>
+
+
+  <app-button class="btn-block" btn-type="continue" (click)="addExtra()" [isLoading]="isSendingRequest" data-elid="add-travel-card-button">Add London Travelcard</app-button>
+  <app-button class="btn-block" btn-type="link" (click)="backToSeatsAndExtras()">Cancel</app-button>
+
+</div>
+
+</div>

@@ -1,0 +1,48 @@
+﻿<div class="container">
+  <h1 class="page-heading" data-elid="review-header">Review your order</h1>
+
+  <app-loading-indicator class="loading-indicator" *ngIf="!(basketService.isBasketReady$ | async)" label="Please wait..."></app-loading-indicator>
+
+  <div *ngIf="(basketService.isBasketReady$ | async)">
+
+      <div *ngFor="let trip of (basketService.basket$ | async )?.trips">
+        <app-trip-card [editable]="true" [trip]="trip" [amendMode]="(basketService.basket$ | async )?.ischangeofjourney" [adminFee]="(basketService.basket$ | async )?.amendFee" [checkReservations]="true"></app-trip-card>
+      </div>
+
+      <div *ngIf="(basketService.basket$ | async )?.selectedDeliveryOption">
+        <app-delivery-summary [editable]="true"
+                              [selectedDeliveryOption]="(basketService.basket$ | async )?.selectedDeliveryOption"
+                              [itsoInfo]="(basketService.basket$ | async )?.itsoInfo">
+        </app-delivery-summary>
+      </div>
+
+      <app-nectar-box *ngIf="!(basketService.basket$ | async )?.ischangeofjourney" [nectarPts]="(basketService.basket$ | async )?.loyaltyPoints"></app-nectar-box>
+
+      <div class="bf-box">
+        <section class="content voucher-box">
+          <h3 class="box-heading heading-normal">eVoucher</h3>
+          <div class="voucher-success-wrap" *ngIf="hasVCSubmitSuccess">
+            <span class="voucher-success-msg">Your eVoucher has been added successfully</span>
+            <hr>
+          </div>
+          <p>If you have a 25 digit code enter it below</p>
+            <input [class.not-valid]="hasVCvalidationError || hasVCSubmitError" class="sessioncamexclude" type="text" pattern="[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{5}-[A-Za-z0-9]{5}" name="voucher-code" [(ngModel)]="voucherCode" (keyup)="hyphenateVoucherCode($event)">
+            <app-loading-indicator inline *ngIf="showLoadingState" class="voucher-loader"></app-loading-indicator>
+            <app-button *ngIf="!showLoadingState" class="add-voucher-code" (click)="addVoucherCode(voucherCode)">Add</app-button>
+            <div *ngIf="hasVCSubmitError" class="validation-msg" id="voucher-code-validation">{{ voucherErrorResponse }}</div>
+            <div *ngIf="hasVCvalidationError" class="validation-msg" id="voucher-code-validation">The eVoucher code is not valid, Please try again</div>
+        </section>
+      </div>
+
+      <app-order-summary [orders]="basketService.basket$ | async"></app-order-summary>
+
+      <div class="btn-wrap">
+        <app-button btn-type="amend-cancel" (click)="cancelAmend()" *ngIf="(basketService.basket$ | async )?.ischangeofjourney">Cancel amending my booking</app-button>
+      </div>
+
+      <app-sticky-button-holder>
+        <app-button [isLoading]="processBasket" btn-type="continue" (click)="continueJourney($event)" data-elid="continue-button">Continue</app-button>
+      </app-sticky-button-holder>
+  </div>
+
+</div>

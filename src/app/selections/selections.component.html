@@ -1,0 +1,60 @@
+﻿<div class="container-fluid">
+  <h1 class="page-heading">Your tickets</h1>
+
+  <app-loading-indicator class="loading-indicator" *ngIf="basketService.isBasketRefreshing$ | async" label="Please wait..."></app-loading-indicator>
+
+  <div *ngIf="!(basketService.isBasketRefreshing$ | async)">
+    <div class="bf-box" *ngIf="showSleeperNotification">
+      <div class="sleepers-notification">
+        <h3>We've pre-selected the cheapest ticket for you</h3>
+        <p>
+          This may not always be a berth or cabin. If you would like to change your ticket type,
+          please select from available options further down the page.
+        </p>
+      </div>
+    </div>
+
+    <div class="bf-box" *ngIf="showCheapestNotification && !showSleeperNotification">
+      <div class="cheapest-notification">
+        <h3>We've pre-selected the cheapest ticket for you</h3>
+        <p>This may not always be the most flexible ticket type. If you would like to change your ticket type, please select from the available options further down the page.</p>
+      </div>
+    </div>
+
+    <app-trip-card *ngIf="trip" [editable]="true" [trip]="trip" [amendMode]="changeOfJourney" [adminFee]="adminFeePrice"></app-trip-card>
+
+    <div *ngIf="!trip" class="bf-box">
+      <section class="content no-trip">
+        <h1>No trip found</h1>
+      </section>
+    </div>
+
+    <div *ngIf="trip && !changeOfJourney">
+      <!-- first class upgrades -->
+      <app-ticket-first-card *ngIf="firstClassTicket?.length" [tickets]="firstClassTicket" [singles]="firstClassSinglesAvailable" [tripNumber]="tripnumber" [selectedService]="selectedServiceResult.selectedService" (onSelect)="selectOtherTicket($event)"></app-ticket-first-card>
+
+      <div class="tickets-types-container">
+        <!-- singles return combinations -->
+        <app-ticket-single-card *ngIf="singleReturns.length" [tickets]="singleReturns" [tripNumber]="tripnumber" [selectedService]="selectedServiceResult.selectedService" (onSelect)="selectOtherTicket($event)"></app-ticket-single-card>
+
+        <!-- singles or returns-->
+        <app-ticket-card *ngIf="otherTicketOptions.length" [tickets]="otherTicketOptions" [tripNumber]="tripnumber" [selectedService]="selectedServiceResult.selectedService" (onSelect)="selectOtherTicket($event)"></app-ticket-card>
+      </div>
+
+      <app-nectar-box *ngIf="nectarPts" [nectarPts]="nectarPts"></app-nectar-box>
+    </div>
+
+    <app-sticky-button-holder>
+      <app-button btn-type="amend-cancel" (click)="cancelAmend()" *ngIf="changeOfJourney">Cancel amending my booking</app-button>
+
+      <app-button
+        data-elid="continue-button"
+        *ngIf="trip"
+        btn-type="continue"
+        btn-fxm="{'type': 'button', text: 'Continue', 'icon': '', section: 'selections'}"
+        btn-region="selection"
+        (click)="continueJourney($event, trip.id )"
+        >Continue</app-button>
+    </app-sticky-button-holder>
+  </div>
+</div>

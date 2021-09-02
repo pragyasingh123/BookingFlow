@@ -1,0 +1,28 @@
+<footer class="bf-footer">
+  <div class="container">
+    <div class="footer-payment-block my-2">
+      <ul>
+        <li><img src="assets/img/paypal-img.png" alt=""></li>
+        <li><img src="assets/img/apple-pay-img.png" alt=""></li>
+        <li><img src="assets/img/google-pay-img.png" alt=""></li>
+      </ul>
+  </div>
+    <ul class="footer-links">
+      <li *ngFor="let link of footerLinks">
+        <a href="{{link.url}}" target="_blank" rel="noopener noreferrer">{{link.label}}</a>
+      </li>      
+      <li><a href="http://www.verisign.com/?dmn=www.verisign.co.uk" target="_blank" rel="noopener noreferrer">About SSL certificates</a></li>
+    </ul>
+    <div class="row footer-logos">
+      <div class="col-xs-6 text-right">
+        <a target="_blank" href="https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn={{domainName}}&lang=en" rel="noopener noreferrer">
+          <img src="assets/img/logos/norton-secured.png" alt="">
+        </a>
+      </div>
+      <div class="col-xs-6 text-left">
+        <img src="assets/img/logos/national-rail-accredited.png" alt="">
+      </div>
+    </div>
+    
+  </div>
+</footer>

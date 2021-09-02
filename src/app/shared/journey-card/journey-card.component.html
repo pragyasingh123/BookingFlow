@@ -1,0 +1,147 @@
+﻿<div data-elid="journey-selection" class="journey clearfix" [ngClass]="{'journey--sleeper__disabled':isSleeper, 'journey-not-active':serviceNotAvailable || serviceDisabled}">
+
+  <a [routerLink]="['./route-details', routeDetailsParams]" class="link-route-details active"></a>
+  <a href="#" *ngIf="canAddJourney" (click)="addJourney($event)" [class.active]="canAddJourney" class="link-next-screen"></a>
+  <a href="tel:03457000125" class="link-next-screen active" *ngIf="hasChildSleeper"></a>
+
+  <div *ngIf="serviceDisabled" class="journey-not-available">
+    <div><p>This journey does not have any fares available.</p></div>
+  </div>
+
+  <div *ngIf="serviceNotAvailable" class="journey-not-available">
+    <div><p>This journey is not available for the ticket you have selected</p></div>
+  </div>
+
+  <div class="journey-details-box">
+    <div *ngIf="hasGroupedStation" class="flex-row">
+      <iron-icon class="rail-icon" icon='toc:rail'></iron-icon>
+
+      <div class="stations">
+        <span class="station-from">{{service.originName}}</span>
+        <span class="station-to">{{service.destinationName}}</span>
+      </div>
+    </div>
+
+    <div class="flex-row flex-wrap">
+      <a class="status-icon">
+        <iron-icon [ngClass]="'ico-' + statusIcon.name" icon="toc:{{ statusIcon.type }}"></iron-icon>
+      </a>
+
+      <div class="journey-left-col">
+        <div class="journey-times">
+          <span class="journey-times-cell">
+            <span *ngIf="!isPartCancelled"
+              [class.journey-times--expected]="service?.expectedDepartureTime"
+              class="journey-times-depart">{{timeDepart}}</span>
+
+            <span *ngIf="service?.expectedDepartureTime"
+              class="journey--expected">Dep. {{ service?.expectedDepartureTime }}</span>
+
+            <span *ngIf="isPartCancelled"
+              [class.journey-times--cancelled]="isPartCancelled"
+              class="journey-times-depart">{{timeDepart}}</span>
+          </span>
+
+          <iron-icon [class.disruption-arrow]="service?.expectedDepartureTime" icon="toc:breadcrumb_arrow"></iron-icon>
+
+          <span class="journey-times-cell">
+            <span *ngIf="!isPartCancelled"
+              [class.journey-times--expected]="service?.expectedArrivalTime"
+              class="journey-times-arrival">{{timeArrive}}</span>
+
+            <span *ngIf="service?.expectedArrivalTime"
+              class="journey--expected">Exp. {{ service?.expectedArrivalTime }}</span>
+
+            <span *ngIf="isPartCancelled"
+              [class.journey-times--cancelled]="isPartCancelled"
+              class="journey-times-arrival">{{timeArrive}}</span>
+          </span>
+        </div>
+
+        <div class="chngs-dur">
+          <span class="changes">{{getChangesMsg(numChanges)}}</span>
+          <span class="duration">{{duration}}</span>
+        </div>
+
+        <div class="journey-mod-applied" *ngIf="isServiceAvailable">
+          <span *ngIf="modifier === 1" class="mod-promo">Promotion<iron-icon icon='toc:promo_price'></iron-icon></span>
+          <span *ngIf="modifier === 2" class="mod-railcard">Railcard added<iron-icon icon='toc:railcard'></iron-icon></span>
+          <span *ngIf="modifier === 3" class="mod-nectar">Double Nectar points<iron-icon icon='toc:nectar'class="mod-nectar"></iron-icon></span>
+        </div>
+      </div>
+
+      <div class="journey-right-col">
+        <div class="journey-details" *ngIf="!showLoadingState">
+          <div *ngIf="isServiceAvailable && canAddJourney">
+            <div class="journey-labels">
+              <div *ngFor="let label of labels" class="journey-label {{label.toLowerCase().replace(' ','-')}}">{{label}}</div>
+            </div>
+
+            <div class="price" *ngIf="!hasChildSleeper">
+              <div class="price-msg">{{cheapestFareLabel}}</div>
+
+              <div *ngIf="price > 0">
+                <span *ngIf="isSingleReturn" class="price-sign">+</span>
+                <span class="price-amount">£{{price | number:'1.2-2'}}</span>
+              </div>
+
+              <div *ngIf="price < 0">
+                <span *ngIf="isReturn" class="price-amount">-</span>
+                <span class="price-amount">£{{price | number:'1.2-2'}}</span>
+              </div>
+
+              <div *ngIf="price == 0 && !isJourneyAmend">
+                <small class="no-extra-cost">No extra cost</small>
+              </div>
+
+              <div *ngIf="price == 0 && isJourneyAmend">
+                <span class="price-amount">£{{price | number:'1.2-2'}}</span>
+              </div>
+            </div>
+
+            <div *ngIf="hasChildSleeper">
+              <span class="sleeper-child">Call to book a sleeper for a child</span>
+              <iron-icon class="sleeper-phone" icon='toc:telephone'></iron-icon>
+            </div>
+          </div>
+
+          <div *ngIf="service.departureDateTime.isBefore()">
+            <span class="past-journey">This train has already departed</span>
+          </div>
+
+          <ng-container *ngIf="!service.departureDateTime.isBefore()">
+            <span *ngIf="isPartCancelled && !hasLegBus" class="journey--cancelled">Cancelled</span>
+          </ng-container>
+
+          <div *ngIf='!deliveryAvailable && !service.departureDateTime.isBefore()'>
+              <span class="delivery-journey">Tickets can no longer be purchased online</span>
+          </div>
+        </div>
+      </div>
+   
+      <div class="extra-row">
+        <div class="left-col">
+          <div class="touch-smartcard-box" *ngIf="isSmartcardAvailable">
+            <iron-icon class="rail-icon touch-smartcard-icon" icon='toc:touch_smartcard'></iron-icon> Touch Smartcard
+          </div>
+        </div>
+
+        <div class="right-col" *ngIf="!showLoadingState">
+
+          <div *ngIf="isServiceAvailable && canAddJourney">
+            <div *ngIf="limitedInventoryAmount" class="limited-tickets">
+              {{getLimitedInventoryMsg(limitedInventoryAmount)}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="journey-arrow-box" *ngIf="isServiceAvailable && !hasChildSleeper && canAddJourney">
+    <app-loading-indicator inline *ngIf="showLoadingState"></app-loading-indicator>
+    <iron-icon class="journey-arrow" icon="toc:arrow_right" *ngIf="!showLoadingState"></iron-icon>
+  </div>
+
+</div>

@@ -1,0 +1,213 @@
+﻿<div class="container">
+  <div class="row">
+    <section class="delivery-intro col-lg-12">
+      <h1 class="page-heading" data-elid="delivery-details-header">How would you like to get your tickets?</h1>
+    </section>
+  </div>
+
+  <div *ngIf="loading | async" data-elid="delivery-loading-indicator">
+    <app-loading-indicator class="row delivery-loading"></app-loading-indicator>
+  </div>
+  <div class="row" *ngIf="!(loading | async)">
+    <div class="delivery-wrapper">
+      <div class="delivery-details" *ngIf="basket?.trips?.length === 0">
+        <div class="alert alert-danger">Your basket is empty. Please search again.</div>
+        <app-button class="btn-block" btn-type="journey" (click)="searchAgainBtnClick()">Search again</app-button>
+      </div>
+
+      <div class="delivery-details" *ngIf="deliveryOptions?.length === 0 && basket?.trips?.length > 0">
+        <div class="alert alert-danger">
+          There are no Delivery options for your selected date/time combination. <br />
+          Please change your journey to a later train or alternatively, purchase your tickets at the station.
+        </div>
+        <app-button class="btn-block" btn-type="journey" (click)="searchAgainBtnClick()">Search again</app-button>
+      </div>
+
+      <div class="delivery-details" *ngIf="deliveryOptions?.length > 0 && basket?.trips?.length > 0">
+
+        <p class="delivery-warning" *ngIf="tripDepartsWithin5Days">As you are travelling within 5 days some delivery
+          options will not be available.</p>
+
+        <app-login-modal *ngIf="showLoginView" (closeEvent)="closeModal($event)"></app-login-modal>
+
+        <div *ngFor="let option of deliveryOptions">
+          <section tabindex="0" class="collection-option delivery-selection"
+                   [class.is-selected]="selectedOption.id === option.id"
+                   [class.has-nectar]="(option?.nectarPoints > 0)"
+                   [class.e-ticket]="option?.isETicket === true"
+                   [attr.data-elid]="option.name">
+            <h2 data-elid="radio-button-select" class="collection-option-heading" (click)="setSelectedOption(option); showLoginModalForItsoCase(option)">
+              <span class="collection-option-radio">
+                <svg width="21px" height="21px" viewBox="20 260 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <circle class="radio-outer" stroke="#525761" stroke-width="2" fill="#FFFFFF" fill-rule="evenodd" cx="30.5" cy="270.5" r="9.5"></circle>
+                  <circle class="radio-inner" stroke="none" fill-rule="evenodd" cx="30.5" cy="270.5" r="6.5"></circle>
+                </svg>
+              </span>
+              <span class="collection-option-title">{{option.name}}</span>
+              <span class="collection-option-price" *ngIf="option.price === 0">Free</span>
+              <span class="collection-option-price" *ngIf="option.price > 0">{{option.price | currency:'GBP':true:'1.2-2'}}</span>
+              <span class="collection-option-nectar" *ngIf="(option?.nectarPoints)">
+                <img class="nectar-logo" alt="" src="data:image/png;base64,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" alt="">
+              </span>
+            </h2>
+
+            <div *ngIf="displayITSOLoader(option.name)">
+              <app-loading-indicator *ngIf="loaderVisible" class="itso-loading-bar"></app-loading-indicator>
+            </div>
+            <div class="collection-option-body">
+              <div *ngIf="displayITSOLoader(option.name)" class="itso-section">
+                <div [class.hide]="loaderVisible">
+                  <div *ngIf="!showLoginView">
+
+                    <div *ngIf="!noCardsOnAccount">
+                      <b>Use our new Touch Smartcard</b>
+                      <div>Pick from your registered and saved cards and load them at your chosen location.</div>
+                      <label class="is-required smartcard-label">Select from your saved cards:</label>
+                      <app-loading-indicator *ngIf="stillLoadingSmartcards" class="itso-loading-bar">
+                      </app-loading-indicator>
+                      <div *ngIf="!stillLoadingSmartcards">
+                        <div class="form-control non-focus"
+                             *ngIf="!smartcardIsFocussed"
+                             (click)="smartcardonFocusClick(input)"
+                             (focus)="smartcardOnComponentFocus()"
+                             [attr.tabindex]="smartcardAmend? -1 : 0">
+                          <span class="location-label">
+                          {{smartcradItemSelected?.label || smartcardDefaultLabel}}
+                          </span>
+                        </div>
+
+                        <div (click)="smartcardCollapseDropdown()" class="dropdown-underlay"
+                             *ngIf="smartcardIsFocussed">
+                        </div>
+
+                        <div [class.hide]="!smartcardIsFocussed" class="input-wrap">
+                          <input type="text" class="form-control"
+                                 [(ngModel)]="smartcardUserInput"
+                                 (keyup)="smartcardOnKeyup($event)"
+                                 (keydown)="checkForNumerics($event)"
+                                 (keydown.Tab)="smartcardCollapseDropdown()"
+                                 placeholder="Search">
+                          <div class="search-results">
+                            <div class="search-label">Saved Cards</div>
+                            <div class="search-result-item itso-dropdown-list"
+                                 [class.highlighted]="i === smartcardHighlightIndex"
+                                 *ngFor="let singleSmartcard of (smartcardLocationSearchResults$ | async);let i = index"
+                                 (click)="smartcardSelectLocation(singleSmartcard)"
+                                 (mousedown)="smartcardOnMouseDown()">
+                              {{singleSmartcard.label}} [{{singleSmartcard.status}}]
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="itso-ticket-station" *ngIf="smartcradItemSelected">
+                        <label class="is-required smartcard-label">Collect at the station:</label>
+                        <div *ngIf="!itsoIsFocussed" class="form-control non-focus"
+                             (click)="onFocusItsoClick()"
+                             (focus)="onItsoComponentFocus()"
+                             [attr.tabindex]="itsoAmend ? -1 : 0"
+                             data-elid="delivery-station-selector">
+
+                            <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg">
+                            <app-loading-indicator inline></app-loading-indicator> Loading stations...</span>
+                            <span *ngIf="!(locationService.isStationsLoading$ | async)"
+                                class="location-label">
+                            {{itsoLocation?.label || defaultLabel}}
+                            </span>
+                        </div>
+                        <div (click)="itsoCollapseDropdown()"
+                             class="dropdown-underlay"
+                             *ngIf="itsoIsFocussed"></div>
+                        <div [class.hide]="!itsoIsFocussed" class="input-wrap">
+                          <input type="text"
+                                 class="form-control"
+                                 [(ngModel)]="itsoUserInput"
+                                 (keyup)="itsoOnKeyup($event)"
+                                 (keydown.Tab)="itsoCollapseDropdown()"
+                                 placeholder="Search"
+                                 data-elid="delivery-station-input">
+                          <div class="search-results">
+                            <div class="search-label">{{itsoSearchLabel}}</div>
+                            <div class="search-result-item"
+                                 [class.highlighted]="i === itsoHighlightIndex"
+                                 *ngFor="let itsoLocation of (itsoLocationSearchResults$ | async); let i = index"
+                                 (click)="itsoSelectLocation(itsoLocation)"
+                                 (mousedown)="itsoOnMouseDown()"
+                                 data-elid="search-stations-result">{{itsoLocation.label}}
+                            </div>
+                            <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg">
+                              <app-loading-indicator inline></app-loading-indicator> Loading stations...
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="!displayITSOLoader(option.name)"class="none-itso">
+
+                <p *ngIf="(option?.nectarPoints > 0)" class="nectar-points">You will earn <strong>{{ option?.nectarPoints }}</strong> Nectar Points after choosing this option.</p>
+
+                <p class="collection-option-description"></p>
+
+                <ng-container *ngIf="option?.isETicket">
+                  <div class="content-box">
+                    <iron-icon class="qr-code" icon="toc:qr_code"></iron-icon>
+                    <div class="content-text">
+                      <p class="mobile-app-info"><b>Delivered straight to your mobile app for FREE.</b></p>
+                    </div>
+                  </div>
+
+                  <footer class="section-footer">
+                    <div class="content-box">
+                      <iron-icon class="mobile-app" icon="toc:free_mobile_app"></iron-icon>
+                      <div class="content-text">
+                        <p class="warring-message">You will need the <b>{{appName}} app</b> to use your tickets.</p>
+                      </div>
+                    </div>
+
+                    <div class="more-info-box">
+                      <p class="more-info-link" (click)="showInfoEticket()"><iron-icon icon="toc:info"></iron-icon>More information</p>
+                    </div>
+                  </footer>
+                </ng-container>
+
+                <div class="tickets-tod" *ngIf="option?.isTod">
+                  <label class="is-required">Collect from station:</label>
+                  <div class="form-control non-focus" *ngIf="!isFocussed" (click)="onFocusClick(input)" (focus)="onComponentFocus()" [attr.tabindex]="amend ? -1 : 0" data-elid="delivery-station-selector">
+                      <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg"><app-loading-indicator inline></app-loading-indicator> Loading stations...</span>
+                      <span *ngIf="!(locationService.isStationsLoading$ | async)" class="location-label">{{location?.label || defaultLabel}}</span>
+                  </div>
+                  <div (click)="collapseDropdown()" class="dropdown-underlay" *ngIf="isFocussed"></div>
+                  <div [class.hide]="!isFocussed" class="input-wrap">
+                    <input type="text" class="form-control" #inputElement [(ngModel)]="userInput" (keyup)="onKeyup($event)" (keydown.Tab)="collapseDropdown()" placeholder="Search" data-elid="delivery-station-input">
+                    <div class="search-results" #searchResultPanel>
+                      <div class="search-label">{{searchLabel}}</div>
+                      <div class="search-result-item" [class.highlighted]="i === highlightIndex" *ngFor="let location of (locationSearchResults$ | async); let i = index" (click)="selectLocation(location)" (mousedown)="onMouseDown()" data-elid="search-stations-result">{{location.label}}</div>
+                      <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg"><app-loading-indicator inline></app-loading-indicator> Loading stations...</span>
+                    </div>
+                  </div>
+                </div>
+
+                <app-self-print-form *ngIf="option.selfPrint" [option]="option" [group]="printForm" (onSelect)="selectedID($event)" (onIsLead)="leadTraveller($event)"></app-self-print-form>
+                <app-post-address *ngIf="option.isPost" [group]="postageForm" (onChecked)="addressSave($event)"></app-post-address>
+                <p *ngIf="!isValidateTodLocation && checkIfCollectAtStationSection(option?.name)" class="delivery-warning">
+                  You have selected to collect your ticket from a self service ticket machine at a different station than the one you are travelling from.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <app-button btn-type="amend-cancel" (click)="cancelAmend()" *ngIf="changeOfJourney">Cancel amending my booking</app-button>
+
+        <app-sticky-button-holder>
+          <app-button btn-type="continue" (click)="onContinueClick()" [isLoading]="setDeliveryInProgress" data-elid="continue-button">Continue</app-button>
+        </app-sticky-button-holder>
+      </div>
+
+    </div>
+  </div>
+
+</div>

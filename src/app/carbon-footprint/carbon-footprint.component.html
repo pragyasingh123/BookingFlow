@@ -1,0 +1,24 @@
+<div class="carbon-footprint-wrap" *ngIf="hasData">
+    <iron-icon class="ti-icon cloud-icon" icon='toc:cloud'>
+        <svg width="22px" height="13px" viewBox="0 0 22 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 45 (43475) - http://www.bohemiancoding.com/sketch -->
+            <title>Fill 1</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop-Mixing-deck-page" transform="translate(-955.000000, -384.000000)" fill="#0092CB">
+                    <path d="M974.727219,396.266497 C969.177042,396.315753 963.626422,396.365482 958.076245,396.415212 C957.974566,396.378744 957.874663,396.334224 957.770763,396.307228 C956.014687,395.857293 954.850482,394.116284 955.124883,392.025748 C955.362875,390.208013 956.944009,388.816532 958.559332,388.873839 C959.017111,388.890416 959.015779,388.871945 959.121898,388.41017 C959.74929,385.694461 962.121214,383.970976 964.827924,384.515633 C966.64261,384.881264 967.867645,386.07288 968.501253,387.934187 C968.66465,388.41538 968.557198,388.448059 969.096232,388.271875 C969.384397,388.177625 969.688102,388.10753 969.988256,388.092848 C972.014736,387.992442 973.648708,389.366399 974.035889,391.486774 C974.071854,391.683324 974.152664,391.74963 974.32805,391.751051 C974.741871,391.753419 975.102411,391.918237 975.455402,392.146046 C975.901636,392.434004 976.066365,392.918512 976.292813,393.365605 C976.295921,393.762494 976.299473,394.160331 976.302581,394.557694 C976.21511,394.75377 976.134299,394.953636 976.037948,395.144029 C975.750227,395.714262 975.26714,396.029216 974.727219,396.266497" id="Fill-1"></path>
+                </g>
+            </g>
+        </svg>
+    </iron-icon>
+    <p class="carbon-footprint-header">{{percentageEmissionSaving}}% CO2 emission saving -</p>
+    <p class="carbon-footprint-details">Based on {{totalNumberOfTickets}} person(s) travelling this journey by train and not by car</p>
+    <ul>
+        <li class="train"><iron-icon class="ti-icon train-icon" icon='toc:train'></iron-icon><span>{{trainEmission}}kg CO2e</span></li>
+        <li class="car"><iron-icon class="ti-icon car-icon" icon='toc:car'></iron-icon><span>{{carEmission}}kg CO2e</span></li>                                   
+    </ul>
+    <div class="carbon-footprint-more">
+        <a href="../../about-us/sustainability/carbon-calculator" target="_blank">Find out more about emissions</a>
+    </div>
+</div>

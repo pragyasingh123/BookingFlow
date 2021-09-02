@@ -1,0 +1,223 @@
+/*
+|--------------------------------------------------------------------------
+| Variables
+|--------------------------------------------------------------------------
+|
+*/
+
+/** Colours **/
+$bf-colour-primary:                           gray !default;
+$bf-colour-secondary:                         darken(gray, 10%) !default;
+$bf-colour-tertiary:                          darken(gray, 20%) !default;
+$bf-colour-quaternary:                        darken(gray, 30%) !default;
+$bf-colour-quinary:                           darken(gray, 40%) !default;
+
+$bf-colour-green-pale:                        #e0f3ea !default;
+$bf-warning-red:                              #D0021B !default;
+
+$bf-colour-checkbox-tick-checked-background:  #E0F3EA !default;
+$bf-colour-checkbox-tick:                     #009688 !default;
+$bf-colour-wait-msg:                          #52c288 !default;
+$bf-colour-promotion-box-border:              #0a493e !default;
+$bf-colour-promotion-box:                     #0a493e !default;
+$bf-colour-btn-wrap-btn:                      #009688 !default;
+$bf-colour-qtt-background:                    #0a493e !default;
+$bf-colour-spinner-background:                #52c288 !default;
+$bf-colour-alert-background:                  #fadc64 !default;
+$bf-colour-more-info:                         #ffffff !default;
+$bf-colour-more-info-background:              #6E298C !default;
+$bf-colour-text:                              #2f2f2f !default;
+$bf-colour-font-heading:                      #525761 !default;
+$bf-colour-headings:                          #525761 !default;
+$bf-colour-link:                              #009688 !default;
+$bf-colour-link-comm:                         red !default;
+$bf-colour-alert:                             darken( red, 20%) !default;
+$bf-colour-offer-title:                       #525761 !default;
+$bf-colour-btn-cream:                         #525761 !default;
+$bf-colour-radio-item:                        #525761 !default;
+$bf-colour-radio-item-inner:                  #FFFFFF !default;
+$bf-colour-radio-item-inner-selected:         #009688 !default;
+
+$bf-colour-collection-option-fill:            #009788 !default;
+$bf-colour-confirmation-primary:              #FFFFFF !default;
+$bf-colour-confirmation-secondary:            #009688 !default;
+$bf-colour-confirmation-tertiary:             #0a493e !default;
+$bf-colour-delivery-details-primary:          #FFFFFF !default;
+$bf-colour-delivery-details-secondary:        #fadc64 !default;
+$bf-colour-delivery-details-tertiary:         #0a493e !default;
+$bf-colour-delivery-details-quaternary:       #6e298c !default;
+$bf-colour-delivery-details-quinary:          #F64F5F !default;
+$bf-colour-failed-component-primary:          #FFFFFF !default;
+$bf-colour-failed-component-secondary:        #0a493e !default;
+$bf-colour-sleeper-traveller-group-background:#FFFFFF !default;
+$bf-colour-selection-other-tickets-background:#FFFFFF !default;
+$bf-colour-other-tickets-background:          none !default;
+$bf-colour-selection-upgrade:                 #0a493e !default;
+$bf-colour-upgrade-background:                #e0f4ea !default;
+$bf-colour-button-primary:                    #FFFFFF !default;
+$bf-colour-button-secondary:                  #009688 !default;
+$bf-colour-button-tertiary:                   #0a493e !default;
+$bf-colour-button-quaternary:                 #6e298c !default;
+$bf-colour-button-quinary:                    #F64F5F !default;
+$bf-colour-button-light:                      #e0f4ea !default;
+$bf-colour-button-upgrade:                    $bf-colour-button-light !default;
+$bf-colour-button-upgrade-hover:              #e0f4ea !default;
+$bf-colour-button-upgrade-background-hover:   $bf-colour-button-tertiary !default;
+$bf-colour-button-nectar-login-background:    $bf-colour-button-primary !default;
+$bf-colour-button-nectar-login-border:        $bf-colour-button-quaternary !default;
+$bf-colour-button-nectar-login:               $bf-colour-button-quaternary !default;
+$bf-colour-button-nectar-login-border-hover:  lighten($bf-colour-button-nectar-login-border, 95%);
+$bf-colour-disruption-primary:                #FFFFFF !default;
+$bf-colour-journey-primary:                   #FFFFFF !default;
+$bf-colour-journey-secondary:                 #009688 !default;
+$bf-colour-journey-tertiary:                  #6e298c !default;
+$bf-colour-journey-mod-nectar:                #6e298c !default;
+$bf-colour-journey-mod-railcard:              #2B4685 !default;
+$bf-colour-journey-mod-promo:                 #E53935 !default;
+
+$bf-colour-journey-header:                    #FFFFFF !default;
+$bf-colour-journey-header-background:         #0a493e !default;
+$bf-colour-journey-sleeper-phone:             #0a493e !default;
+$bf-colour-journey-label-fastest:             #54e1c2 !default;
+$bf-colour-journey-label-cheapest:            #37AA32 !default;
+$bf-colour-journey-label-sleeper:             #6E298C !default;
+$bf-colour-journey-label-slow-train:          #E15200 !default;
+$bf-colour-journey-label-groupsave:           #B3274A !default;
+
+
+$bf-colour-route-details-primary:             #FFFFFF !default;
+$bf-colour-route-details-secondary:           #fadc64 !default;
+$bf-colour-route-details-tertiary:            #009688 !default;
+$bf-colour-route-calling-points-primary:      #FFFFFF !default;
+$bf-colour-route-calling-points-secondary:    #fadc64 !default;
+$bf-colour-route-calling-leg-point:           #e53935 !default;
+$bf-colour-route-calling-points-toggle:       $bf-colour-route-calling-points-secondary;
+$bf-colour-route-calling-points-toggle-hover: darken($bf-colour-route-calling-points-secondary, 20%) !default;
+
+$bf-colour-tab-option-primary:                #FFFFFF !default;
+$bf-colour-tab-option-secondary:              #009688 !default;
+$bf-value-tab-option-focus-outline:           5px auto $bf-colour-tab-option-secondary !default;
+$bf-colour-notification-primary:              #FFFFFF !default;
+$bf-colour-notification-secondary:            #009688 !default;
+$bf-colour-modal-foreground:                  #FFFFFF !default;
+$bf-colour-review-order-primary:              #009688 !default;
+$bf-colour-review-order-secondary:            #F64F5F !default;
+$bf-colour-search-result-item-selected:       #009688 !default;
+$bf-colour-search-result-item-selected-text:  #FFFFFF !default;
+$bf-colour-help-icon:                         #009688 !default;
+$bf-colour-iron-icon:                         #009688 !default;
+$bf-colour-tube-icon:                         #2B4685 !default;
+$bf-colour-disrupted-icon:                    #E53935 !default;
+$bf-colour-icon-favourite:                    #E53935 !default;
+$bf-colour-form-label-required:               #009688 !default;
+$bf-colour-form-label-invalid:                #E53935 !default;
+$bf-colour-navbar-btn-cart:                   #0a493e !default;
+$bf-colour-navbar-background:                 #FFFFFF !default;
+$bf-colour-journey-nav:                       #0a493e !default;
+$bf-colour-datepicker-selected:               #0a493e !default;
+$bf-colour-nectar-box-validation-success:     #0a493e !default;
+$bf-colour-progress-bar:                      #6e998d !default;
+$bf-colour-progress-bar-background:           #d4ebdc !default;
+$bf-colour-progress-bar-background-current:   #4dc386 !default;
+$bf-colour-progress-bar-text-current:         #0a493e !default;
+$bf-colour-progress-bar-passed:               #0a493e !default;
+$bf-colour-progress-bar-passed-background:    #4DC386 !default;
+$bf-colour-date-picker-close-icon:            none    !default;
+
+$bf-colour-modal-wrapper-border:              #0a493e !default;
+$bf-colour-modal-wrapper-plum:                #6e298c !default;
+$bf-colour-modal-wrapper-orange:              #E15200 !default;
+$bf-colour-modal-wrapper-navyblue:            #2B4685 !default;
+$bf-colour-modal-wrapper-grass:               #4DC386 !default;
+$bf-colour-content-plum:                      #6e298c !default;
+$bf-colour-content-orange-bright:             #f78d1b !default;
+$bf-colour-content-red-bright:                #F64F5F !default;
+$bf-colour-content-navyblue:                  #2B4685 !default;
+$bf-colour-content-grass:                     #4DC386 !default;
+$bf-colour-bundle-1-item-a:                   #8e9090 !default;
+$bf-colour-bundle-1-item-b:                   #e0ded8 !default;
+$bf-colour-bundle-1-item-c:                   #f7f5ef !default;
+$bf-colour-nre-basket:                        #0a493e;
+$bf-colour-basket-label:                      #d7eed6;
+$bf-colour-basket-label-button:               $bf-colour-link;
+
+//.wait-msg[_ngcontent-ycg-38]
+$bf-colour-confirmation-loader:               #4DC386 !default;
+$bf-colour-background:                        #f2f2f2 !default;
+$bf-colour-background-darker:                 #f5f3ef !default;
+$bf-colour-background-footer:                 $bf-colour-background-darker !default;
+$bf-colour-form-background:                   darken( $bf-colour-background, 20%) !default;
+
+$bf-colour-sleeper-connection-details:        #4A2C4D !default;
+$bf-sleeper-colour-dark:                      #4A2C4D !default;
+$bf-sleeper-colour-light:                     #5C415E !default;
+$bf-colour-orange-bright:                     #f78d1b !default;
+
+/** Navbar **/
+$bf-navbar-height:                            auto !default;
+$bf-navbar-margin-bottom:                     0 !default;
+$bf-navbar-btn-cart-padding:                  2px 12px 3px 12px !default;
+
+/** Logotype **/
+$bf-colour-navbar-logo-background:            #FFFFFF !default;
+$bf-navbar-logo-background:                   url("../img/tpe_logo.png") no-repeat 0 0 !default;
+$bf-navbar-logo-background-clip:              padding-box !default;
+$bf-navbar-logo-background-size:              45px 25px !default;
+$bf-navbar-logo-display:                      inline-block !default;
+$bf-navbar-logo-height:                       25px !default;
+$bf-navbar-logo-width:                        50px !default;
+$bf-navbar-logo-margin:                       13px 15px 14px 15px !default;
+$bf-navbar-logo-position:                     relative !default;
+
+/** Fonts **/
+
+$bf-font-base:                                Arial, sans-serif  !default;
+$bf-font-headings:                            "Times New Roman", serif !default;
+$bf-font-icons:                               "bf-icons" !default;
+
+$bf-font-size-base:                           16px !default;
+$bf-line-height:                              1.5 !default;
+
+/** Spacing and sizing **/
+$bf-gutter:                                   16px !default;
+$bf-component-padding:                        12px !default;
+$bf-component-max-width:                      39rem !default;
+
+/** Breakpoints **/
+$breakpoint-modal:                            "500px" !default;
+$breakpoint-phone:                            "767px" !default;
+$breakpoint-mid-screen:                       "922px" !default;
+
+/** Shadows **/
+$bf-shadow-default:                           0 2px 2px rgba(0,0,0,0.12), 0 2px 2px rgba(0,0,0,0.24) !default;
+$bf-shadow-default-hover:                     0 10px 20px rgba(0,0,0,0.24), 0 6px 40px rgba(0,0,0,0.12) !default;
+$bf-shadow-default-focus:                     $bf-shadow-default-hover !default;
+$bf-shadow-default-pressed:                   0 6px 20px rgba(0,0,0,0.19), 0 8px 17px rgba(0,0,0,0.20) !default;
+
+/** Borders **/
+$bf-component-border-radius:                  5px !default;
+$bf-button-border-radius:                     3px !default;
+$bf-component-border-colour:                  #e0e0e0 !default;
+
+/** Progress bar **/
+$bf-progress-foreground:                      #4DC386 !default;
+$bf-progress-background:                      #d5eddd !default;
+$bf-progress-text:                            #0A493E !default;
+
+$bf-value-navbar-spinner-top:                 0.4em !default;
+$bf-value-journey-border:                     none !default;
+$bf-value-journey-border-radius:              0 !default;
+$bf-colour-form-select-carrot:                #009688 !default;
+$bf-value-other-tickets-padding:              0 !default;
+$bf-btn-view-in-account:                      #009688 !default;
+$bf-booking-ref-thank-you-background:         $bf-progress-foreground !default;
+$bf-booking-ref-thank-you:                    $bf-colour-confirmation-tertiary !default;
+$bf-booking-ref-background:                   './assets/img/booking-ref-background.jpg' !default;
+$bf-booking-ref-box:                          $bf-colour-confirmation-tertiary url($bf-booking-ref-background) 15% center no-repeat !default;
+$bf-booking-ref-box-failed:                   $bf-colour-failed-component-secondary url($bf-booking-ref-background) 15% center no-repeat !default;
+
+
+//Theme overrides
+@import "themes/tpe/theme";
+
+

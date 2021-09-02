@@ -1,0 +1,66 @@
+.availability {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(94, 101, 108, .8);
+
+  > div {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    padding-top: 34px;
+
+    &.checking {
+      padding-top: 10px;
+    }
+
+    &.available {
+      background-color: rgba(68,73,79,.7);
+      padding: 30px 20px 0;
+    }
+
+    &.unavailable {
+      background-color: rgba(68,73,79,.7);
+      padding: 24px 20px 0;
+    }
+  }
+
+  app-loading-indicator {
+    /deep/ .spinner {
+      height: 30px;
+
+      > div {
+        background-color: #fff;
+      }
+    }
+
+    /deep/ .wait-msg {
+      color: #fff;
+      padding: 0 25px;
+      font-size: .9em;
+    }
+  }
+}
+
+.sold-out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  padding-top: 43px;
+  width: 100%;
+  height: 100%;
+}

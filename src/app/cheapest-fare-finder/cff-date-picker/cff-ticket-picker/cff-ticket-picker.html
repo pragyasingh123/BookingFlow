@@ -1,0 +1,99 @@
+<section *ngIf="!searchError">
+  <div *ngIf="isPrevPageAvailable"
+       class="cff-pagination earlier">
+    <extend-search [link]="true"
+                   [direction]="'earlier'"
+                   (onClicked)="showPrevPage($event)"></extend-search>
+  </div>
+
+  <ul class="cheapest-fares"
+      [class.show-all]="showAll">
+    <li *ngFor="let service of visibleResults, let i = index"
+        [class.cff-not-closest]="!service.closest"
+        class="cff-box">
+      <div class="cff-box__heading">
+        <span class="time">
+          {{ service.datetimefrom.format("HH:mm") }}
+          <span class="icon-green icon-arrow">
+            <iron-icon icon="toc:breadcrumb_arrow"></iron-icon>
+          </span> {{ service.datetimeto.format("HH:mm") }}</span>
+        <span class="dur">{{ (service.changes > 0)? service.changes + ' Chg' : 'Direct' }} | {{ service.durationhum }}</span>
+      </div>
+      <div (click)="!service.standard.isSoldOut && selectFare(service, 'standard')"
+           [class.selected]="service.standard.selected"
+           class="cff-box__fare"
+           id="service-{{i}}-standard">
+
+        <app-ticket-availability [isAvailable]="service.standard.isAvailable"
+                                 [isSelected]="service.standard.selected"
+                                 [isSoldOut]="service.standard.isSoldOut"></app-ticket-availability>
+
+        <p>Standard Class
+          <br />
+          <strong>{{ service.standard.fare/100 | currency:'GBP':true }}</strong>
+          <br />
+        </p>
+
+        <p class="small" [class.warn]="service.standard.availability < 9">
+          Only {{ service.standard.availability }} tickets left
+          <br />at this price
+        </p>
+      </div>
+      <div (click)="!service.first.isSoldOut && selectFare(service, 'first')"
+           [class.selected]="service.first.selected"
+           class="cff-box__fare"
+           id="service-{{i}}-first">
+
+        <app-ticket-availability [isAvailable]="service.first.isAvailable"
+                                 [isSelected]="service.first.selected"
+                                 [isSoldOut]="service.first.isSoldOut"></app-ticket-availability>
+
+        <p>First Class
+          <br />
+          <strong>{{ service.first.fare/100 | currency:'GBP':true }}</strong>
+          <br />
+        </p>
+
+        <p class="small" [class.warn]="service.first.availability < 9">
+          Only {{ service.first.availability }} tickets left
+          <br />at this price
+        </p>
+      </div>
+    </li>
+  </ul>
+
+  <app-button *ngIf="!showAll && searchResults && searchResults.length > closestCount"
+              btn-type="secondary"
+              (click)="showAll = true">Show all the cheapest fares on the day &#9662;</app-button>
+
+
+  <div *ngIf="isNextPageAvailable"
+       class="cff-pagination">
+    <extend-search [link]="true"
+                   [direction]="'later'"
+                   (onClicked)="showNextPage($event)"></extend-search>
+  </div>
+</section>
+
+<div *ngIf="showMobileToast"
+     class="mobile-toast">Select
+  <a (click)="showAllFares($event)">All fares</a> to view available fares
+  <iron-icon (click)="hideMobileToast()"
+             class="icon-close"
+             icon="toc:close_alternate"></iron-icon>
+</div>
+
+<div *ngIf="searchError"
+     class="no-fares">
+  <div class="bf-box">
+    <div class="alert alert-danger text-center">
+      {{ searchError }}
+    </div>
+  </div>
+</div>
+
+<app-route-details *ngIf="showRouteDetails"
+                   [params]="routeDetailsParams$ | async"
+                   [waitForParams]="true"
+                   [closeSubscription]="true"
+                   (closeEmitter)="closeRouteDetails()"></app-route-details>

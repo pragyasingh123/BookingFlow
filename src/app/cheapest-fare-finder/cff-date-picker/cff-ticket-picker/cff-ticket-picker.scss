@@ -1,0 +1,152 @@
+@import "../../../../assets/styles/variables";
+
+.cheapest-fares {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+
+  &.show-all {
+    .cff-box.cff-not-closest {
+      display: block;
+    }
+  }
+
+  .cff-box {
+    padding: 5px;
+    background: white;
+    margin-bottom: 15px;
+
+    &.cff-not-closest {
+      display: none;
+    }
+
+    .cff-box__heading {
+      height: 2.4rem;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .time {
+        font-size: 1.4rem;
+      }
+
+      .dur {
+        font-size: 0.75rem
+      }
+
+      .icon-green {
+        color: $bf-colour-tab-option-secondary;
+
+        &.icon-arrow iron-icon {
+          transform: scale(.8);
+        }
+
+        &.icon-information iron-icon {
+          transform: scale(1.3);
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .cff-box__fare {
+      background-color: #D0ECDB;
+      padding: 10px;
+      display: inline-block;
+      vertical-align: top;
+      width: calc(50% - 5px);
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.75;
+      position: relative;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      .small {
+        margin-top: 5px;
+        font-size: 0.75rem;
+        line-height: 1.1;
+        opacity: 0;
+
+        &.warn {
+          opacity: 1;
+          color: $bf-colour-link-comm;
+        }
+      }
+
+      &+.cff-box__fare {
+        margin-left: 5px;
+      }
+
+      &.selected {
+        background-color: $bf-colour-journey-header-background;
+        color: white;
+      }
+    }
+  }
+}
+
+app-button {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.mobile-toast {
+  color: $cff-toast-primary;
+  background-color: $cff-toast-secondary;
+  border-radius: 8px 0 0 8px;
+  padding: 12px 10px;
+  position: fixed;
+  bottom: 30px;
+  right: 0;
+  width: 90%;
+  z-index: 102;
+  font-size: 14px;
+  line-height: 16px;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+
+  .icon-close {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+    cursor: pointer;
+    transform: scale(1.5);
+  }
+
+  a {
+    text-decoration: underline;
+    color: $cff-toast-primary;
+  }
+}
+
+.cff-pagination {
+  text-align: center;
+  font-size: 16px;
+
+  &.earlier {
+    margin-top: 15px;
+  }
+}
+
+.no-fares {
+  margin-top: 20px;
+}
+
+.loader {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  font-size: 16px;
+}
+
+app-route-details {
+  position: absolute;
+  top: -100px;
+  width: 100%;
+
+  /deep/ .modal-wrapper {
+    width: 100%;
+  }
+}

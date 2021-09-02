@@ -1,0 +1,28 @@
+<div class="bf-box grass">
+  <section class="content delivery-summary">
+    <div class="flex-row">
+      <div class="card-row-left-col">
+
+        <h3 class="heading-normal box-heading">Delivery details</h3>
+
+      </div>
+      <app-button *ngIf="editable" class="card-row-right-col btn btn-link" btn-type="link" (click)="editDelivery()">Change</app-button>
+    </div>
+
+    <div class="flex-row" *ngIf="!itsoInfo">
+      <div>{{selectedDeliveryOption.name}}</div>
+      <div class="price card-row-right-col">
+        <div *ngIf="roundPrice(selectedDeliveryOption) == 0">
+          Free
+        </div>
+        <div *ngIf="roundPrice(selectedDeliveryOption) > 0">
+          £{{ roundPrice(selectedDeliveryOption) | number:'1.2-2'}}
+        </div>
+      </div>
+    </div>
+    <app-itso-delivery *ngIf="itsoInfo" [itsoData]="itsoInfo"></app-itso-delivery>
+  </section>
+</div>
+
+
+

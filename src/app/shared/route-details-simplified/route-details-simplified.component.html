@@ -1,0 +1,63 @@
+<div class="modal-wrapper">
+  <div class="modal-foreground" [class.layout-sleeper]="isSleeper">
+    <div class="modal-heading-wrap">
+      <h1>
+        <iron-icon class="modal-heading-icon" icon="toc:info"></iron-icon>
+        <span *ngIf="isSleeper">Sleeper service</span>
+        <span *ngIf="!isSleeper">Route details</span>
+      </h1>
+
+      <button class="close-btn" (click)="backToJourneys()">
+        <iron-icon class="modal-close-icon" icon="toc:close_alternate"></iron-icon>
+      </button>
+    </div>
+
+    <app-loading-indicator *ngIf="isSearchInProgress$ | async" label="Loading route details..."></app-loading-indicator>
+
+    <div class="route-details-wrap" *ngIf="!(isSearchInProgress$ | async)">
+
+      <div class="modal-content-wrap">
+        <div class="rd-dur-changes">
+          <span>Duration: {{getJourneyDuration()}}</span>
+          <span>Changes: {{getNumberOfRouteChanges()}}</span>
+        </div>
+
+        <span *ngFor="let journeyLeg of routeDetails.journeyLegs; let i = index">
+
+          <div class="route-details" *ngIf="!journeyLeg.mode.isConnection">
+
+            <app-route-calling-points [class.layout-sleeper]="isSleeper"
+                                      [journeyLeg]="journeyLeg"
+                                      [isSimplified] ="true">
+            </app-route-calling-points>
+          </div>
+
+          <div *ngIf="(routeDetails.journeyLegs.length > 1 && legTimes[i]?.duration)" class="route-connection">
+
+            <div class="route-connection-details">
+              <iron-icon [icon]="journeyLeg.mode.icon"></iron-icon> Change {{ legTimes[i]?.duration }}
+            </div>
+
+            <hr class="route-connection-line">
+          </div>
+
+        </span>
+
+        <app-button *ngIf="isSleeper"
+                    class="btn-block"
+                    btn-type="modal-inverse"
+                    (click)="backToJourneys()">Close
+        </app-button>
+
+        <app-button *ngIf="!isSleeper"
+                    class="btn-block"
+                    btn-type="modal"
+                    (click)="backToJourneys()">Close
+        </app-button>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" (click)="backToJourneys()"></div>
+</div>

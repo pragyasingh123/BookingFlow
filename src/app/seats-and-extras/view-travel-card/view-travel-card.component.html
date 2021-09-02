@@ -1,0 +1,45 @@
+﻿<div class="bf-box blue layout-extras-view">
+  <section class="content">
+    <div class="title-and-logo-container">
+      <h3 class="extras-title">
+        <iron-icon icon="toc:info" (click)="showInfo()"></iron-icon>
+        <span>Travelcard</span>
+      </h3>
+
+      <img src="assets/img/logos/tfl.png" alt="Transport for London Logo" class="tfl-logo extras-logo">
+    </div>
+
+    <p class="extras-info">Travel as often as you like within the London travel zones.</p>
+
+    <ul class="extras-listing has-items-added" *ngIf="travelcard">
+      <li class="extra-item">
+        <div class="extra-head">
+          <div class="extra-head-text">{{travelcard.zoneDescription}}, {{travelcard.ticketTypeDescription}}</div>
+          <div class="extra-controls">
+            <app-button btn-type="link" [routerLink]="['./add/travelcard']"  [hidden]="isSendingRequest" (click)="edit(travelcard)">Change</app-button>
+            <span  [hidden]="isSendingRequest" class="tfp-pipe">|</span>
+            <app-button btn-type="link" [isLoading]="isSendingRequest" (click)="remove(travelcard) ">Remove</app-button>
+          </div>
+        </div>
+        <div class="extra-desc">
+          <div>{{ getPassengersInfo() }}</div>
+          <div>{{travelcard.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+        </div>
+      </li>
+    </ul>
+
+
+    <ul class="extras-listing  has-no-items-added" *ngIf="!travelcard">
+      <li class="extra-item">
+        <div class="extra-head">
+          <div class="extra-head-text travelcard-from-placeholder">
+            <span>Add a London Travelcard to your journey</span>
+          </div>
+          <div class="extra-controls">
+            <app-button [routerLink]="['./add/travelcard']" btn-fxm="{'type': 'button', text: 'Add', 'icon': '', section: 'travelcard'}" data-elid="travel-card-add-button">Add</app-button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>

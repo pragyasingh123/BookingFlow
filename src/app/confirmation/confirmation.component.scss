@@ -1,0 +1,217 @@
+﻿@import "../../assets/styles/variables";
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/typography";
+@import "../../assets/styles/components/ng_components_shared";
+
+.booking-ref-thank-you,
+.booking-ref-box,
+.booking-ref-controls {
+  text-align: center;
+
+  p {
+    max-width: 630px;
+    margin: 10px auto;
+  }
+}
+
+.booking-ref-box {
+  color: $bf-colour-confirmation-primary;
+  background: $bf-booking-ref-box;
+  background-size: cover;
+  padding: $bf-gutter;
+}
+
+.booking-ref-thank-you--amend {
+  p:last-of-type {
+    color: $bf-warning-red;
+  }
+}
+
+.booking-ref-thank-you {
+  background-color: $bf-booking-ref-thank-you-background;
+  color: $bf-booking-ref-thank-you;
+  padding: 10px 20px;
+}
+
+.booking-ref-heading {
+  margin-top: 0;
+  margin-bottom: $bf-gutter;
+  font-family: $bf-font-base;
+  color: $bf-colour-confirmation-primary;
+  font-size: $f-large;
+}
+
+.booking-ref {
+  font-weight: bold;
+  font-size: 2rem;
+  font-family: $bf-font-headings;
+  margin-top: .3rem;
+}
+
+.booking-ref-text {
+  padding: 0 $bf-gutter $bf-gutter/2;
+}
+
+.booking-ref-controls {
+  background-color: $bf-colour-confirmation-tertiary;
+  padding: $bf-gutter/2 0 $bf-gutter;
+  text-align: center;
+  color:#fff;
+
+  .btn {
+    color: #fff;
+  }
+
+  button {
+    color: $bf-colour-confirmation-primary;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: $bf-gutter/2;
+    &:first-child {
+      margin-right: 5%;
+    }
+    &:hover, &.is-active, &:focus {
+      text-decoration: none;
+      color: $bf-colour-confirmation-secondary;
+    }
+  }
+}
+
+.alt-email-wrap {
+  border-top: 1px solid transparentize($bf-colour-green-pale, .9);
+  color: $bf-colour-confirmation-primary;
+  padding: $bf-gutter/2 $bf-gutter;
+
+  button {
+    color: $bf-colour-confirmation-primary;
+  }
+
+  p {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+}
+
+.alt-email {
+  display: inline-block;
+  text-align: left;
+  color: #000;
+}
+
+.confirmation-mid-section {
+  margin-top: -($bf-gutter / 2);
+}
+
+.offers-wrap {
+  margin-top: $bf-gutter;
+  background-color: $bf-colour-background-darker;
+  text-align: center;
+}
+
+.offers-title {
+  font-size: $f-large;
+  color: $bf-colour-offer-title;
+  font-weight: bold;
+}
+
+.offers-desc {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $bf-component-max-width*.9;
+}
+
+.btn-view-in-account {
+  padding: 10px;
+  margin: 10px auto;
+  background: $bf-btn-view-in-account;
+  font-size: 1rem;
+  max-width: 320px;
+  font-weight: bold;
+}
+
+//todo finish block grid - left it unfinished at Bas' request as he finds out how the offers will be populated
+//responsible for the block grid
+.offers {
+  text-align: left;
+  //1 column
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: $bf-component-max-width) {
+    //2 columns
+    flex-direction: row;
+    justify-content: center;
+    .offer {
+      margin-left: $bf-gutter/4;
+      margin-right: $bf-gutter/4;
+      max-width: $bf-component-max-width*.6;
+    }
+  }
+}
+
+//override main styles
+.bf-box .content {
+  padding: 0;
+}
+
+.offer-title,
+.offer-deal,
+.offer-desc,
+.offer-link {
+  display: block;
+  padding: 0 $bf-component-padding;
+  font-size: $f-normal;
+}
+
+
+.offer-title {
+  color: $bf-colour-offer-title;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.offer-deal {
+  margin-top: 0;
+  color: $bf-colour-offer-title;
+  font-weight: bold;
+  font-family: $bf-font-base;
+}
+
+.offer-link {
+  margin: $bf-gutter 0;
+}
+
+.see-all-offers {
+  display: block;
+  text-align: center;
+  margin: $bf-gutter;
+}
+
+
+//adjust booking ref background and green controls bar size
+@media screen and (min-width: $breakpoint-phone) {
+  .booking-ref-box {
+    background-position: left center;
+    padding: $bf-gutter*2 $bf-gutter $bf-gutter*1.5;
+  }
+
+  .booking-ref-controls {
+    padding-bottom: $bf-gutter*2.5;
+  }
+
+  .confirmation-mid-section {
+    margin-top: -$bf-gutter*2;
+  }
+
+  .alt-email-wrap {
+    text-align: center;
+  }
+}
+
+.confirmation-loader {
+  margin-top: 20px;
+}
+
+.white {
+    color: white;
+}

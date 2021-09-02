@@ -1,0 +1,152 @@
+@import "../variables";
+
+$prefix: bf-box;
+
+.#{$prefix} {
+  margin: 0 auto $bf-gutter/2;
+  max-width: $bf-component-max-width;
+  > a {
+    float: right;
+    line-height: 1;
+    margin-bottom: 0.67em;
+  }
+  .content {
+    background: white;
+    border-radius: $bf-component-border-radius;
+    border: 1px solid $bf-component-border-colour;
+    border-top: $bf-component-border-radius solid $bf-colour-primary;
+    padding: $bf-component-padding;
+    @media screen and (min-width: $breakpoint-phone) {
+      padding: $bf-component-padding * 2;
+    }
+
+    .summary-panel & {
+      padding: 10px 0 0 0;
+      background: transparent;
+      border: none;
+      color: #fff;
+
+      h1 {
+        color: #fff;
+      }
+    }
+  }
+  &.orange .content {
+    border-top-color: $bf-colour-content-orange-bright;
+  }
+  &.red .content {
+    border-top-color: $bf-colour-content-red-bright;
+  }
+  &.blue .content {
+    border-top-color: $bf-colour-content-navyblue;
+  }
+  &.plum .content {
+    border-top-color: $bf-colour-content-plum;
+  }
+  &.grass .content {
+    border-top-color: $bf-colour-content-grass;
+  }
+
+  .box-heading {
+    margin: $bf-gutter/4 0 $bf-gutter/2;
+  }
+
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+/**
+Seats and extras views - the boxes showing the current selections for PlusBus, London Travelcard and bikes
+
+This could be generalised if there are more bf-boxes with a icon-text-logo header
+
+[wojtekd 29-08-2016]
+**/
+.bf-box.layout-extras-view {
+  position: relative;
+
+  .content {
+    padding: 23px;
+  }
+
+  .title-and-logo-container,
+  .extras-title {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+  }
+  .title-and-logo-container {
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: $bf-gutter / 2;
+  }
+  .extras-title {
+    margin: 0 10px 0 0;
+    font-size: $f-normal;
+    font-family: $bf-font-base;
+    font-weight: bold;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+
+    span {
+      margin-top: 2px;
+    }
+    iron-icon {
+      transform: scale(1.3);
+      flex: 0 1 32px;
+    }
+  }
+
+  .extras-logo {
+    margin-left: auto;
+    width: 100px;
+    height: auto;
+    flex: 0 1 100px;
+  }
+
+  .extras-info {
+    margin: 0 0 $bf-gutter / 2;
+  }
+
+  hr {
+    margin: 0;
+    border-color: $bf-colour-bundle-1-item-a;
+  }
+
+  .pipe {
+    color: $bf-colour-bundle-1-item-b;
+  }
+
+  .extras-listing {
+    font-size: $f-smaller;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: $bf-gutter / 2;
+    margin-bottom: 0;
+  }
+
+  .extra-item:not(:first-of-type) {
+    border-top: 1px solid $bf-colour-bundle-1-item-b;
+    padding-top: $bf-gutter / 2;
+    margin-top: $bf-gutter / 2;
+  }
+
+  .extra-head {
+    @extend .flex-row;
+    font-weight: bold;
+  }
+
+  .extra-desc {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .extra-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+}

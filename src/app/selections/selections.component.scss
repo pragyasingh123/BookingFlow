@@ -1,0 +1,204 @@
+@import "../../assets/styles/variables";
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/typography";
+@import "../../assets/styles/components/ng_components_shared";
+
+:host {
+  display: block;
+  margin-bottom: 1em;
+}
+
+/*
+* Upgrade to 1st class
+*/
+.upgrade,
+.no-trip {
+  background-color: $bf-colour-upgrade-background;
+  h1 {
+    color: $bf-colour-selection-upgrade;
+    font-size: 1rem;
+    margin-top: 0;
+    font-family: $bf-font-base;
+    font-weight: bold;
+  }
+  p {
+    color: $bf-colour-selection-upgrade;
+  }
+}
+
+.upgrade-row {
+  display: flex;
+  align-items: center;
+
+  .loader {
+    margin-left: auto;
+  }
+}
+
+.upgrade-icon {
+  margin-right: .5rem;
+  fill: $bf-colour-selection-upgrade;
+}
+
+app-button[btn-type="upgrade"] {
+  margin-left: auto;
+}
+
+.other-tickets-wrap {
+  background-color: $bf-colour-other-tickets-background;
+}
+
+.other-tickets {
+  max-width: $bf-component-max-width;
+  margin-left: auto;
+  margin-right: auto;
+  color: $bf-colour-text;
+  font-family: $bf-font-base;
+  margin-bottom: 30px;
+  padding: $bf-value-other-tickets-padding;
+  background-color: $bf-colour-other-tickets-background;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .flex-row {
+    padding: $bf-component-padding;
+    background-color: $bf-colour-selection-other-tickets-background;
+    margin-bottom: $bf-gutter / 2;
+    justify-content: space-between;
+  }
+
+  p {
+    margin: 0;
+    font-size: $f-smaller;
+  }
+}
+
+.other-tickets-dropdown {
+  display: none;
+  margin-top: 20px;
+
+  &.is-open {
+    display: block;
+
+    .flex-row.extra-margin-outward-box {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.other-tickets-heading, .other-ticket-option-heading {
+  color: $bf-colour-text;
+  font-family: $bf-font-base;
+}
+
+.other-tickets-heading {
+  font-size: $f-large;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+}
+
+.other-ticket-option-heading {
+  font-size: $f-normal;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.sleeper-top {
+  background-color: $bf-colour-journey-primary;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sleeper-body {
+  padding: 8px 12px 12px 12px;
+  background-color: $bf-colour-selection-other-tickets-background;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.other-tickets-left-col {
+  @media screen and (max-width: 540px) {
+    padding-right: $bf-component-padding * 2;
+  }
+  padding-right: $bf-component-padding * 3;
+}
+
+.btn-block {
+  margin-bottom: 0;
+
+  .btn {
+    margin: 10px 0 0 0;
+  }
+}
+
+.bf-box {
+  .sleepers-notification,
+  .cheapest-notification {
+    padding: $bf-component-padding;
+    border-radius: $bf-component-border-radius;
+
+    h3 {
+      margin-left: 10px;
+      margin-top: 0px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+  
+    p {
+      margin-left: 10px;
+      margin-bottom: 5px;
+    }
+  }
+
+  .sleepers-notification {
+    color: $bf-colour-route-details-primary;
+    background-color: $bf-colour-journey-label-sleeper;
+
+    h3 {
+      color: $bf-colour-route-details-primary; 
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  .cheapest-notification { 
+    color: $bf-colour-text;
+    background-color: $bf-cheapest-notification-bg; 
+
+    h3, p {
+      color: $bf-colour-text;
+    }
+  }
+}
+
+.tickets-types-container {
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgba(224, 222, 216, 0.6);
+}
+
+.flags {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin: 5px -3px;
+
+	.sleeper-service {
+		color: $bf-colour-journey-primary;
+    font-size: 0.65rem;
+    border-radius: .2rem;
+    padding: 0.1rem 0.3rem;
+    margin: 3px;
+    background-color: $bf-sleeper-colour-dark;
+	}
+}

@@ -1,0 +1,57 @@
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/variables";
+@import "../../assets/styles/typography";
+
+.page-wrap  {
+  overflow: hidden;
+}
+
+.journey-header {
+  background-color: $bf-colour-journey-header-background;
+  color: $bf-colour-journey-header;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid transparentize($bf-colour-green-pale, .9);
+  .journey-header-title {
+    color: $bf-colour-journey-header;
+    margin: 0 0 .5rem 0;
+  }
+}
+
+.journeys-wrap {
+  text-align: center;
+}
+
+//insert separators using css to eliminate extra text in page
+.journey-date:after {content: ", "}
+.station-from:after {content: " to "}
+
+.journey-nav {
+  text-decoration: none;
+  display: inline-block;
+  color: $bf-colour-journey-header-background;
+  padding: .5rem 1rem;
+  [icon] {
+    transform: scale(2);
+    fill: $bf-colour-journey-header-background;
+  }
+}
+
+
+.journey-select-controls {
+  text-align: center;
+  max-width: 786px;
+  border-bottom: 1px solid darken($bf-colour-background, 10%);
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  .select-wrap {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+.search-indicator {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}

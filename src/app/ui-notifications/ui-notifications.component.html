@@ -1,0 +1,71 @@
+<div class="toast-wrapper">
+  <aside aria-label="error" [style.top.px]="[alertTopValue]" class="toast alert alert-danger" *ngFor="let toast of errors" [class.dismiss]="toast.dismissed">
+    <div class="container">
+      <div class="toast-content" data-elid="toast-alert-danger-message" [ngClass]="{'scale-toast-message': isReservationAmendButtonCase(toast.typeString)}" >
+        <iron-icon icon="toc:warning"></iron-icon> {{toast.msg}}
+      </div>
+      <button *ngIf="isReservationAmendButtonCase(toast.typeString)" class="btn amend-search" (click)="removeTrip(toast)">
+        Amend search
+      </button>
+      <button class="toast-dismiss" (click)="dismissToast(toast)">
+        <iron-icon icon="toc:close" [ngClass]="{'bigger-close-button': isReservationAmendButtonCase(toast.typeString)}"></iron-icon>
+      </button>
+    </div>
+  </aside>
+
+  <aside aria-label="alert" [style.top.px]="[alertTopValue]" class="toast alert alert-warning" *ngFor="let toast of alerts" [class.dismiss]="toast.dismissed">
+    <div class="container">
+      <div class="toast-content" [ngClass]="{'scale-toast-message': isReservationAmendButtonCase(toast.typeString)}" data-elid="toast-alert-warning-message">
+        <iron-icon icon="toc:warning"></iron-icon> {{toast.msg}}
+      </div>
+      <button *ngIf="isReservationAmendButtonCase(toast.typeString)" class="btn amend-search" (click)="removeTrip(toast)">
+        Amend search
+      </button>
+      <button class="toast-dismiss" (click)="dismissToast(toast)">
+        <iron-icon icon="toc:close" [ngClass]="{'bigger-close-button': isReservationAmendButtonCase(toast.typeString)}"></iron-icon>
+      </button>
+    </div>
+  </aside>
+
+  <aside aria-label="info" [style.top.px]="[alertTopValue]" class="toast alert alert-info" *ngFor="let toast of infos" [class.dismiss]="toast.dismissed">
+    <div class="container">
+      <div class="toast-content" data-elid="toast-alert-info-message">
+        <iron-icon icon="toc:info"></iron-icon> {{toast.msg}}
+      </div>
+      <button class="toast-dismiss" (click)="dismissToast(toast)">
+        <iron-icon icon="toc:close"></iron-icon>
+      </button>
+    </div>
+  </aside>
+</div>
+<div class="modal-wrapper" *ngIf="currentModal">
+  <div class="modal-foreground" [ngClass]="{'long-info-modal': currentModal.typeString === 'infoLong'}">
+    <button class="close-btn" (click)="closeModal(currentModal)">
+      <iron-icon icon="toc:close_alternate"></iron-icon>
+    </button>
+    <div class="modal-heading-wrap">
+      <h1>{{currentModalTitle}}</h1>
+    </div>
+    <div class="modal-content-wrap" >
+      <p *ngIf="!currentModal.isHtml">{{currentModal.msg}}</p>
+      <div *ngIf="currentModal.isHtml" class="modal-content-html"></div>
+    </div>
+    <app-button class="btn-block" btn-type="modal" (click)="closeModal(currentModal)">Close</app-button>
+  </div>
+  <div class="modal-backdrop" (click)="closeModal(currentModal)"></div>
+</div>
+
+<div class="prompt-wrapper" *ngIf="currentPrompt">
+  <div class="prompt-foreground">
+    <div class="prompt-heading-wrap">
+      <h1>{{currentPrompt.title}}</h1>
+    </div>
+    <div class="prompt-content-wrap">
+      <p>{{currentPrompt.msg}}</p>
+    </div>
+    <div class="prompt-option-wrap">
+      <button *ngFor="let option of currentPrompt.options" [style.width]="(100/currentPrompt.options.length) + '%'" (click)="onPromptOptionClick(option)">{{option.label}}</button>
+    </div>
+  </div>
+  <div class="modal-backdrop"></div>
+</div>

@@ -1,0 +1,80 @@
+﻿<section class="confirmation">
+
+  <div *ngIf="loading">
+    <app-loading-indicator class="confirmation-loader" label="Confirming order.."></app-loading-indicator>
+  </div>
+
+  <div *ngIf="!loading">
+
+    <div *ngIf="!changeOfJourney" class="booking-ref-thank-you sessioncamhidetext">Thank you for booking with us, {{firstName}}</div>
+    <div *ngIf="changeOfJourney" [innerHTML]="amendSuccessMessage" class="booking-ref-thank-you booking-ref-thank-you--amend"></div>
+
+    <div *ngIf="bookingRef" class="booking-ref-box" gtmTrackMessage message="Your booking reference [bookingRef] You will receive a confirmation email shortly">
+      <h1 class="booking-ref-heading">
+        Your booking reference
+        <div class="booking-ref" data-elid="booking-ref">{{bookingRef}}</div>
+      </h1>
+      <div class="booking-ref-text">You will receive a confirmation email shortly</div>
+      <app-button class="btn btn-block btn-view-in-account" (click)="viewInAccount(bookingRef)">View in your account</app-button>
+    </div>
+
+    <div *ngIf="!bookingRef" class="booking-ref-box" gtmTrackMessage message="Can't retrieve booking reference now. You will receive a confirmation email shortly">
+      <h1 class="booking-ref-heading">
+        Sorry we can’t get your booking reference right now
+        <div class="booking-ref">{{bookingRef}}</div>
+      </h1>
+      <div class="booking-ref-text">You will receive a confirmation email shortly, where you can check your booking reference, or you can check the order history in your account to see it.</div>
+      <app-button class="btn btn-block btn-view-in-account" (click)="viewInAccount(bookingRef)">View in your account</app-button>
+    </div>
+
+    <div class="booking-ref-controls">
+
+      <div class="btn-booking-ref-email">
+          <app-button class="btn-booking-ref-email btn-white"
+                      btn-type="btn-white"
+                      [class.is-active]="showAltEmail"
+                      (click)="showAltEmail = showAltEmail? false : true">
+                      <iron-icon class="white" icon="toc:email"></iron-icon>
+          Email
+          </app-button>
+      </div>
+
+      <div class="alt-email-wrap" *ngIf="showAltEmail">
+        <div class="alt-email">
+          <p>Send details to an alternative address:</p>
+
+          <div class="alt-email-input">
+            <input type="email" name="alt-email" class="sessioncamexclude" [(ngModel)]="altEmail">&nbsp;
+            <app-button [show-loading-on]="emailPostInProgress" (click)="sendAltEmail()">Send</app-button>
+          </div>
+
+          <div *ngIf="hasEmailValidationError" class="validation-msg">Please check if you have entered a valid email
+            address
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container confirmation-mid-section" *ngIf="basketService.isBasketReady$ | async">
+
+      <div *ngIf="selectedDeliveryOption">
+        <app-delivery-summary [editable]="false"
+                              [selectedDeliveryOption]="selectedDeliveryOption"
+                              [itsoInfo]="basket.itsoInfo">
+
+        </app-delivery-summary>
+      </div>
+
+      <div *ngFor="let trip of basket.trips">
+        <app-trip-card [editable]="false" [trip]="trip"></app-trip-card>
+      </div>
+
+      <app-nectar-box *ngIf="!changeOfJourney" [nectarPts]="nectarPts" [journeyComplete]="true"></app-nectar-box>
+
+      <app-order-summary [orders]="basket" [review]="true"></app-order-summary>
+
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>BookingFlow.Frontend-TPE</id>
+        <version>1.0.0.0</version>
+        <title>BookingFlow.Frontend-TPE</title>
+		<authors>ORM</authors>
+        <owners>ORM</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Frontend deployment package for BookingFlow</description>
+        <copyright>MIT License</copyright>
+        <language>en-GB</language>
+    </metadata>
+    <files>
+        <file src="dist\**\*.*" />
+    </files>
+</package>

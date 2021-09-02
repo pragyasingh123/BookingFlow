@@ -1,0 +1,43 @@
+@import "../../assets/styles/variables";
+
+:host {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.page-wrap {
+  overflow: hidden;
+}
+
+.voucher-success-msg {
+  font-size: 0.875rem;
+  color: $bf-colour-review-order-primary;
+}
+
+input.not-valid {
+  border-bottom: 2px solid $bf-colour-review-order-secondary;
+}
+
+.voucher-loader {
+  display: inline-block;
+  padding: 8px 14px;
+  background-color: #009688;
+  border: 2px solid #009688;
+  border: 0;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  top: 0.4em;
+  margin: 10px 0;
+}
+
+.btn-basic {
+  margin: 0;
+}
+
+.btn-wrap {
+  text-align: center;
+  margin: 30px auto;
+}

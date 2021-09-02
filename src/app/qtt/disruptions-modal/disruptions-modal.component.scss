@@ -1,0 +1,46 @@
+.modal-foreground {
+  position: fixed;
+  z-index: 1000;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  background-color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: 1em;
+  max-height: calc(100vh - 40px);
+  min-height: 100px;
+
+  @media (min-width: 540px) {
+    right: auto;
+    top: 20px;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+  iron-icon {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9;
+}

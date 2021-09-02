@@ -1,0 +1,5 @@
+﻿<div class="btn-group btn-group-justified" role="group" aria-label="">
+  <div class="btn-group" role="group" *ngFor="let option of options">
+    <button type="button" class="btn btn-tab" [class.active]="value === option.value" (click)="onSelect(option.value)">{{option.label}}</button>
+  </div>
+</div>

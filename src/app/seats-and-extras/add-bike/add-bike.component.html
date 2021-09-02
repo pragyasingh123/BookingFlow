@@ -1,0 +1,26 @@
+﻿<div class="color-strip"></div>
+<div class="container-fluid">
+  <header class="modal-header-container">
+    <iron-icon icon="toc:bike"></iron-icon>
+    <h1 class="dialog-heading">Reserve a bike space</h1>
+  </header>
+  <hr>
+  <p>You can reserve up to two bike spaces when you buy your tickets - if there is room on the train. If you need more, these can be booked later within the My Account area of {{ providerDomain }}. <a href="{{travellingWithBikeUrl}}" target="_blank">Find out more about bringing your bike on our trains.</a></p>
+
+  <div class="well">
+    <div class="row">
+      <div class="col-xs-8 select-label">
+        <p>Number of bike spaces:</p>
+      </div>
+      <div class="col-xs-4 select-wrap">
+        <app-select [options]="bikeSpaceOptions" [value]="bikeSpaceSelection" [disabled]="bikeSpaceOptions.length === 1" (onSelected)="bikeSpaceSelection = $event"></app-select>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <app-button class="btn-block" btn-type="continue" (click)="reserveBike()" [showLoader]="true" data-elid="reserve-button">Reserve bike space</app-button>
+  <app-button class="btn-block" btn-type="link" (click)="backToSeatsAndExtras()">Cancel</app-button>
+
+</div>

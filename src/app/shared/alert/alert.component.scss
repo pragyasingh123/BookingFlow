@@ -1,0 +1,23 @@
+@import "../../../assets/styles/variables";
+
+
+#alert-messages-container {
+  background-color: $bf-alert-component-background-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.alert-message-content {
+  font-size: 14px;
+  color: $bf-alert-component-text-color;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  line-height: normal;
+
+  a {
+    color: $bf-alert-component-text-color;
+  }
+}

@@ -1,0 +1,249 @@
+@import "../../../assets/styles/variables";
+:host {
+  display: block;
+  position: relative;
+  margin: 0 0 1em 0;
+  top: 1px;
+}
+
+.selected-date-heading {
+  font-size: 1rem;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.date-picker-panel {
+  margin: 0 -15px;
+  border: 0;
+  background: white;
+}
+
+.month-info-wrapper {
+  background-color: $bf-colour-button-secondary;
+  color: white;
+  padding: 15px 0;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  align-items: center;
+  box-shadow: 0 5px 10px 2px rgba(204, 204, 204, 1);
+  margin-bottom: 15px;
+
+  >* {
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
+}
+
+.month-btn {
+  flex-basis: 30px;
+  border-radius: 20px;
+  border: 0;
+  padding: 0;
+  margin: 5px;
+  background: transparent;
+  display: block !important;
+  height: 30px;
+  width: 30px;
+  -webkit-transition: all 100ms ease-out;
+  -moz-transition: all 100ms ease-out;
+  -ms-transition: all 100ms ease-out;
+  -o-transition: all 100ms ease-out;
+  transition: all 100ms ease-out;
+  outline: none;
+
+  &.tapped {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &.hide {
+    opacity: 0;
+  }
+  iron-icon {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+.prev-month iron-icon {
+  left: 1px;
+  top: 2px;
+}
+
+.next-month iron-icon {
+  left: 2px;
+  top: 2px;
+}
+
+.strapline {
+  flex-basis: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.month-label {
+  text-align: center;
+  flex-basis: calc(100% - 80px);
+  font-family: $bf-font-headings;
+  font-size: 1.33rem;
+  margin: 10px 0;
+}
+
+.week-heading {
+  font-weight: bold;
+  flex-basis: 100%;
+  margin-top: 5px;
+  .day-heading {
+    float: left;
+    width: 14.27%;
+    text-align: center;
+  }
+}
+
+.week {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day {
+  margin: 1px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+  border-radius: 6px;
+  overflow: hidden;
+  flex: calc(100% / 7) 0 1;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: default;
+  padding: 0 0 4px;
+  -webkit-transition: all .5s ease-in-out;
+  -moz-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+
+  >* {
+    flex-grow: 0;
+    flex-shrink: 1;
+  }
+  
+  &.outsideCurrentMonth {
+    color: #e8e8e8;
+  }
+
+  &.beforeMinDate,
+  &.afterMinDate {
+    color: #e8e8e8;
+    pointer-events: none;
+  }
+
+  &.today {
+    border-color: $bf-colour-upgrade-background;
+  }
+
+  &.selected {
+    border-color: $bf-colour-primary;
+    background-color: $cff-selected-day;
+
+    * {
+      color: $cff-selected-day-color !important;
+    }
+  }
+
+  .price {
+    color: $bf-colour-primary;
+  }
+
+  .label-wrap {
+    padding: 0;
+    display: flex;
+    min-width: 28px;
+    min-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    max-width: 2.15em;
+    margin-left: auto;
+    margin-right: auto;
+    color: $bf-colour-primary;
+    font-size: 1.2em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &:before {
+    width: 100%;
+    flex-basis: 18px;
+    line-height: 18px;
+    text-align: center;
+    content: '';
+    font-size: 0.75em;
+    color: white;
+  }
+
+  &.is-cheapest-standard,
+  &.is-cheapest-first {
+    cursor: pointer;
+  }
+}
+
+.is-cheapest-standard,
+.is-cheapest-first {
+  &:before {
+    content: 'Cheapest';
+  }
+}
+
+.is-promo {
+  &:before {
+    content: 'Promo';
+  }
+}
+
+.is-cheapest-standard {
+  &:before {
+    background-color: $bf-colour-journey-label-cheapest;
+  }
+  background-color: $bf-colour-checkbox-tick-checked-background;
+}
+
+.is-promo,
+.is-cheapest-first {
+  &:before {
+    background-color: $bf-colour-link-comm;
+  }
+  background-color: lighten($bf-colour-link-comm, 30%);
+}
+
+.is-disabled,
+.outsideCurrentMonth {
+  .label-wrap {
+    color: $bf-colour-green-pale;
+  }
+}
+
+.extended-booking-horizon__paragraph {
+  text-align: center;
+  padding-top: 25px;
+}
+
+.extended-booking-horizon__link {
+  color: #009688 !important;
+}
+
+.close-icon {
+  position: absolute;
+  top: 0.55em;
+  right: 0.2em;
+  padding: 5px;
+  background-color: transparent;
+  color: $bf-colour-date-picker-close-icon;
+  border: none;
+}
+
+.no-fares {
+  margin-top: 20px;
+}

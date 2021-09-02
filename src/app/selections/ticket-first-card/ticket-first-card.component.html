@@ -1,0 +1,91 @@
+<div class="bf-box">
+  <section class="content upgrade">
+    <h1 class="upgrade-heading"><iron-icon class="upgrade-icon" icon="toc:first_class"></iron-icon>Upgrade to First Class</h1>
+    <p>Upgrade to enjoy spacious reclining seats, tables with power sockets and complimentary refreshments.</p>
+
+    <!-- single and open return upgrades -->
+    <div *ngIf="!singles">
+      <div *ngFor="let ticket of tickets">
+        <div class="upgrade-row">
+          <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+            <iron-icon icon="toc:info" ></iron-icon>
+          </a>
+          <div class="upgrade-label">{{ ticket.faregroupname }}</div>
+          <app-loading-indicator class="loader" inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+          <app-button btn-type="upgrade" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">
+            £{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}
+          </app-button>
+        </div>
+        <hr>
+      </div>
+    </div>
+
+    <div *ngIf="singles">
+      <h2 class="first-class-ticket-type" *ngIf="outboundSingles.length > 0 || returnSingles.length > 0">Single tickets</h2>
+      <!-- single outbound upgrades -->
+      <section id="single-outbound-upgrade" *ngIf="outboundSingles.length > 0">
+        <h3 class="other-ticket-option-heading">Upgrade outbound</h3>
+        <div  *ngFor="let ticket of outboundSingles">
+          <div class="upgrade-row">
+            <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+              <iron-icon icon="toc:info" ></iron-icon>
+            </a>
+            <div class="upgrade-label">{{ ticket.faregroupname }}</div>
+            <app-loading-indicator class="loader" inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+            <app-button btn-type="upgrade" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">
+              £{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}
+            </app-button>
+          </div>
+          <hr>
+        </div>
+      </section>
+
+      <!-- single return upgrades -->
+      <section id="single-return-upgrade" *ngIf="returnSingles.length > 0">
+        <h3 class="other-ticket-option-heading">Upgrade return</h3>
+        <div *ngFor="let ticket of returnSingles">
+          <div class="upgrade-row">
+            <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+              <iron-icon icon="toc:info" ></iron-icon>
+            </a>
+            <div class="upgrade-label">{{ ticket.faregroupname }}</div>
+            <app-loading-indicator class="loader" inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+            <app-button btn-type="upgrade" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">
+              £{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}
+            </app-button>
+          </div>
+          <hr>
+        </div>
+      </section>
+
+      <h2 class="first-class-ticket-type" *ngIf="returnTickets.length > 0">Return tickets</h2>
+      <!-- single return upgrades -->
+      <section id="single-return-upgrade" *ngIf="returnTickets.length > 0">
+        <div *ngFor="let ticket of returnTickets">
+          <div class="upgrade-row">
+            <a [routerLink]="['./route-details', getRouteParams(ticket)]" class="status-icon">
+              <iron-icon icon="toc:info" ></iron-icon>
+            </a>
+            <div class="upgrade-label">{{ ticket.faregroupname }}</div>
+            <app-loading-indicator class="loader" inline *ngIf="ticket.showLoadingState"></app-loading-indicator>
+            <app-button btn-type="upgrade" *ngIf="!ticket.showLoadingState" (click)="selectOtherTicket(ticket)">
+              £{{ ticket.cost.totalfare / 100 | number:'1.2-2' }}
+            </app-button>
+          </div>
+          <hr>
+        </div>
+      </section>
+    </div>
+
+    <div class="assisted-travel-wrap">
+      <div class="assisted-travel-wrap--left-col">
+        <iron-icon icon="toc:accessibility" class="assisted-travel-icon"></iron-icon>
+      </div>
+
+      <div class="assisted-travel-wrap--right-col">
+        <p class="assisted-travel">It is not possible to access First Class in a wheelchair on TransPennine Express or some other operators’ trains. Please check with our <a href="{{ assistedTravelLink }}" target="_blank" rel="noopener noreferrer">Assisted Travel</a> team before booking.</p>
+      </div>
+    </div>
+
+  </section>
+</div>

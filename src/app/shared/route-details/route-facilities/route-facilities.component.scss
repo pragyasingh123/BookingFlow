@@ -1,0 +1,54 @@
+@import "../../../../assets/styles/components/ng_components_shared";
+
+:host {
+  background-color: #F8F8F8;
+}
+
+.facilities-heading {
+  font-weight: normal;
+  text-align: center;
+  margin: 18px 0px 30px 0px;
+}
+
+.flex-grid {
+  padding-left: 0;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  li {
+    display: block;
+    float: none;
+    margin-bottom: 30px;
+    padding-left: 0px;
+    padding-right: 0px; 
+
+    iron-icon {
+      display: inline-block;
+      width: 100%;
+      transform: scale(2);
+      margin-bottom: .5rem;
+    }
+  }
+}
+
+//sleeper overrides
+:host(.layout-sleeper) {
+  .facilities-heading {
+    color: $bf-colour-route-details-primary;
+  }
+}
+
+.route-facilities-list {
+  margin-bottom: 0px;
+  li:last-child, li:nth-last-child(2){
+    margin-bottom: 10px;
+  }
+}
+
+.distance-between-sections {
+    margin-top: 7px;
+    margin-bottom: 16px;
+}

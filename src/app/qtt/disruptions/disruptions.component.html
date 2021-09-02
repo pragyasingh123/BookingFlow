@@ -1,0 +1,16 @@
+<app-loading-indicator inline *ngIf="!showDisruptionModal" class="seat-loader"></app-loading-indicator>
+<div class="container-fluid" *ngIf="showDisruptionModal">
+  <header class="modal-header-container">
+    <iron-icon icon="toc:warning_major"></iron-icon>
+    <h1 class="dialog-heading">Important to know</h1>
+  </header>
+  <hr>
+  <div>
+    <p [innerHTML]="disruptionMessage"></p>
+  </div>
+  <hr>
+
+  <div class="extra-controls">
+    <app-button (click)="goToSearch()" [showLoader]="true" btn-fxm="{'type': 'button', text: 'Add', 'icon': '', section: 'plusbus'}">Continue to tickets</app-button>
+  </div>
+</div>

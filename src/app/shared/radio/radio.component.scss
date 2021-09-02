@@ -1,0 +1,8 @@
+:host {
+  margin-bottom: 5px;
+  display: block;
+  &.l-inline app-radio-item{
+    display: inline-block;
+    margin-right: .5rem;
+  }
+}

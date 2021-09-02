@@ -1,0 +1,39 @@
+﻿<div class="input-area" (keyup)="openPanel($event)" (blur)="closePanel()">
+  <div data-elid="calendar-open-on-click" tabindex="0" type="text" class="form-control" (click)="openPanel($event)" (keydown)="openPanel($event)" [class.open]="open$ | async">
+    <iron-icon data-elid="calendar-display-date" icon="toc:date_picker"></iron-icon> {{(selected$ | async).format(labelFormat)}}
+  </div>
+  <button data-elid="close-calendar" class="close-icon" (click)="closePanel()" (blur)="closePanel()" *ngIf="open$ | async"><iron-icon icon="toc:close"></iron-icon></button>
+</div>
+<div class="date-picker-panel" *ngIf="open$ | async">
+  <button data-elid="previous-month" tabindex="-1" class="month-btn prev-month" (click)="viewPreviousMonth()" [hidden]="viewPrevMonthButton()"><iron-icon icon="toc:arrow_left"></iron-icon></button>
+  <div data-elid="month-full-name" class="month-label">
+    {{(viewMonth$ | async).format("MMMM") }}
+  </div>
+  <button data-elid="next-month" tabindex="-1" class="month-btn next-month" (click)="viewNextMonth()" [hidden]="viewNextMonthButton()"><iron-icon icon="toc:arrow_right"></iron-icon></button>
+
+  <div data-elid="month-view" class="days-display-wrapper">
+    <div class="week-heading clearfix">
+      <div class="day-heading" *ngFor="let day of dayHeadings">{{day}}</div>
+    </div>
+    <div class="week clearfix" *ngFor="let week of (visibleMonthData$ | async)">
+      <div data-elid="single-day" class="day" *ngFor="let day of week"
+           [class.outsideCurrentMonth]="!day.isCurrentMonth"
+           [class.beforeMinDate]="day.isBeforeMinDate"
+           [class.afterMinDate]="day.isAfterMinDate"
+           [class.today]="day.isToday"
+           [class.selected]="day.isSelected"
+           (click)="dayClick(day.moment)"
+      >
+        <span data-elid="single-day-no" class="label-wrap">
+          {{day.moment.format('D')}}
+        </span>
+      </div>
+    </div>
+
+  </div>
+  <p data-elid="calendar-bottom-message" class="extended-booking-horizon__paragraph">Buy Advance Single tickets up to three months before you travel on <a  data-elid="calendar-bottom-link" class="extended-booking-horizon__link" href="/plan-journey/tickets-railcards-and-season-tickets/booking-tickets-in-advance">selected routes</a>.</p>
+
+</div>
+
+
+

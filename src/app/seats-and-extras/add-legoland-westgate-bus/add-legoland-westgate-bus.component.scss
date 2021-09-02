@@ -1,0 +1,70 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.color-strip {
+  height: 4px;
+  background-color: rgba(245, 55, 73, 0.80);
+}
+h1 {
+  font-size: 1.5em;
+}
+
+.legolandbus-option {
+  .flex-row {
+    justify-content: space-between;
+  }
+  h2 {
+    font-size: 1rem;
+    margin-bottom: $bf-gutter / 4;
+    margin-top: $bf-gutter / 2;
+
+  }
+  iron-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+p {
+  margin-bottom: 0.2em;
+}
+
+.total-row {
+  font-size: 1.4em;
+  margin-bottom: 1em;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1em;
+  margin-left: -13px;
+}
+
+.modal-header-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-right: 25px;
+  padding-top: 20px;
+  padding-bottom: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  iron-icon {
+    flex-basis: 24px;
+    margin-top: 2px;
+    margin-right: 4px;
+    min-width: 24px;
+  }
+}
+
+.container-fluid {
+  padding: 0 23px 23px;
+}

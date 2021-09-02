@@ -1,0 +1,163 @@
+@import "../../../assets/styles/variables";
+
+.modal-sleeper-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.3;
+  z-index: 99990;
+  top: 0px;
+}
+
+// modal sleeper
+.modal-sleeper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 96%;
+  transform: translate(-50%, -50%);
+  max-height: 90vh;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  background: $bf-sleeper-modal-bg;
+
+  @media screen and (min-width: 600px) {
+    width: 550px;
+  }
+}
+
+// sleeper modal header
+.modal-sleeper-header {
+  display: block;
+  width: 100%;
+  height: 82px;
+  border-bottom: 5px solid $bf-sleeper-header-border;
+  padding: 0px;
+  margin: 0px;
+  background: linear-gradient(263deg, $bf-sleeper-header-gradient-start, $bf-sleeper-header-gradient-end);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  position: relative;
+}
+
+.night-riviera-logo {
+  margin: 0 auto;
+  display: block;
+  width: 144px;
+  height: auto;
+  padding-top: 5px;
+}
+
+.close-sleeper-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: $bf-sleeper-header-close-btn;
+  border-radius: 50%;
+  background: $bf-sleeper-header-close-btn-bg;
+  font-size: 15px;
+  display: inline-block;
+  line-height: 16px;
+  vertical-align: middle;
+  text-align: center;
+  width: 16px;
+  height: 16px;
+  font-style: normal;
+  font-weight: 400;
+
+  .modal-close-icon.close-x.x-scope {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// sleeper modal content
+.modal-sleeper-body-container-row {
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+
+  &.space-between {
+    justify-content: space-between;
+  }
+}
+
+.modal-sleeper-body-container-col {
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.modal-sleeper-body-full-col {
+  width: 100%;
+}
+
+.sleeper-content-modal {
+  margin: 0 0 0 18px;
+  padding: 8px 18px 10px 0;
+}
+
+// sleeper modal footer
+.modal-sleeper-footer-container {
+  border-top: solid 2px $bf-sleeper-footer-border;
+  margin: 0px 20px 10px;
+  padding-top: 10px;
+
+  .link {
+    width: 100%;
+    display: block;
+    text-align: center;
+    
+    a {
+      line-height: 28px;
+      font-size: 14px;
+      vertical-align: middle;
+      text-decoration: underline;
+
+      @media screen and (min-width: 600px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .button {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+.modal-sleeper-body {
+  overflow-x: auto; 
+  max-height: calc(90vh - 213px);
+}
+
+.modal-sleeper-footer {
+  display: inline-block;
+  width: 100%;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.icon-sleeper {
+  display: block;
+  width: 30px;
+  height: 30px;
+  color: $bf-sleeper-icons-color;
+}
+
+.modal-sleeper-body-item-icon {
+  padding-right: 13px;
+  width: 43px;
+  order: 1;
+}
+
+.modal-sleeper-body-item-col {
+  order: 2;
+  width: 100%;
+}

@@ -1,0 +1,42 @@
+﻿<div class="bf-box red layout-extras-view">
+  <section class="content">
+    <div class="title-and-logo-container">
+      <h3 class="extras-title">
+        {{header}}
+      </h3>
+
+      <img *ngIf="legolandOption" src="assets/img/logos/legolandbus.png" alt="Legoland Bus Logo" class="legoland-bus-logo extras-logo">
+    </div>
+
+    <p class="extras-info">{{bodyText}}</p>
+    <ul class="extras-listing has-items-added" *ngIf="legolandWestgateBus != undefined">
+      <li class="extra-item">
+        <div class="extra-head">
+          <div class="extra-head-text">{{legolandWestgateBus.name}}</div>
+          <div class="extra-controls">
+            <app-button btn-type="link"  [isLoading]="isSendingRequest" (click)="remove(legolandWestgateBus)">Remove</app-button>
+          </div>
+        </div>
+        <div class="extra-desc">
+          <div>{{pluralAdults(legolandWestgateBus?.adults)}}<span *ngIf="legolandWestgateBus?.children > 0">, {{pluralChildren(legolandWestgateBus.children)}}</span></div>
+          <div class="extra-price">{{legolandWestgateBus?.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="extras-listing has-no-items-added" *ngIf="legolandWestgateBus == undefined">
+      <li class="extra-item">
+        <div class="extra-head">
+          <div class="extra-head-text bottom-text">
+            {{bottomText}}
+          </div>
+          <p>{{legolandWestgateBus}}</p>
+          <div class="extra-controls">
+            <app-button *ngIf="legolandOption" [routerLink]="['./add/legolandbus']" btn-fxm="{'type': 'button', text: 'Add', 'icon': '', section: 'legolandbus'}">Add</app-button>
+            <app-button *ngIf="!legolandOption" [routerLink]="['./add/oxfordwestgate']" btn-fxm="{'type': 'button', text: 'Add', 'icon': '', section: 'oxfordwestgate'}">Add</app-button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>

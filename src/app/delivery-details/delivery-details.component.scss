@@ -1,0 +1,298 @@
+@import "../../assets/styles/components/ng_components_shared";
+@import "../shared/station-picker/station-picker.component.scss";
+$icon-size: 44px;
+
+.delivery-intro {
+  text-align: center;
+
+  .delivery-intro--message {
+    display: $delivery-intro--message;
+  }
+}
+
+//todo pull design in line with alert-warning on seats-and-extras page
+.delivery-warning {
+  background-color: $bf-colour-delivery-details-secondary;
+  color: $bf-colour-delivery-details-tertiary;
+  font-weight: bold;
+  padding: .5rem;
+}
+
+.delivery-details {
+  text-align: center;
+
+  @media (min-width: 600px) {
+     min-width: 300px;
+  }
+}
+
+.collection-option {
+  background-color: $bf-colour-delivery-details-primary;
+  margin-bottom: .5rem;
+  text-align: left;
+  &.is-selected {
+    .collection-option-heading {
+      color: $bf-colour-primary;
+      background-color: $bf-colour-green-pale;
+      border: 1px $bf-colour-green-pale solid;
+      font-weight: 700;
+      .radio-inner {
+        display: block;
+        fill: $bf-colour-collection-option-fill;
+      }
+    }
+    .collection-option-body {
+      padding-bottom: 1rem;
+      padding-top: 1rem;
+      overflow: visible;
+      height: auto;
+    }
+  }
+  &.has-nectar {
+    h2 .collection-option-nectar {
+      display: inline-block;
+      margin-left: 8px;
+      width: 22px;
+      img { max-width: 100%; }
+    }
+
+  }
+  .nectar-points { color: $bf-colour-delivery-details-quaternary; }
+}
+
+.btn-address-lookup {
+  display: block;
+
+  .btn-wrap {
+    text-align: left;
+  }
+}
+
+.delivery-wrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.collection-option-heading {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: $bf-colour-headings;
+  cursor: pointer;
+}
+
+.collection-option-radio {
+  flex-basis: 2rem;
+  svg {
+    margin-bottom: -.3rem;
+  }
+  .radio-inner {
+    display: none;
+  }
+}
+
+.collection-option-title {
+  flex-grow: 1;
+}
+
+.collection-option-price {
+  flex-basis: 3rem;
+  text-align: right;
+}
+
+.collection-option-body, .collection-option-heading:not(.selected) {
+  border: 1px $bf-colour-bundle-1-item-b solid;
+}
+
+.collection-option-body {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-top: 0;
+  height: 0;
+  //prevents content showing when body is collapsed
+  overflow: hidden;
+}
+
+.collection-warning {
+  color: $bf-colour-delivery-details-quinary;
+  font-weight: bold;
+  padding-bottom: 1rem;
+}
+
+.collection-info {
+  border-top: 1px solid $bf-colour-bundle-1-item-c;
+  display: flex;
+  padding-top: 1rem;
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.collection-info-icon {
+  flex-shrink: 0;
+  flex-basis: 2rem;
+  align-self: center;
+  margin-left: -.3rem;
+}
+
+//TODO? refactor Summary Panel as separate component
+.summary-panel {
+  background-color: $bf-colour-delivery-details-tertiary;
+  min-height: 35rem;
+  p {
+    color: $bf-colour-delivery-details-primary;
+    margin-top: 5rem;
+    text-align: center;
+  }
+}
+.continue-box {
+  padding: 1em 0;
+  text-align: center;
+}
+
+.delivery-selection {
+  &.is-selected {
+    -webkit-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  &.collection-option.is-selected {
+    .collection-option-heading::after {
+      content: '';
+      display: none;
+    }
+  }
+
+  .collection-option-heading,
+  .collection-option-body {
+    border: none;
+  }
+
+  .collection-option-heading {
+    position: relative;
+    font-weight: 700;
+    color: $bf-colour-primary;
+  }
+
+  .collection-option-description {
+    display: none;
+  }
+
+  .mobile-app-info {
+    margin-bottom: 0px;
+
+    span {
+      display: block;
+    }
+  }
+
+  .mobile-app {
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  .qr-code {
+    width: $icon-size;
+    height: $icon-size;
+  }
+}
+
+.e-ticket {
+  border-radius: 5px;
+  border-top: 8px solid $bf-eticket-border-top;
+  .collection-option-body {
+    overflow: visible;
+    height: auto;
+    padding: 0.5rem 1rem 1rem;
+  }
+  &.collection-option {
+    .collection-option-heading:after {
+      content: '';
+      display: block;
+      left: 1rem;
+      right: 1.5rem;
+      height: 1px;
+      background-color: $bf-colour-bundle-1-item-b;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+.other-delivery-options {
+  margin: 40px auto;
+  font-weight: 400;
+  font-size: 1.2rem;
+  text-align: center;
+  color: $bf-colour-primary;
+}
+
+.bold-bright-green-text {
+  color: $bf-eticket-bright-green;
+  font-weight: 700;
+}
+
+.more-info-link {
+  @extend .bold-bright-green-text;
+  cursor: pointer;
+}
+
+.section-footer {
+  padding-top: 0.5rem;
+  &:before {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: $bf-colour-bundle-1-item-b;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  .more-info-box{
+    margin-left: 8px;
+  }
+}
+
+.warring-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+app-loading-indicator.itso-loading-bar {
+  position: relative;
+}
+
+.itso-dropdown-list {
+  color: $bf-colour-bundle-1-item-a;
+}
+.smartcard-label {
+  margin-top: 21px;
+}
+
+.link-to-add-smartcards {
+  @extend .bold-bright-green-text;
+  display: inline;
+}
+app-loading-indicator.delivery-loading {
+  position: static;
+}
+
+.content-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.content-text {
+  margin-left: 10px;
+}

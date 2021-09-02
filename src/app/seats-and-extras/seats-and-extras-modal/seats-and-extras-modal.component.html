@@ -1,0 +1,7 @@
+﻿<div class="modal-foreground extra-scrollbar" [style.borderTopColor]="borderColor">
+  <button class="close-btn" (click)="backToSeatsAndExtras()">
+    <iron-icon icon="toc:close_alternate"></iron-icon>
+  </button>
+  <router-outlet></router-outlet>
+</div>
+<div class="backdrop" (click)="backToSeatsAndExtras()"></div>

@@ -1,0 +1,9 @@
+<span *ngIf="facilities?.length >= 1">
+  <hr class="distance-between-sections">
+  <h3 class="facilities-heading">{{ header || "On board facilities" }}</h3>
+  <ul class="flex-grid text-center route-facilities-list">
+    <li *ngFor="let facility of facilities" class="col-xs-6">
+      <iron-icon icon="{{ facility.icon }}"></iron-icon>{{ facility.label }}
+    </li>
+  </ul>
+</span>

@@ -1,0 +1,85 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+:host {
+  margin-bottom: 5px;
+  display: block;
+}
+
+
+//custom styles for radio component variants
+:host(.l-small-extra) .extra {
+  font-size: .875rem;
+}
+
+:host(.l-tablet-inline-extra) {
+
+  @media (min-width: $breakpoint-phone) {
+    .radio-item-label::after {
+      content: ": "
+    }
+
+    .extra, .radio-item-label {
+      display: inline-block;
+    }
+  }
+
+}
+
+.price {
+  font-weight: normal;
+  margin-left: auto;
+}
+
+
+//standard radio styles
+.radio-item-wrap {
+  padding: 15px 15px 15px 2.8em;
+  display: flex;
+  align-items: center;
+  background-color: $bf-colour-bundle-1-item-b;
+  color: $bf-colour-radio-item;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+
+  .radio-item-disc {
+    width: 19px;
+    height: 19px;
+    background-color: $bf-colour-radio-item;
+    display: inline-block;
+    margin-right: 1em;
+    float: left;
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    left: 15px;
+    top: 50%;
+    margin-top: -11px;
+
+    .radio-item-inner {
+      background-color: $bf-colour-radio-item-inner;
+      position: absolute;
+      left: 2px;
+      right: 2px;
+      top: 2px;
+      bottom: 2px;
+      border: 2px solid $bf-colour-radio-item-inner;
+      border-radius: 50%;
+    }
+  }
+
+  .radio-item-label {
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+
+  &.selected {
+    background-color: $bf-colour-green-pale;
+
+    .radio-item-disc .radio-item-inner {
+      background-color: $bf-colour-radio-item-inner-selected;
+    }
+
+  }
+
+}

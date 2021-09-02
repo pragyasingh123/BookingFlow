@@ -1,0 +1,16 @@
+﻿<div class="form-control non-focus" *ngIf="!isFocussed" (click)="onFocusClick(input)" (focus)="onComponentFocus()" [attr.tabindex]="amend ? -1 : 0">
+  <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg"><app-loading-indicator inline></app-loading-indicator> Loading stations...</span>
+  <span data-elid="full-station-name" *ngIf="!(locationService.isStationsLoading$ | async)" class="location-label">{{location?.label || defaultLabel}}</span>
+</div>
+
+<div (click)="collapseDropdown()" class="dropdown-underlay" *ngIf="isFocussed"></div>
+
+<div [class.hide]="!isFocussed" class="input-wrap">
+  <input data-elid="qtt-station-name-input" type="text" class="form-control" #inputElement [(ngModel)]="userInput" (keyup)="onKeyup($event)" (keydown.Tab)="collapseDropdown()" placeholder="Search">
+  <div data-elid="qtt-station-name-results" class="search-results" #searchResultPanel>
+    <div class="search-label">{{searchLabel}}</div>
+    <div data-elid="search-item" class="search-result-item" [class.highlighted]="i === highlightIndex" *ngFor="let location of (locationSearchResults$ | async); let i = index" (click)="selectLocation(location)" (mousedown)="onMouseDown()">{{location.label}}</div>
+
+    <span *ngIf="locationService.isStationsLoading$ | async" class="loading-msg"><app-loading-indicator inline></app-loading-indicator> Loading stations...</span>
+  </div>
+</div>

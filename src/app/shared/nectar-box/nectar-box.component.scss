@@ -1,0 +1,102 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+p {
+  font-size: $f-smaller;
+}
+
+.nectar-input {
+  padding: .5rem 1rem;
+}
+
+.nectar-logo {
+  margin-top: -14px;
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: .5rem;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { //IE11 case
+  .nectar-logo {
+    width: auto;
+    height: auto;
+  }
+}
+
+.nectar-card-input {
+  display: block;
+  overflow: hidden;
+}
+
+.nectar-input-wrap {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-right: 5px;
+}
+
+.nectar-leading-numbers {
+  position: absolute;
+  left: 1rem;
+  color: $bf-colour-bundle-1-item-a;
+  transform: translate(0, -70%);
+  top: 50%;
+  pointer-events: none;
+}
+
+.nectar-content p {
+  margin: 20px 0 10px;
+}
+
+.nectar-loader {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #6e298c;
+    border: 0;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 4px;
+    float: left;
+    height: 36px;
+    top: 0;
+    line-height: 36px;
+    width: 55px;
+}
+
+.validation-success {
+   margin: 10px 0;
+   color: $bf-colour-nectar-box-validation-success;
+}
+
+.validation-msg {
+  margin: 0;
+}
+
+@include mq(desktop) {
+  .nectar-card-dialog .btn-login {
+    margin-left: auto;
+  }
+}
+.content.nectar-card-dialog {
+  H3 {
+    height: 28px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .nectar-input {
+    width: 100%;
+  }
+  .add-nectar-card {
+    width: 20%;
+    margin: .4rem 0 0 2%;
+    display: inline-block;
+    float: left;
+  }
+}
+
+.add-nectar-card {
+  margin-top: 4px;
+}

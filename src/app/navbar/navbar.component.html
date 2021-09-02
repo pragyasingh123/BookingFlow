@@ -1,0 +1,34 @@
+﻿<div class="bf-logo-cart-bar">
+  <div class="container">
+    <div class="row">
+      <div class="bf-logo">
+        <a href="/" (click)="clearNreFlag()">
+          <div class="logotype"></div>
+        </a>
+      </div>
+
+      <button class="btn-cart" (click)="basketDropdownOpen = !basketDropdownOpen" *ngIf="showBasket" data-elid="global-bsket-button">
+        <div *ngIf="!(basketService.isBasketRefreshing$ | async)">
+          <iron-icon class="bf-basket-icon" icon="toc:basket"></iron-icon>
+          <span class="bf-price">{{basket?.totalCost | currency:'GBP':true:'1.2-2'}}</span>
+          <iron-icon class="bf-cart-icon" *ngIf="!basketDropdownOpen" icon="toc:arrow_down"></iron-icon>
+          <iron-icon class="bf-cart-icon" *ngIf="basketDropdownOpen" icon="toc:arrow_up"></iron-icon>
+        </div>
+
+        <app-loading-indicator inline *ngIf="basketService.isBasketRefreshing$ | async"></app-loading-indicator>
+      </button>
+
+      <div class="modal-wrapper basket-modal" [class.is-basket-show]="basketDropdownOpen">
+        <div class="modal-foreground">
+          <app-basket [basket]="basket" (onEdit)="editExtras($event)"></app-basket>
+          
+          <app-button *ngIf="!basket?.isEmpty && !showDeliveryBtn && showOnReviewOrder" btn-type="continue" (click)="continueToNextStep()">{{ continueBtnText }}</app-button>
+          <app-button *ngIf="!basket?.isEmpty && showDeliveryBtn" btn-type="continue" (click)="gotoDelivery()">Return to delivery details</app-button>
+          <app-button btn-type="modal" class="btn-block" (click)="basketDropdownOpen = !basketDropdownOpen">Close</app-button>
+        </div>
+
+        <div class="modal-backdrop" (click)="basketDropdownOpen = !basketDropdownOpen"></div>
+      </div>
+    </div>
+  </div>
+</div>

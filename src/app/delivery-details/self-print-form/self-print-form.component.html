@@ -1,0 +1,52 @@
+<div class="selfprint">
+  <p>
+    <iron-icon icon="toc:info"></iron-icon>
+    <a href="#" (click)="showDeliveryInformation($event, option)">Why do I need identification?</a>
+  </p>
+
+  <label class="is-required">Is the ID provided for the lead passenger? </label>
+  <app-radio class="l-inline" [options]="leadTravellerOptions"
+            (onSelect)="toggleTraveller($event)"></app-radio>
+
+  <span *ngIf="isLeadTraveller">
+      <label class="is-required">Select the type of ID to use</label>
+      <app-select class="l-inline" [options]="personalIdOptions"
+        (onSelected)="selectedID($event)"></app-select>
+
+      <label for="last4digits" class="is-required">Last 4 digits on ID</label>
+      <input type="text" [formControl]="printForm.controls['last4digits']"
+            name="last4digits" id="last4digits" minlength="4" maxlength="4" required pattern="[0-9]{4}" />
+      
+      <div *ngIf="printForm.controls['last4digits'] && printForm.controls['last4digits'].hasError('required') && printForm.controls['last4digits'].touched" class="alert alert-danger">
+        Last 4 digits on ID may not be empty.
+      </div>
+
+      <div *ngIf="printForm.controls['last4digits'] && !printForm.controls['last4digits'].hasError('required') && printForm.controls['last4digits'].invalid && printForm.controls['last4digits'].touched" class="alert alert-danger">
+        Please enter 4 digits only.
+      </div>
+
+      <label for="fullNameOnId" class="is-required">Full name on ID</label>
+      <input type="text" [formControl]="printForm.controls['fullNameOnId']" name="fullNameOnId"
+            id="fullNameOnId" maxlength="20" required pattern="([a-zA-Z]+)([a-zA-Z ,.'-]+)" />
+      
+      <div *ngIf="printForm.controls['fullNameOnId'] && printForm.controls['fullNameOnId'].hasError('required') && printForm.controls['fullNameOnId'].touched" class="alert alert-danger">
+        Full name on ID may not be empty.
+      </div>
+
+      <div *ngIf="printForm.controls['fullNameOnId'] && !printForm.controls['fullNameOnId'].hasError('required') && printForm.controls['fullNameOnId']?.invalid && printForm.controls['fullNameOnId']?.touched" class="alert alert-danger">
+        Full name from ID is invalid. Only letters with space or - are allowed.
+      </div>
+    </span>
+
+  <span *ngIf="!isLeadTraveller">
+      <label for="passengerName" class="is-required">Name of passenger</label>
+      <input type="text" [formControl]="printForm.controls['passengerName']" required name="passengerName"
+            id="passengerName"/>
+      
+      <div *ngIf="printForm.controls['passengerName'].hasError('required') && printForm.controls['passengerName'].touched" 
+            class="alert alert-danger">
+            Passenger name may not be empty.
+      </div>
+    </span>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="bf-progress-bar" (window:resize)="onResize($event)">
+
+  <div #content [hidden]="processed"><ng-content></ng-content></div>
+
+  <ul class="bar-large" id="bar_large">
+    <li *ngFor="let item of steps" class="step step-{{ item.index }}" [class.passed]="item.number < current" [(class.current)]="item.number == current">
+      {{ item.number }} {{ item.label }}
+      <iron-icon *ngIf="item.number < current" class="icon-rcard" icon="toc:default_selection"></iron-icon>
+    </li>
+  </ul>
+
+  <div #bar class="bar-small" id="bar_small" [style.width]="barWidth + 'px'">
+    <ul >
+        <li *ngFor="let item of steps" 
+            class="step-{{ item.index }}" 
+            [class.passed]="item.number < current" 
+            [(class.current)]="item.number == current"
+            [style.width]="itemWidth + 'px'">
+        <div class="number" *ngIf="!(item.number < current)"><span>{{ item.index }}</span></div> 
+        <iron-icon *ngIf="item.number < current" class="icon-rcard" icon="toc:default_selection"></iron-icon>
+        {{ item.label }}
+      </li>
+    </ul>
+    
+  </div>
+
+</div>

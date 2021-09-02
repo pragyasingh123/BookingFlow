@@ -1,0 +1,24 @@
+<section class="bike-reservations">
+  <h2 *ngIf="directionHeading" class="bike-reservations__header">{{ directionHeading }}</h2>
+
+  <ng-container *ngFor="let ttjourney of journey.timetableJourneys">
+    <ng-container *ngFor="let leg of ttjourney.legs">
+      <ng-container *ngIf="leg.bikeReservation.length > 0">
+        <div class="leg-route-info">
+          <div class="leg-route-info__icon">
+            <iron-icon icon="toc:tube" *ngIf="leg.mode === 'U'"></iron-icon>
+            <iron-icon icon="toc:rail" *ngIf="leg.mode !== 'U'"></iron-icon>
+          </div>
+
+          <div class="leg-route-info__desc">
+            <p>{{ leg.departure.name }} to {{ leg.arrival.name }}</p>
+          </div>
+        </div>
+
+        <p *ngIf="leg.reservable === '_'">Reservations are not possible for this part of your journey.</p>
+
+        <app-bike-reservation-desc [bikeReservation]="leg.bikeReservation" [direction]="" *ngIf="leg.reservable !== '_'"></app-bike-reservation-desc>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</section>

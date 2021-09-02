@@ -1,0 +1,48 @@
+<div class="modal-wrapper">
+  <div class="modal-foreground">
+    <div class="modal-heading-wrap">
+      <h1>
+        <iron-icon class="modal-heading-icon" icon="toc:warning"></iron-icon>
+        Session Expired
+      </h1>
+    </div>
+    <div class="modal-content-wrap">
+      <p>We're sorry for the inconvenience, but we've saved your search so you can easily run it again if you still want to book your journey.</p>
+      <div class="bf-box red" *ngIf="searchCriteria$ | async">
+        <section class="content">
+          <h1 class="search-again-heading">
+            <span class="station-from">{{(searchCriteria$ | async)?.originName}}</span> to
+            <span class="station-to">{{(searchCriteria$ | async)?.destinationName}}</span>
+          </h1>
+
+          <div class="search-criterion">
+            <iron-icon icon="toc:out"></iron-icon>
+            {{(searchCriteria$ | async)?.datetimedepart.format("ddd D MMM YYYY") }}
+          </div>
+
+          <div class="search-criterion" *ngIf="isReturn">
+            <iron-icon icon="toc:return"></iron-icon>
+            {{(searchCriteria$ | async)?.datetimeReturn.format("ddd D MMM YYYY") }}
+          </div>
+
+          <div class="search-criterion">
+            <iron-icon icon="toc:my_account"></iron-icon>
+            {{(searchCriteria$ | async)?.adults}} {{ "Adult" | pluralise:(searchCriteria$ | async)?.adults }},
+            {{(searchCriteria$ | async)?.children}} {{ "Child" | pluralise:(searchCriteria$ | async)?.children }}
+          </div>
+
+          <div class="search-criterion" *ngIf="hasRailcard">
+            <iron-icon icon="toc:railcard"></iron-icon>
+            {{(searchCriteria$ | async)?.railcards}} x {{ "Railcard" | pluralise:(searchCriteria$ | async)?.railcards }}
+          </div>
+          
+          <app-button btn-type="continue" class="btn-block" (click)="searchNew($event, true)">Search again</app-button>
+        </section>
+      </div>
+      <app-button btn-type="modal" class="btn-block" (click)="searchNew($event, false)">New search</app-button>
+    </div>
+  </div>
+  <!--todo close backdrop on click-->
+  <div class="modal-backdrop"></div>
+
+</div>

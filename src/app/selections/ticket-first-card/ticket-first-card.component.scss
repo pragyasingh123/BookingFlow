@@ -1,0 +1,38 @@
+.assisted-travel-wrap {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 11px;
+
+	&--left-col {
+		order: 1;
+	}
+	&--right-col {
+		order: 2;
+		font-style: normal;
+
+		p:last-child {
+			margin-bottom: 0px
+		}
+	}
+}
+
+.assisted-travel-icon {
+	width: 30px;
+  height: 30px;
+}
+
+.first-class-ticket-type {
+	font-size: 1.25rem;
+	text-align: center;
+	padding: 20px;
+	margin: 0;
+}
+
+.status-icon {
+  &:hover {
+    text-decoration: none;
+  }
+}

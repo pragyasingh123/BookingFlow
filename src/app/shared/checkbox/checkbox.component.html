@@ -1,0 +1,7 @@
+<div data-elid="checkbox-click" tabindex="0" class="checkbox-wrap" [class.checked]="checked" (click)="onClick()" (keypress)="onClick()" [class.disabled]="amend" [ngClass]="{'disabled-checkbox': canWeContactYou}">
+  <div class="checkbox-tick">
+    <iron-icon icon="toc:good" *ngIf="checked"></iron-icon>
+  </div>
+  <label data-elid="checkbox-label">{{label}}</label>
+  <div class="extra" *ngIf="extra">{{extra}}</div>
+</div>

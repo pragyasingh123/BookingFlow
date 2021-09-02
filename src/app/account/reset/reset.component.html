@@ -1,0 +1,36 @@
+﻿<div class="container">
+  <h1 *ngIf="!isSubmitted" class="page-heading">Reset Password</h1>
+
+  <h1 *ngIf="isSubmitted" class="page-heading page-heading--email-sent">Check your emails</h1>
+  <div *ngIf="isSubmitted" class="email-sent">
+    <div>We have emailed you instructions on how to create a new password.</div>
+    <div>Didn't receive the email?</div>
+    <div>Check your spam or junk folders for emails from: <strong>{{companyEmail}}</strong></div>
+    <div>Still having problems?</div>
+    <div>Make sure your email is entered correctly, or it may not be registered with us yet. Click <a (click)="gotoRegister()">here to register</a> or, <a [href]="myAccountLink">send the email again</a>.</div>
+    <a (click)="gotoLogin()">Back to login</a>
+  </div>
+
+  <div *ngIf="!isSubmitted" class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+      <form #resetForm="ngForm" (ngSubmit)="captchaExecute()" novalidate *ngIf="!isSubmitted">
+        <div class="form-group">
+          <label for="email" class="is-required">Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" pattern="[A-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})" required />
+          <small *ngIf="resetForm.controls.email?.invalid && resetForm.controls.email?.touched" class="alert alert-danger">Please enter a valid email address.</small>
+
+        </div>
+
+        <re-captcha #captchaRef="reCaptcha" (resolved)="captchaResolved($event)"></re-captcha>
+
+        <app-button btn-type="continue" type="submit" [disabled]="!resetForm.form.valid" [show-loader]="true" [isLoading]="resetInProgress">Reset password</app-button>
+        <p class="password-not-working">Enter the email address linked with your TPE account and we'll email you a unique reset code.</p>
+      </form>
+      <div *ngIf="isSubmitted" class="submit-success">
+        We will shortly send you an email that includes the link to reset your password.
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

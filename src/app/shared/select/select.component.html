@@ -1,0 +1,6 @@
+﻿<div class="select-wrap" [class.amend]="amend">
+  <select data-elid="select-options" (focus)="onFocus()" (change)="onSelect($event.target.value)" class="form-control" [disabled]="disabled" [attr.tabindex]="amend ? -1 : 0">
+    <option class="select-placeholder" *ngIf="placeholder" value="" disabled selected>{{placeholder}}</option>
+    <option data-elid="select-single-item" *ngFor="let option of options; let i = index" [value]="i" [selected]="option.selected">{{option.label}}</option>
+  </select>
+</div>

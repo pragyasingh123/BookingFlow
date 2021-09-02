@@ -1,0 +1,41 @@
+@import "../../../assets/styles/components/ng_components_shared";
+
+.disruption-alert {
+  background-color: $bf-colour-alert;
+  color: $bf-colour-disruption-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.disruption-content {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1, a {
+  color: $bf-colour-disruption-primary;
+}
+
+h1, p {
+  font-size: $f-normal;
+  padding: 0;
+  margin: 0;
+  line-height: 1.1em;
+}
+h1 {
+  margin-bottom: 0.5em;
+}
+p {
+  font-size: 0.85em;
+}
+a {
+  text-decoration: underline;
+}
+
+.disruption-icon {
+  fill: $bf-colour-disruption-primary;
+  margin-right: .5rem;
+}

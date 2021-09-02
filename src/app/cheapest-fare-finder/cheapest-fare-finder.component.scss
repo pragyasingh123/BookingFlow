@@ -1,0 +1,74 @@
+@import "../../assets/styles/helpers";
+@import "../../assets/styles/variables";
+@import "../../assets/styles/typography";
+:host {
+  font-size: 12px;
+  color: #104A41;
+
+  .container {
+    max-width: 48em;
+  }
+}
+
+.is-hidden {
+  display: none;
+}
+
+.station-from,
+.station-to {
+  font-weight: bold;
+}
+
+.station-from+span {
+  margin: 0 5px;
+}
+
+app-loading-indicator {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  font-size: 16px;
+}
+
+app-cff-date-picker {
+  margin-top: -11px;
+}
+
+.journey-header {
+  background-color: $bf-colour-journey-header-background;
+  color: $bf-colour-journey-header;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid transparentize($bf-colour-green-pale, .9);
+  margin-bottom: 10px;
+  .journey-header-title {
+    color: $bf-colour-journey-header;
+    margin: 0 0 .5rem 0;
+    font-size: 1.5rem;
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.journey-header-stations,
+.journey-chosen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.journey-chosen {
+  app-button {
+    width: auto;
+    margin-left: 10px;
+  }
+}
+
+app-button {
+  width: 100%;
+}
+
+app-button .btn-continue {
+  max-width: 320px;
+  margin-bottom: 20px;
+}

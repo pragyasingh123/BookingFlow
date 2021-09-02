@@ -1,0 +1,40 @@
+@import "../../../assets/styles/variables";
+
+.cff-assisted-travel-section {
+  min-height: 78px;
+  max-height: 108px;
+  border-radius: 4px;
+  background-color: $bf-colour-bundle-1-item-b;
+  display: flex;
+  width: 100%;
+
+  &--left {
+    width: 100px;
+    height: 51px;
+    margin-top: 12px;
+    .cff-assisted-travel-icon {
+      width: 100%;
+      height: 100%;
+      color: $bf-colour-plum;
+    }
+    @media screen and (max-width: 512px) {
+      width: 150px;
+    }
+  }
+
+  &--right {
+    margin-top: 14px;
+    .cff-assisted-travel-message {
+      font-size: 14px;
+      color: $bf-colour-plum;
+      margin-right: 6px;
+      a {
+        text-decoration: underline;
+        color: $bf-colour-qtt-background;
+      }
+      @media screen and (max-width: 350px) {
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,0 +1,131 @@
+@import "../variables",
+        "../helpers",
+        "../typography";
+
+//styles shared between multiple Angular components
+//flexbox grid elements
+
+//these are used in specific cases within subcomponents e.g. to offset rows without extra markup
+$left-col-width: 10%;
+$right-col-width: 90%;
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.card-row-left-col {}
+
+.card-row-right-col {
+  margin-left: auto;
+}
+
+
+//price
+.price {
+  text-align: right;
+  font-weight: bold;
+}
+
+.price-msg {
+  font-size: $f-small;
+  margin-bottom: -.2rem;
+  font-weight: normal;
+}
+
+.price-amount {
+  font-size: $f-larger;
+}
+
+//todo refactor prices throughout to use Angular currency pipe and the following style:
+.bf-price {
+  display: inline-block;
+}
+
+.icon-direction {
+  transform: scale(1.3);
+}
+
+// various triangle warning icons
+.ico-warning {
+  fill: $bf-warning-color;
+}
+
+.ico-alert {
+  fill: $bf-alert-color;
+}
+
+/*
+* Modal Styles
+* todo refactor all modal code to a common source - i.e. make uiNotifications lightweight modals and more complex ones (route-details, seats-and-extras subroutes)
+*/
+
+.modal-foreground {
+  z-index: 1050;
+  left: 0;
+  right: 0;
+  margin: auto;
+  overflow: auto;
+  max-width: $bf-component-max-width;
+  background-color: $bf-colour-modal-foreground;
+  padding-bottom: 2px;
+  padding-left: $bf-component-padding;
+  padding-right: $bf-component-padding;
+
+  h2 {
+    margin: 0;
+    font-size: $f-larger;
+    font-weight: bold;
+  }
+
+  //todo refactor cover-all mobile modal vs desktop modal w/ backdrop into global modal styles
+  @media (max-width: $breakpoint-modal) {
+    position: relative;
+    top: 0;
+    bottom: 0;
+  }
+  @media (min-width: $breakpoint-modal) {
+    position: absolute; //todo generalize this fix for long/dynamic modal scrolling
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    margin-bottom: $bf-gutter;
+    top: 5vh;
+    -ms-overflow-style: none; // hides scroll bar on IE 10-11
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 3px;
+  right: 8px;
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+
+  iron-icon {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-heading-wrap {
+  padding: 0 1.4em;
+  h1 {
+    color: $bf-colour-headings;
+    border-bottom: 1px solid $bf-colour-bundle-1-item-b;
+    padding-bottom: $bf-gutter;
+    margin-top: 8px;
+  }
+}
+
+.modal-content-wrap {
+  padding: 0 $bf-component-padding;
+  overflow-x: hidden;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "booking-flow-frontend",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Christopher Imrie <christopher.imrie@ormlondon.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "toc-icon": "http://dev.bower.local/toc-iron-icons.zip",
+    "intl": "1.2.5"
+  }
+}

@@ -1,0 +1,90 @@
+﻿<div *ngIf="travelcard">
+  <div class="bf-box blue layout-extras-view">
+    <section class="content">
+
+      <h3 class="extras-title">
+        <iron-icon icon="toc:info" (click)="showInfo()"></iron-icon>
+        London Travelcard
+        <img src="assets/img/logos/tfl.png" alt="Transport for London Logo" class="tfl-logo extras-logo">
+      </h3>
+
+      <ul class="extras-listing has-items-added">
+        <li class="extra-item">
+          <div class="extra-head">
+            <div class="extra-head-text">{{travelcard.zoneDescription}}, {{travelcard.ticketTypeDescription}}</div>
+          </div>
+          <div class="extra-desc">
+            <div>{{ getPassengersInfo() }}</div>
+            <div>{{travelcard.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<div *ngIf="plusBuses && plusBuses.length > 0">
+  <div class="bf-box orange layout-extras-view">
+    <section class="content">
+      <h3 class="extras-title">
+        PlusBus
+        <img src="assets/img/logos/plusbus.png" alt="PlusBus Logo" class="plus-bus-logo extras-logo">
+      </h3>
+
+      <ul class="extras-listing has-items-added">
+        <li class="extra-item" *ngFor="let option of plusBuses;let i = index">
+          <div class="extra-head">
+            <div class="extra-head-text">{{option.name}}</div>
+          </div>
+          <div class="extra-desc">
+            <div>{{option.date}}</div>
+            <div class="extra-price">{{option.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<div *ngIf="legolandBus != undefined">
+  <div class="bf-box red layout-extras-view">
+    <section class="content">
+      <h3 class="extras-title">
+        Legoland Bus
+        <img src="assets/img/logos/legolandbus.png" alt="LegolandBus Logo" class="legoland-bus-logo extras-logo">
+      </h3>
+      <ul class="extras-listing has-items-added">
+        <li class="extra-item">
+          <div class="extra-head">
+            <div class="extra-head-text">{{legolandBus.name}}</div>
+          </div>
+          <div class="extra-desc">
+            <div>{{pluralAdults(legolandBus.adults)}}<span *ngIf="legolandBus.children > 0">, {{pluralChildren(legolandBus.children)}}</span></div>
+            <div class="extra-price">{{legolandBus.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<div *ngIf="oxfordWestgate != undefined">
+  <div class="bf-box red layout-extras-view">
+    <section class="content">
+      <h3 class="extras-title">
+        Oxford Westgate Bus Return
+      </h3>
+      <ul class="extras-listing has-items-added">
+        <li class="extra-item">
+          <div class="extra-head">
+          </div>
+          <div class="extra-desc">
+            <div>{{pluralAdults(oxfordWestgate.adults)}}<span *ngIf="oxfordWestgate.children > 0">, {{pluralChildren(oxfordWestgate.children)}}</span></div>
+            <div class="extra-price">{{oxfordWestgate.totalcost | currency:'GBP':true:'1.2-2'}}</div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </div>
+</div>
+

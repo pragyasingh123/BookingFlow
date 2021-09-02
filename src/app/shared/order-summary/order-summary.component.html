@@ -1,0 +1,120 @@
+<div class="bf-box order-summary-wrap">
+  <section class="content order-summary">
+    <h1 class="box-heading">Order Summary</h1>
+    <div class="order-summary-body">
+      <div *ngFor="let journey of orders?.trips; let orderSeq = index">
+          <div class="os-order">
+              <div class="os-title">
+                Journey {{orderSeq + 1}}
+              </div>
+
+              <div *ngFor="let trip of journey.outwardJourneys">
+                <div class="flex-row">
+                  <div class="os-stations" data-elid="order-stations">
+                    {{ trip.origin.name }} to {{ trip.destination.name }}
+                  </div>
+
+                  <div class="os-price card-row-right-col" data-elid="order-price">
+                    <span class="price">£{{journey.totalCost | number:'1.2-2'}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngFor="let trip of journey.returnJourneys">
+                <div class="flex-row">
+                  <div class="os-stations" data-elid="order-return-stations">
+                    {{ trip.origin.name }} to {{ trip.destination.name }}
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="os-delivery" *ngIf="orders?.selectedDeliveryOption">
+        <div class="os-delivery-label">Delivery</div>
+
+        <div class="flex-row">
+           <div class="os-delivery-type" data-elid="delivery-type">
+              {{ orders.selectedDeliveryOption.name }}
+            </div>
+
+            <div class="card-row-right-col">
+              <div *ngIf="orders.selectedDeliveryOption.price == 0">
+                <span class="price">-</span>
+              </div>
+
+              <div *ngIf="orders.selectedDeliveryOption.price > 0">
+                  <span class="price">£{{ orders.selectedDeliveryOption.price | number:'1.2-2'}}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="os-delivery" *ngIf="orders?.amendPriceAvailble">
+        <div class="flex-row">
+            <div class="card-row-left-col">
+              <div>
+                  <div class="os-delivery-label">Admin fee</div>
+              </div>
+            </div>
+
+            <div class="card-row-right-col">
+              <div>
+                <span class="price">£{{ orders?.amendFee | number:'1.2-2' }}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <hr class="os">
+
+      <div class="os-evoucher flex-row" *ngIf="orders?.totalEVoucherCost">
+        <span>eVoucher</span>
+        <div class="card-row-right-col">
+          <span class="price">-£{{orders?.totalEVoucherCost | number:'1.2-2'}}</span>
+        </div>
+      </div>
+
+      <div class="os-payment flex-row" *ngIf="orders?.totalCardPaymentCost && orders?.paymentSourceType">
+        <span>{{orders?.paymentSourceType == "HandoffPayment" ? "Card" : orders?.paymentSourceType}} Payment</span>
+        <div class="card-row-right-col">
+          <span class="price">-£{{orders?.totalCardPaymentCost | number:'1.2-2'}}</span>
+        </div>
+      </div>
+
+      <div class="os-payment flex-row" *ngIf="orders?.totalOnlinePaymentCost">
+        <span>{{orders?.paymentSourceType}} Payment</span>
+        <div class="card-row-right-col">
+          <span class="price">-£{{orders?.totalOnlinePaymentCost | number:'1.2-2'}}</span>
+        </div>
+      </div>
+
+      <div class="os-delivery" *ngIf="orders?.basketDiscountAmount > 0">
+        <div class="flex-row">
+            <div class="card-row-left-col">
+              <div>
+                  <div class="os-delivery-label">Basket discount</div>
+              </div>
+            </div>
+            <div class="card-row-right-col">
+              <div>
+                <span class="price">£{{ orders?.basketDiscountAmount | number:'1.2-2' }}</span>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="os-total flex-row">
+        <span *ngIf="!review">Price to pay</span>
+        <span *ngIf="review">Price paid</span>
+
+        <div class="card-row-right-col" data-elid="order-total-price">
+          <span class="price" data-elid="total-price">£{{orders?.totalCost | number:'1.2-2'}}</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>

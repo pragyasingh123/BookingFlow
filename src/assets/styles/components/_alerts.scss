@@ -1,0 +1,49 @@
+@import "../variables";
+
+.alert {
+  padding: 10px;
+  border-radius: 0;
+  display: table;
+  width: 100%;
+  margin-bottom: 1em;
+
+
+  a {
+    color: currentColor;
+    //main link that wraps all the alert content
+    &.content-wrap {
+      font-weight: normal;
+    }
+  }
+
+  .icon-wrap, .content-wrap {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .icon-wrap {
+    width: 25px;
+    padding-right: 15px;
+    text-align: center;
+  }
+
+  &.alert-warning {
+    color: $bf-colour-text;
+    background-color: $bf-colour-alert-background;
+  }
+
+  &.alert-more-info {
+    color: $bf-colour-more-info;
+    background-color: $bf-colour-more-info-background;
+    border-radius: $bf-component-border-radius;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.text-warning {
+  color: $bf-colour-alert;
+  font-size: $f-smaller;
+}
